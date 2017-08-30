@@ -9,12 +9,12 @@
          </properties>
 
          <modelVersion>4.0.0</modelVersion>
-         <groupId>edu.csu2017fa314.DTR04</groupId>
-         <artifactId>DTR04</artifactId>
+         <groupId>edu.csu2017fa314.T04</groupId>
+         <artifactId>T04</artifactId>
          <packaging>jar</packaging>
          <version>0.0.1-SNAPSHOT</version>
-         <name>DTR04</name>
-         <url>https://github.com/csu2017fa314/DTR-04/</url>
+         <name>T04</name>
+         <url>https://github.com/csu2017fa314/T04/</url>
          <build>
                   <plugins>
                            <plugin>
@@ -25,7 +25,7 @@
                                              <archive>
                                                       <manifest>
                                                                <addClasspath>true</addClasspath>
-                                                               <mainClass>edu.csu2017fa314.DTR04</mainClass>
+                                                               <mainClass>edu.csu2017fa314.T04</mainClass>
                                                       </manifest>
                                              </archive>
                                     </configuration>
