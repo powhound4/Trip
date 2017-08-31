@@ -6,7 +6,7 @@
 
 Sprint # | Model-Data | Model-Itinerary | View-Server | View-Client
 -------- | ---------- | --------------- | ----------- | -----------
-1 | | | | | George
+1 | Person 1 | person 2 | person 3 | George
 2 |
 3 |
 4 |
