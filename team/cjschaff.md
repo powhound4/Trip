@@ -1,6 +1,6 @@
-#Chris Schaffer
-#INTP
-#Teamwork Questionnaire
+* Chris Schaffer
+* INTP
+* Teamwork Questionnaire
 
 1. Is it generally easier to reach you by text, email, vmail or something else?  What hours?
 I like to use Slack as a group chat. I can be reached between noon and 10pm, 7 days a week.
