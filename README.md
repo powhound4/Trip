@@ -1,7 +1,7 @@
 # t04 - 4TheWin
 * Alison Finnman, afinnman, afinnman, the girl coder
 * Evan Salzman, evansalz, evansalz
-
+* Chris Schaffer, cjschaff, chris-schaffer
 
 Sprint # | Model-Data | Model-Itinerary | View-Server | View-Client
 -------- | ---------- | --------------- | ----------- | -----------
