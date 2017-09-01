@@ -6,7 +6,7 @@
 
 Sprint # | Model-Data | Model-Itinerary | View-Server | View-Client
 -------- | ---------- | --------------- | ----------- | -----------
-1 | Chris | | | George
+1 | Chris |Evan |Alison | George
 2 |
 3 |
 4 |
