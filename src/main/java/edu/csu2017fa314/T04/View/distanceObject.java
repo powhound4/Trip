@@ -25,5 +25,12 @@ public class distanceObject {
 	public Double getTotalDistance(){
 		return totalDistance;
 	}
+	
+	//convert lattitude and longitude to a decimal value
+	public double toDecimal(String deg){ 
+	    String[] decdegree = deg.split("[°' \"]");
+	    return Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+	    		+Double.parseDouble(decdegree[2])/3600;
+	}
 
 }
