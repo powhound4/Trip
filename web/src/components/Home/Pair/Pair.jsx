@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-let Pair = ({start, end, dist}) => <tbody
+let Pair = ({start, end, dist, totalDist}) => <tbody
     className="pair">
     <tr>
         <td>
@@ -11,6 +11,9 @@ let Pair = ({start, end, dist}) => <tbody
         </td>
         <td>
             <h5>{dist}</h5>
+        </td>
+        <td>
+            <h5>{totalDist}</h5>
         </td>
     </tr>
 </tbody>;
