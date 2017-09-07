@@ -43,7 +43,7 @@ export default class App extends React.Component {
             let p = { //create object with start, end, and dist variable
                 start: start,
                 end: end,
-                dist: dist
+                dist: dist,
                 totalDist: totalDist
             };
             pairs.push(p); //add object to pairs array
