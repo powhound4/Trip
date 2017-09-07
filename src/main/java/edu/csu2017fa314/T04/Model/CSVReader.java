@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.io.*;
+//import java.io.*;
 
 public class CSVReader {
 
@@ -45,14 +45,19 @@ public class CSVReader {
 			while ((line = br.readLine()) != null) {		 
 				// use comma as separator
 	            String[] values = line.split(delim);
+	            if(values.length == 1){   //empty line
+                   continue;
+                }
+                    
 	            for(int i = 0; i < values.length; i++)
 	            	values[i] = values[i].trim();
+	            	
 		    if(indexElevation == -1 && indexCity == -1){
-			brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
+                brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
 		    	brewList.add(brew);
 		    }
 		    else{
-			brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
+                brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
 		    	brewList.add(brew);
 		    }
 		    
