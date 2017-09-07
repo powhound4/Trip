@@ -36,10 +36,62 @@ public class distanceObject {
 	}
 	
 	//convert lattitude and longitude to a decimal value
-	public double toDecimal(String deg){ 
-	    String[] decdegree = deg.split("[°' \"]");
-	    return Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
-	    		+Double.parseDouble(decdegree[2])/3600;
+		public double toDecimal(String degree){ 
+		int countmin = 0; int countsec = 0; int countdeg = 0;
+		boolean negative = false;
+	    
+	    for (int i = 0; i < degree.length(); i++){
+	    	if (degree.charAt(i) == '\'')
+	    		countmin++;
+	    	if (degree.charAt(i) == '"')
+	    		countsec++;
+	    	if (degree.charAt(i) == '°')
+	    		countdeg++;
+	    	if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S')
+	    		negative = true;
+	    }
+	    
+	    if ((countdeg == 1) && (countmin == 1) && (countsec == 1)){
+	    	String[] decdegree = degree.split("[°' \"]");
+	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+		    		+Double.parseDouble(decdegree[2])/3600;
+	    	if (negative == true)
+	    		return result * -1;
+	    	return result;
+	    }
+	    
+	    else if ((countdeg == 1) && (countmin == 1) && (countsec == 0)){
+	    	String[] decdegree = degree.split("[°' ]");
+	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
+	    	if (negative == true)
+	    		return result * -1;
+	    	return result;
+	    }
+	    
+	    else if ((countdeg == 1) && (countmin == 0) && (countsec == 1)){
+	    	String[] decdegree = degree.split("[° \"]");
+	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
+	    	if (negative == true)
+	    		return result * -1;
+	    	return result;
+	    }
+		
+	    else if ((countdeg == 1) && (countmin == 0) && (countsec == 0)){
+	    	String[] decdegree = degree.split("[° ]");
+	    	double result = Double.parseDouble(decdegree[0]);
+	    	if (negative == true)
+	    		return result * -1;
+	    	return result;
+	    }
+	    else{
+	    	String[] decdegree = new String[1];
+	    	decdegree[0] = degree;
+	    	double result = Double.parseDouble(decdegree[0]);
+	    	if (negative == true)
+	    		return result * -1;
+	    	return result;
+	    }
+	    
 	}
 
 	
