@@ -1,3 +1,4 @@
+package edu.csu2017fa314.T04.Model;
 
 public class Brewery {
 
@@ -38,14 +39,12 @@ public class Brewery {
 	public String getElevation(){
 		return elevationFt;
 	}
-	
+	/*
 	public Brewery getNextBrewery(){
 		return this;//FIXME
 	}
+	*/
 	
-	public static void main(String[] args) {
-		
-
-	}
+	
 
 }
