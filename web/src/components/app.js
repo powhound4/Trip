@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
     render() {
         let pairs = this.state.allPairs;
-        let totDis = this.getTotalDistance(); //totDis holds the value of total Distance
+        let totDis = this.tDist; //totDis holds the value of total Distance
         let ps = pairs.map((pp) => {
             return <Pair {...pp}/>;
         });
@@ -49,7 +49,7 @@ export default class App extends React.Component {
             pairs.push(p); //add object to pairs array
             console.log("Pushing pair: ", p); //log to console
         }
-        this.setTotalDistance(totalDist); //set tDist to the cummulative distance
+        this.tDist = totalDist; //set tDist to the cummulative distance
         
         //Here we will update the state of app.
         // Anything component (i.e. pairs) referencing it will be re-rendered
@@ -58,10 +58,5 @@ export default class App extends React.Component {
             sysFile: file
         });
     }
-        setTotalDistance(tempDist){
-            this.tDist = tempDist;
-        }
-        getTotalDistance(){
-            return this.tDist;
-        }
+        
 }
