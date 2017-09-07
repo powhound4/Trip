@@ -1,15 +1,16 @@
-
+package edu.csu2017fa314.T04.Model;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.*;
 
 public class CSVReader {
 
 	private BufferedReader br = null;
-	private String csvFile = "/data/brews.csv";
+	private String csvFile;
 	private String line = "";
 	private String delim = ",";
 	private String[] labels = null;
@@ -18,8 +19,10 @@ public class CSVReader {
 	private Brewery brew = null;
 	private ArrayList<Brewery> brewList = new ArrayList<Brewery>();
 	
-	public CSVReader(){
+	public CSVReader(String file){
 		try {
+			csvFile = file;
+			//System.out.println(new File(".").getAbsolutePath());
 			br = new BufferedReader(new FileReader(csvFile));
 			
 			//get first line with all labels
@@ -42,6 +45,8 @@ public class CSVReader {
 			while ((line = br.readLine()) != null) {		 
 				// use comma as separator
 	            String[] values = line.split(delim);
+	            for(int i = 0; i < values.length; i++)
+	            	values[i] = values[i].trim();
 	            brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
 	            brewList.add(brew);
 			}
