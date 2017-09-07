@@ -2,16 +2,26 @@ package edu.csu2017fa314.T04.View;
 
 
 public class distanceObject {
-	public String startID ="";
-	public String endID = "";
-	public double totalDistance;
+	public  String startID ="";
+	public  String endID ="";
+	public String lat1 ="";
+	public String lat2 = "";
+	public String long1 = "";
+	public String long2 = "";
+	public int totalDistance;
 
-	public distanceObject(String startID, String endID, double totalDistance){
+	public distanceObject(String startID, String endID, String lat1, String long1, String lat2, String long2){
+		
 		this.startID = startID;
 		this.endID = endID;
-		this.totalDistance = totalDistance;
+		this.lat1 = lat1;
+		this.lat2 = lat2;
+		this.long1 = long1;
+		this.long2 = long2;
 		
+		computeDistance();
 	}
+	
 	
 	public String getStartID(){
 		return startID;
@@ -21,18 +31,19 @@ public class distanceObject {
 		return endID;
 	}
 	
-	public Double getTotalDistance(){
+	public int getTotalDistance(){
 		return totalDistance;
 	}
 	
-	public double toDecimal(String degree){
-	   	//convert lattitude and longitude to a decimal value
-		String[] decdegree = degree.split("[°' \"]");
-		return Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
-			+Double.parseDouble(decdegree[2])/3600;
+	//convert lattitude and longitude to a decimal value
+	public double toDecimal(String deg){ 
+	    String[] decdegree = deg.split("[°' \"]");
+	    return Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+	    		+Double.parseDouble(decdegree[2])/3600;
 	}
+
 	
-	public distanceObject computeDistance(String ID1, String ID2, String lat1, String long1, String lat2, String long2){
+	public int computeDistance(){
 		double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
 		double sin = 0.0; double cos = 0.0; double distance = 0.0;
 		double deltalat = 0.0; double deltalong = 0.0; double earthradmi = 3958.7613;
@@ -51,9 +62,7 @@ public class distanceObject {
 		
 		deltalat = Math.atan(sin/cos);
 		distance = earthradmi * deltalat;
-		distanceObject d = new distanceObject(ID1, ID2, distance);
-		totalDistance = distance;
-		return d;
+		totalDistance = (int)Math.round(distance);
+		return totalDistance;
 	}
-
 }
