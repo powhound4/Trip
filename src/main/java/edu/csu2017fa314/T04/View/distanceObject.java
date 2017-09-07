@@ -14,10 +14,10 @@ public class distanceObject {
 		
 		this.startID = startID;
 		this.endID = endID;
-		this.lat1 = lat1;
-		this.lat2 = lat2;
-		this.long1 = long1;
-		this.long2 = long2;
+		this.lat1 = lat1.replaceAll("\\s","");
+		this.lat2 = lat2.replaceAll("\\s","");
+		this.long1 = long1.replaceAll("\\s","");
+		this.long2 = long2.replaceAll("\\s","");
 		
 		computeDistance();
 	}
@@ -115,6 +115,6 @@ public class distanceObject {
 		deltalat = Math.atan(sin/cos);
 		distance = earthradmi * deltalat;
 		totalDistance = (int)Math.round(distance);
-		return totalDistance;
+		return Math.abs(totalDistance);
 	}
 }
