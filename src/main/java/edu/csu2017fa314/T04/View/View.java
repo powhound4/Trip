@@ -4,6 +4,7 @@ import edu.csu2017fa314.T04.Model.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -60,7 +61,8 @@ public static void writeItinerary(ArrayList<distanceObject> itinerary){
 public static void writeFile(JSONArray locations){
 
 	try{
-		FileWriter file = new FileWriter("/web/test.json");
+		System.out.println(new File(".").getAbsolutePath());
+		FileWriter file = new FileWriter("test.json");
 		file.write(locations.toJSONString());
 		file.flush();
 		file.close();
