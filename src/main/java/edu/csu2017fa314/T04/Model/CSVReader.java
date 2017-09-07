@@ -49,10 +49,13 @@ public class CSVReader {
 	            	values[i] = values[i].trim();
 		    if(indexElevation == -1 && indexCity == -1){
 			brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
-		    }else{
-			   brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
+		    	brewList.add(brew);
 		    }
-		    brewList.add(brew);
+		    else{
+			brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
+		    	brewList.add(brew);
+		    }
+		    
 			}
 			
 		}catch (FileNotFoundException e) {
