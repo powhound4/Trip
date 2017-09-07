@@ -61,8 +61,8 @@ public static void writeItinerary(ArrayList<distanceObject> itinerary){
 public static void writeFile(JSONArray locations){
 
 	try{
-		System.out.println(new File(".").getAbsolutePath());
-		FileWriter file = new FileWriter("test.json");
+		//System.out.println(new File(".").getAbsolutePath());
+		FileWriter file = new FileWriter("web/test.json");
 		file.write(locations.toJSONString());
 		file.flush();
 		file.close();
