@@ -47,8 +47,12 @@ public class CSVReader {
 	            String[] values = line.split(delim);
 	            for(int i = 0; i < values.length; i++)
 	            	values[i] = values[i].trim();
-	            brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
-	            brewList.add(brew);
+		    if(indexElevation == -1 && indexCity == -1){
+			brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
+	            else{
+			   brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
+		    }
+		    brewList.add(brew);
 			}
 			
 		}catch (FileNotFoundException e) {
