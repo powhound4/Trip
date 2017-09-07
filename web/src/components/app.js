@@ -15,7 +15,6 @@ export default class App extends React.Component {
 
     render() {
         let pairs = this.state.allPairs;
-        let totDis = this.tDist; //totDis holds the value of total Distance
         let ps = pairs.map((pp) => {
             return <Pair {...pp}/>;
         });
@@ -24,7 +23,7 @@ export default class App extends React.Component {
                 <Home
                     browseFile={this.browseFile.bind(this)}
                     pairs={ps}
-                    totalDist = {totDis} //totalDist can be referenced in Home.jsx via this.props.totalDist
+                    totalDist = {this.tDist} //totalDist can be referenced in Home.jsx via this.props.totalDist
                 />
             </div>
         )
