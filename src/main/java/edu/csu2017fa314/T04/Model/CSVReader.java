@@ -52,7 +52,7 @@ public class CSVReader {
 	            for(int i = 0; i < values.length; i++)
 	            	values[i] = values[i].trim();
 	            	
-		    if(indexElevation == -1 && indexCity == -1){
+		    if(indexElevation == -1 || indexCity == -1){
                 brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
 		    	brewList.add(brew);
 		    }
