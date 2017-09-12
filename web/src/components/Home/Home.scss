@@ -1,16 +1,33 @@
 .home-container {
+    
   h1, h3 {
  text-align: center;
  }
+ .inner {
+     background-color: #E9A447;
+     padding: 5px;
+     border-top: 2px solid black;
+     border-bottom: 5px solid black;
+
+}
   .dropzone-style button {
-  text-align: center;
+    background-color: #DACA78;
+    text-align: center;
+    //border-radius:1px;
   }
+ 
   .pair-table {
+    background-color:#DACA78;
     margin-left: auto;
     margin-right: auto;
-    
+    padding: 1em;
+    border: 2px solid black;
+    border-radius: 1px;
     table, th, td {
       border: 1px solid black;
+      border-radius:5px;
+      text-align: center;
+      padding: 5px;
     }
 
     td {
