@@ -1,50 +1,51 @@
 package edu.csu2017fa314.T04.Model;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Brewery {
-
-	protected String id,name,city,latitude,longitude,elevationFt;
+    
+	protected String[] brewInfo = null;
+	protected String[] labels = null;
 
 	public Brewery(){
 	}
 	
-	public Brewery(String id, String name, String city, String latitude, String longitude, String elevationFt){
-		this.id = id;
-		this.name = name;
-		this.city = city;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.elevationFt = elevationFt;
+	public Brewery(String[] info, String[] labels){
+        this.brewInfo = info;
+        //ArrayList<String> brewInfo = new ArrayList<String>(Arrays.asList(info));
+        this.labels = labels;
+	}
+	private int getLabelIndex(String lab){
+        	return Arrays.asList(this.labels).indexOf(lab);
 	}
 	
-	public String getId(){
-		return id;
+	public String getBrewInfo(String labelName){
+        	return Arrays.asList(this.brewInfo).get(getLabelIndex(labelName));
+	}
+    
+    	public String getId(){
+		return Arrays.asList(this.brewInfo).get(getLabelIndex("id"));
 	}
 	
 	public String getName(){
-		return name;
+		return Arrays.asList(this.brewInfo).get(getLabelIndex("name"));
 	}
 	
 	public String getCity(){
-		return city;
+		return Arrays.asList(this.brewInfo).get(getLabelIndex("city"));
 	}
 	
 	public String getLatitude(){
-		return latitude;
+		return Arrays.asList(this.brewInfo).get(getLabelIndex("latitude"));
 	}
 	
 	public String getLongitude(){
-		return longitude;
+		return Arrays.asList(this.brewInfo).get(getLabelIndex("longitude"));
 	}
 	
-	public String getElevation(){
+	/*public String getElevation(){
 		return elevationFt;
-	}
-	/*
-	public Brewery getNextBrewery(){
-		return this;//FIXME
-	}
-	*/
+	}*/
 	
-	
-
 }
