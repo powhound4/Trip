@@ -14,10 +14,14 @@ public class CSVReader {
 	private String line = "";
 	private String delim = ",";
 	private String[] labels = null;
-	private int indexId, indexName, indexCity, indexLatitude, indexLongitude, indexElevation; //indexOf
+	//private int indexId, indexName, indexCity, indexLatitude, indexLongitude, indexElevation; //indexOf
 
 	private Brewery brew = null;
 	private ArrayList<Brewery> brewList = new ArrayList<Brewery>();
+	
+	/*public int getLabelIndex(String lab){
+        return Arrays.asList(labels).indexOf(lab);
+	}*/
 	
 	public CSVReader(String file){
 		try {
@@ -31,16 +35,9 @@ public class CSVReader {
 			for(int i = 0; i < labels.length; i++){
 				labels[i] = labels[i].toLowerCase().trim();
 			}
-			
-			indexId = Arrays.asList(labels).indexOf("id");
-			indexName = Arrays.asList(labels).indexOf("name");
-			indexCity = Arrays.asList(labels).indexOf("city");
-			indexLatitude = Arrays.asList(labels).indexOf("latitude");
-			indexLongitude = Arrays.asList(labels).indexOf("longitude");
-			indexElevation = Arrays.asList(labels).indexOf("elevation");
-			if(indexElevation == -1){
+			/*if(indexElevation == -1){
 				indexElevation = Arrays.asList(labels).indexOf("elevationft");
-			}
+			}*/
 			
 			while ((line = br.readLine()) != null) {		 
 				// use comma as separator
@@ -49,17 +46,11 @@ public class CSVReader {
                    continue;
                 }
                     
-	            for(int i = 0; i < values.length; i++)
+	            for(int i = 0; i < values.length; i++){
 	            	values[i] = values[i].trim();
-	            	
-		    if(indexElevation == -1 || indexCity == -1){
-                brew = new Brewery(values[indexId], values[indexName], "", values[indexLatitude], values[indexLongitude], "");
+                }
+                brew = new Brewery(values, labels);
 		    	brewList.add(brew);
-		    }
-		    else{
-                brew = new Brewery(values[indexId], values[indexName], values[indexCity], values[indexLatitude], values[indexLongitude], values[indexElevation]);
-		    	brewList.add(brew);
-		    }
 		    
 			}
 			
