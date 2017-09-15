@@ -25,7 +25,7 @@
 
 ## Plan 
 
-User stories (epics) in the Sprint Backlog: *#8, #9, #10, #12, #11, #14*.  
+User stories (epics) in the Sprint Backlog: *#113, #114, #115, #116, #117, #118*.  
 
 Total planned tasks / issues in the Sprint Backlog: *99* 
 
