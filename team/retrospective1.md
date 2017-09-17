@@ -1,4 +1,4 @@
-# Txx Retrospective for Sprint 1
+# T04 Retrospective for Sprint 1
 
 Area | What we did well | What we need to work on | What we will change
 :--- | :------- | :--------- | :---------------------
