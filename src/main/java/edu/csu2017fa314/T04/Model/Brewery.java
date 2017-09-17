@@ -19,6 +19,9 @@ public class Brewery {
 	private int getLabelIndex(String lab){
         	return Arrays.asList(this.labels).indexOf(lab);
 	}
+	public String[] getLabels(){
+        	return this.labels;
+	}
 	
 	public String getBrewInfo(String labelName){
         	return Arrays.asList(this.brewInfo).get(getLabelIndex(labelName));
