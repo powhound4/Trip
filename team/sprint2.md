@@ -33,7 +33,7 @@ Total planned tasks / issues in the Sprint Backlog: *15*
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
- | | | |
+ |9/18/17|Cumulative distance, plan and tasks are done | Tests for code in Sprint 1, merge shortest path code (from all in progress tasks), change distanceObject to incorporate all the data instead of certain pieces | Proficiency with JUnit tests and using SVG | Moderate-low
  | | | | 
  | | | | 
 
