@@ -35,8 +35,8 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
  |9/18/17|Cumulative distance, plan and tasks are done | Tests for code in Sprint 1, merge shortest path code (from all in progress tasks), change distanceObject to incorporate all the data instead of certain pieces | Proficiency with JUnit tests and using SVG | Moderate-low
  | 9/20/17 | distanceObject method moved and distanceObject class changed, tests added | nearest neighbor algorithm implemented and optimized, add all info columns to web user interface | nearest neighbor algorithm running slow - optimize algorithm, proficiency with SVG files | moderate-low 
+ |9/22/17| Many of the tests written, conversion of svg coordinates | Merge in Sprint 1 tests, add user options to the web interface, keep looking for ways to optimize the nearest neighbor algorithm |  Slow nearest neighbor algorithm, fully understanding svg coordinates and files | Moderately low
  | | | | 
-
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
