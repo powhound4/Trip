@@ -30,9 +30,9 @@ public static ArrayList<distanceObject> calculateDistance(ArrayList<Brewery> bre
 	int j = 1;
 	
   	for(int i = 0; j < breweries.size(); i++){
-  	
-  		distanceObject dObj = new distanceObject(breweries.get(i).getId(), breweries.get(j).getId(), breweries.get(i).getLatitude(), 
-  									breweries.get(i).getLongitude(), breweries.get(j).getLatitude(), breweries.get(j).getLongitude());
+  	        
+		distanceObject dObj = new distanceObject(breweries.get(i), breweries.get(j));
+  		
   		trip.add(dObj);
   		
   		j++;
