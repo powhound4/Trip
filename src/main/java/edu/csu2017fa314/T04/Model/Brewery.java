@@ -26,6 +26,9 @@ public class Brewery {
 	public String getBrewInfo(String labelName){
         	return Arrays.asList(this.brewInfo).get(getLabelIndex(labelName));
 	}
+	public String[] getBrewInfo(){
+        	return this.brewInfo;
+	}
     
     	public String getId(){
 		return Arrays.asList(this.brewInfo).get(getLabelIndex("id"));
