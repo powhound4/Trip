@@ -37,7 +37,7 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
  | 9/20/17 | distanceObject method moved and distanceObject class changed, tests added | nearest neighbor algorithm implemented and optimized, add all info columns to web user interface | nearest neighbor algorithm running slow - optimize algorithm, proficiency with SVG files | moderate-low 
  |9/22/17| Many of the tests written, conversion of svg coordinates | Merge in Sprint 1 tests, add user options to the web interface, keep looking for ways to optimize the nearest neighbor algorithm |  Slow nearest neighbor algorithm, fully understanding svg coordinates and files | Moderately low
  |9/25/17|Research on dynamic user options on the webpage, determined how to put in a line on an svg file | optimize nearest neighbor in the lab today and tomorrow, evaluate what can still be done for this Sprint |Need array of shortest paths for svg file, not having the javascript information that will be posted later today |Moderately confident
- | | | | 
+ | 9/27/17 | Code written for SVG file,  map and nearest neighbor | Add tests and merge code for SVG file, map and nearest neighbor, work on Javascript dropdown menu and any conflicts/issues with merging our code together | Running out of time to complete all epics for this sprint | moderate
 
 ## Review
 
