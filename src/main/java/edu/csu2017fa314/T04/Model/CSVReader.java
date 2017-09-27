@@ -35,6 +35,8 @@ public class CSVReader {
 			for(int i = 0; i < labels.length; i++){
 				labels[i] = labels[i].toLowerCase().trim();
 			}
+			Info labelInfo = new Info(labels);
+			labelInfo.writeInfo();
 			/*if(indexElevation == -1){
 				indexElevation = Arrays.asList(labels).indexOf("elevationft");
 			}*/
