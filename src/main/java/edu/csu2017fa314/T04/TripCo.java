@@ -42,7 +42,7 @@ public class TripCo
        ArrayList<distanceObject> test = new ArrayList<distanceObject>();
        test = View.calculateDistance(breweryList);
 
-    
+    	BuildSVG bsvg = new BuildSVG(test,args[1]);
    	View.writeItinerary(test);
    }
 
