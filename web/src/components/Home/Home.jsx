@@ -16,10 +16,10 @@ class Home extends React.Component {
                 <h3>Brewery Tour</h3>
 		    
                 <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
-                    <center><button type="button" class="btn btn-primary btn-md">Open Information File</button></center>
+                    <center><button type="button" className="btn btn-primary btn-md">Open Information File</button></center>
                 </Dropzone>
                 <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
-                    <center><button type="button" class="btn btn-primary btn-md">Open JSON File</button></center>
+                    <center><button type="button" className="btn btn-primary btn-md">Open JSON File</button></center>
                 </Dropzone>
 	
                 <table className="pair-table">
@@ -43,10 +43,32 @@ class Home extends React.Component {
                     </tbody>
                 </table>
             </div>
+		<div className="right">
+            		{this.props.svg}
+        		<Dropzone className="dropzone-style" onDrop={this.showPhoto.bind(this)}>
+        			<center><button className="btn btn-primary btn-md">Display Map</button></center>
+        		</Dropzone>
+        
+       		 </div>
         </div>
         
     }
-
+	showPhoto(svgFile){ 
+        	console.log("Accepting drop");
+        	svgFile.forEach(file => {
+            		console.log("Filename:", file.name, "File:", file);
+            		console.log(JSON.stringify(file));
+            		let fr = new FileReader();
+            		fr.onload = (function () {
+                	return function (e) {
+                		let image = e.target.result;
+                		console.log("Image = ", image);
+                		this.props.svgImage(image);
+    			};
+    		}) (file).bind(this);
+        	fr.readAsDataURL(file);
+    	});
+    }
 
     drop(acceptedFiles) {
         console.log("Accepting drop");
