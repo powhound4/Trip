@@ -1,5 +1,5 @@
 package edu.csu2017fa314.T04.View;
-
+import edu.csu2017fa314.T04.Model.*;
 
 public class distanceObject {
 	public  String startID ="";
@@ -9,8 +9,29 @@ public class distanceObject {
 	public String long1 = "";
 	public String long2 = "";
 	public int totalDistance;
+	public String[] b1Info = null;
+	public String[] b2Info = null;
+	public String[] b1Labels = null;
+	public String[] b2Labels = null;
 
-	public distanceObject(String startID, String endID, String lat1, String long1, String lat2, String long2){
+	//Distance object that takes 2 brewery objects
+	public distanceObject(Brewery b1, Brewery b2){
+        this.b1Info = b1.getBrewInfo();
+        this.b2Info = b2.getBrewInfo();
+        this.b1Labels = b1.getLabels();
+        this.b2Labels = b2.getLabels();
+        
+		this.startID = b1.getId();
+		this.endID = b2.getId();
+		this.lat1 = b1.getLatitude().replaceAll("\\s","");
+		this.lat2 = b2.getLatitude().replaceAll("\\s","");
+		this.long1 = b1.getLongitude().replaceAll("\\s","");
+		this.long2 = b2.getLongitude().replaceAll("\\s","");
+		
+		computeDistance();
+	}
+
+	/*public distanceObject(String startID, String endID, String lat1, String long1, String lat2, String long2){
 		
 		this.startID = startID;
 		this.endID = endID;
@@ -20,8 +41,19 @@ public class distanceObject {
 		this.long2 = long2.replaceAll("\\s","");
 		
 		computeDistance();
+	}*/
+	public String[] getB2Info(){
+        	return this.b2Info;
 	}
-	
+	public String[] getB1Info(){
+        	return this.b1Info;
+	}
+	public String[] getB1Labels(){
+        	return this.b1Labels;
+	}
+	public String[] getB2Labels(){
+        	return this.b2Labels;
+	}
 	
 	public String getStartID(){
 		return startID;
