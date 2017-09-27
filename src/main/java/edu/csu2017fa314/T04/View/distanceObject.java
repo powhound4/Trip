@@ -68,7 +68,7 @@ public class distanceObject {
 	}
 	
 	//convert lattitude and longitude to a decimal value
-		public double toDecimal(String degree){ 
+	public static double toDecimal(String degree){ 
 		int countmin = 0; int countsec = 0; int countdeg = 0;
 		boolean negative = false;
 	    
