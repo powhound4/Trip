@@ -131,27 +131,6 @@ public class Brewery {
 		totalDistance = (int)Math.round(distance);
 		return Math.abs(totalDistance);
 	}
-	//could make array a class variable and compute when constructor is called..
-	//could also call the replaceAll("\\s","") in toDecimal()
-	public double[] getCoSVGPoint(){
-		return scale2CoSVG(toDecimal(this.getLatitude().replaceAll("\\s","")), toDecimal(this.getLongitude().replaceAll("\\s","")));
-	}
-	//second argument (longitude) must be negative ex -104.9903
-	//this is based on the colorado map provided in sprint2
-	private double[] scale2CoSVG(double latitude, double longitude){
-		int northLong = -109;
-		int northLat = 41;
-		double scaleH = 176.4625;
-		double scaleW = 141.1714286;
-		double tempLat = northLat - latitude;
-		double tempLong = longitude - northLong;
-		double svgH = (tempLat * scaleH) + 38.3;
-		double svgW = (tempLong * scaleW) + 38.3;
-		double[] svg = {svgH,svgW}; //{lat,long}
-		return svg;
-	}
-	/*public String getElevation(){
-		return elevationFt;
-	}*/
+	
 	
 }
