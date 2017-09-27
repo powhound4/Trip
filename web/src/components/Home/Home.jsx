@@ -15,7 +15,7 @@ class Home extends React.Component {
                 <h1>T04 - 4TheWin</h1>
                 <h3>Brewery Tour</h3>
                 <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
-                    <center><button type="button" class="btn btn-primary btn-md">Open JSON File</button></center>
+                    <center><button type="button" class="btn btn-primary btn-md">Open Mileage Data File</button></center>
                 </Dropzone>
                 
                 <table className="pair-table">
@@ -24,7 +24,7 @@ class Home extends React.Component {
                             <th>Start</th>
                             <th>End</th>
                             <th>Distance</th>
-                            <th>Cummulative Distance</th>
+                            <th>Cumulative Distance</th>
                         </tr>
                     </thead>
                 
