@@ -14,10 +14,14 @@ class Home extends React.Component {
             <div className="inner">
                 <h1>T04 - 4TheWin</h1>
                 <h3>Brewery Tour</h3>
+		    
                 <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
-                    <center><button type="button" class="btn btn-primary btn-md">Open Mileage Data File</button></center>
+                    <center><button type="button" class="btn btn-primary btn-md">Open Information File</button></center>
                 </Dropzone>
-                
+                <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
+                    <center><button type="button" class="btn btn-primary btn-md">Open JSON File</button></center>
+                </Dropzone>
+	
                 <table className="pair-table">
                     <thead>
                         <tr>
