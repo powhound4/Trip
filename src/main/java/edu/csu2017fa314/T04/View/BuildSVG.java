@@ -62,9 +62,9 @@ public void copySVG(){
     	 
 public void writeSVG(){
     	 //begin writing to new file
-    	 String stroke = "black";
+    	 String stroke = "blue";
     	 String strokeWidth = "4";
-    	 String style = "stroke:black; stroke-width:2";
+    	 String style = "stroke:blue; stroke-width:2";
     	 
     	 try{
     	 
