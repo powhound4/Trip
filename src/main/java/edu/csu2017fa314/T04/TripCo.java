@@ -40,7 +40,12 @@ public class TripCo
        CSVReader csvReader = new CSVReader(args[0]);
        ArrayList<Brewery> breweryList = new ArrayList<Brewery>(csvReader.getBreweryList());
        ArrayList<distanceObject> test = new ArrayList<distanceObject>();
-       test = View.calculateDistance(breweryList);
+	   
+	ArrrayList<Brewery> trip = new ArrayList<Brewery>(); //create trip of brewery objects
+	shortTrip st = new shortTrip(breweryList);       //instantiate new shortTrip object
+	trip = st.getShortestTrip(breweryList);          //find the shortest
+	   
+       	test = View.calculateDistance(breweryList);
 
     	BuildSVG bsvg = new BuildSVG(test,args[1]);
    	View.writeItinerary(test);
