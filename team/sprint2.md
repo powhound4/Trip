@@ -58,6 +58,8 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 
 #### Problems encountered and resolutions
 * Issues with javascript react, needs more time to complete.
+* Unsure how to test web side and svg files, continue to learn.
+* Tests were done in isolation rather than making tests in Github for all to use, next sprint we will make and use test classes.
 
 ## Retrospective
 
