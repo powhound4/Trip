@@ -45,7 +45,7 @@ public class TripCo
 	shortTrip st = new shortTrip(breweryList);       //instantiate new shortTrip object
 	trip = st.getShortestTrip(breweryList);          //find the shortest
 	   
-       	test = View.calculateDistance(breweryList);
+       	test = View.calculateDistance(trip);
 
     	BuildSVG bsvg = new BuildSVG(test,args[1]);
    	View.writeItinerary(test);
