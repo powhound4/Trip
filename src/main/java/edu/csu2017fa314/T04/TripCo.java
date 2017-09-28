@@ -41,7 +41,7 @@ public class TripCo
        ArrayList<Brewery> breweryList = new ArrayList<Brewery>(csvReader.getBreweryList());
        ArrayList<distanceObject> test = new ArrayList<distanceObject>();
 	   
-	ArrrayList<Brewery> trip = new ArrayList<Brewery>(); //create trip of brewery objects
+	ArrayList<Brewery> trip = new ArrayList<Brewery>(); //create trip of brewery objects
 	shortTrip st = new shortTrip(breweryList);       //instantiate new shortTrip object
 	trip = st.getShortestTrip(breweryList);          //find the shortest
 	   
