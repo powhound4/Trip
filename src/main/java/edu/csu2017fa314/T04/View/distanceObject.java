@@ -4,6 +4,8 @@ import edu.csu2017fa314.T04.Model.*;
 public class distanceObject {
 	public  String startID ="";
 	public  String endID ="";
+	public String startName = "";
+	public String endName = "";
 	public String lat1 ="";
 	public String lat2 = "";
 	public String long1 = "";
@@ -23,6 +25,10 @@ public class distanceObject {
         
 		this.startID = b1.getId();
 		this.endID = b2.getId();
+		
+		this.startName = b1.getName();
+		this.endName = b2.getName();
+		
 		this.lat1 = b1.getLatitude().replaceAll("\\s","");
 		this.lat2 = b2.getLatitude().replaceAll("\\s","");
 		this.long1 = b1.getLongitude().replaceAll("\\s","");
@@ -63,6 +69,14 @@ public class distanceObject {
 		return endID;
 	}
 	
+	public String getStartName(){
+        return startName;
+        }
+    
+    public String getEndName(){
+        return endName;
+        }
+        
 	public int getTotalDistance(){
 		return totalDistance;
 	}
