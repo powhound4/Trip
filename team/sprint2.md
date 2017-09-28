@@ -42,18 +42,22 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-*
-
-Completed ** tasks / issues associated with these user stories.
+* Calculate Nearest Neighbor.
+* Create an svg file destinations found in csv file.
+* Draw itinerary over Colorado Map. 
+* Added functionality to display svg image on webpage.
+* Cummulative distances are computed and displayed on webpage.
 
 #### Incomplete user stories / epics in Sprint Backlog 
-* 
+* Useful information in itinerary.
 
 #### What went well
-*
+* Paired programming and working together to solve problems.
+* Asking for help from teammates.
+* When one person was done with their task they would help others out.
 
 #### Problems encountered and resolutions
-* 
+* Issues with javascript react, needs more time to complete.
 
 ## Retrospective
 
