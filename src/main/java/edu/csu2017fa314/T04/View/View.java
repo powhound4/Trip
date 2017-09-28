@@ -79,7 +79,7 @@ public static void writeItinerary(ArrayList<distanceObject> itinerary){
 	for(int i =0; i < itinerary.size(); i++){
 		JSONObject temp = new JSONObject();
 	
-		temp.put("end", itinerary.get(i).endID);
+		temp.put("end", itinerary.get(i).endName);
 		String[] endBrew = itinerary.get(i).getB2Info();
 		String[] brew2Labels = itinerary.get(i).getB2Labels();
 		
@@ -89,7 +89,7 @@ public static void writeItinerary(ArrayList<distanceObject> itinerary){
 		}
 		
 		temp.put("distance",itinerary.get(i).totalDistance);
-		temp.put("start" ,itinerary.get(i).startID);
+		temp.put("start" ,itinerary.get(i).startName);
 		
 		String[] startBrew = itinerary.get(i).getB1Info();
         String[] brew1Labels = itinerary.get(i).getB1Labels();
