@@ -75,7 +75,7 @@ class Home extends React.Component {
           			</form>
         		</ReactModal>
       		</div>
-	
+		    <br></br>
                 <table className="pair-table">
                     <thead>
                         <tr>
