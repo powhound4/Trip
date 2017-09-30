@@ -67,5 +67,5 @@ Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
 What we will change this time |Find more times to work together. |Make sure everyone understands all parts of customer needs throughout the process.|Take advantage of TA office hours for help. 
 What we did well |Paired-programming| Creating issues and not merging our own pull requests. |Using the react-modal component of ReactJS 
-What we need to work on |Seek out help from the team earlier on.|Throughout the Sprint process, we need to help each other out more than we are now.| We need a better understanding specifically of React JS, but also of javascript in general.
-What we will change next time |We will help each out when someone is struggling| Look to help out with incomplete tasks when one's role in the Sprint is completed.| Start frequently using JUnit testing and look to work in IntelliJ
+What we need to work on |Seek out help from the team earlier on and not wait till the last minute.|Throughout the Sprint process, we need to work together more than we are now.| We need a better understanding specifically of React JS, but also of javascript in general.
+What we will change next time |We will help each other out when someone is struggling and if we are struggling we will ask for help.| Look to help out with incomplete tasks when one's role in the Sprint is completed.| Start frequently using JUnit testing and look to work in IntelliJ
