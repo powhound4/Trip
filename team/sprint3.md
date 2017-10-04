@@ -34,7 +34,7 @@ Total planned tasks / issues in the Sprint Backlog: *number of issues in backlog
 
 Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only) | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
- |  |  |  | 
+ |10/4/17|Added Itinerary class and sprint3.md to master|Rename Brewery class to Destination (use find and replace), look at ways to optimize nearest neighbor, javascript|Work schedules, other classes, other assignments| Fairly confident
  | | | | 
  
 
