@@ -26,16 +26,18 @@
 
 ## Plan 
 
-User stories (epics) in the Sprint Backlog: *list the epics in your sprint backlog here*.  
+User stories (epics) in the Sprint Backlog: *list the epics in your sprint backlog here*.
+* #113 #208 #207 #117 #122 #125
 
 Total planned tasks / issues in the Sprint Backlog: *number of issues in backlog at start* 
+* 17
 
 ## Daily Scrums
 
 Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only) | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
  |10/4/17|Added Itinerary class and sprint3.md to master|Rename Brewery class to Destination (use find and replace), look at ways to optimize nearest neighbor, javascript|Work schedules, other classes, other assignments| Fairly confident
- | | | | 
+ | 10/6/17 | #210 | #220 #218 #113 | Understanding react and Javascript | Low
  
 
 ## Review
