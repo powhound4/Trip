@@ -8,6 +8,6 @@ Sprint # | Model-Data | Model-Itinerary | View-Server | View-Client
 -------- | ---------- | --------------- | ----------- | -----------
 1 | Chris |Evan |Alison | George
 2 | George | Alison | Chris | Evan
-3 |
+3 | Evan | Chris | George | Alison
 4 |
 5 |
