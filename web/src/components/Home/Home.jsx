@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal';
+import Select from 'react-select';
 import Dropzone from 'react-dropzone';
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
@@ -19,30 +20,44 @@ const customStyles = {
   }
 };
 
+var options = [
+  { value: 'name', label: 'Name' },
+  { value: 'distance', label: 'Distance' },
+  { value: 'latitude', label: 'Latitude' },
+  { value: 'longitude', label: 'Longitude'}
+];
+
 class Home extends React.Component {
 	
-	constructor() {
-    		super();
+	constructor(props) {
+    		super(props);
    	 	this.state = {
-      			modalIsOpen: false
+      			modalIsOpen: false,
+			values: []
     		};
    	 
     		this.openModal = this.openModal.bind(this);
     		this.afterOpenModal = this.afterOpenModal.bind(this);
     		this.closeModal = this.closeModal.bind(this);
   	}
-
+	
+	logChange(val) {
+  	  this.setState({value: val}); //dropdown has selected value
+  	  this.state.values.push(val); 
+  	  console.log(val);
+	}
   	openModal() {
-   		this.setState({modalIsOpen: true});
+   	  this.setState({modalIsOpen: true});
   	}
 
   	afterOpenModal() {
-    	this.subtitle.style.color = '#000';
+    	  this.subtitle.style.color = '#000';
   	}
 
   	closeModal() {
-    	this.setState({modalIsOpen: false});
+    	  this.setState({modalIsOpen: false});
   	}
+	
     	render() {
     
         let total = this.props.totalDist; //update the total here
@@ -54,6 +69,24 @@ class Home extends React.Component {
                 <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
                     <center><button type="button" className="btn btn-primary btn-md">Open Information File</button></center>
                 </Dropzone>
+		    
+		<center>
+		<form>
+		<div className = "select-control">
+			<Select
+  			name="form-field-name"
+  			value={this.state.value}
+  			multi={true}
+ 		 	options={options}
+  			onChange={this.logChange.bind(this)}
+  			simpleValue
+  			searchable={false}
+  			placeholder = "Select trip itinerary information to display..."
+  			backspaceToRemoveMessage=""
+			/>
+		</div>
+		</form>
+		</center>
                 
 		<div>
          		<center><button type="button" className="btn btn-primary btn-md" onClick={this.openModal}>Open JSON FILE</button></center>
