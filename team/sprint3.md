@@ -38,6 +38,7 @@ Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only)
 :--- | :--- | :--- | :--- | :---
  |10/4/17|Added Itinerary class and sprint3.md to master|Rename Brewery class to Destination (use find and replace), look at ways to optimize nearest neighbor, javascript|Work schedules, other classes, other assignments| Fairly confident
  | 10/6/17 | #210 | #220 #218 #113 | Understanding react and Javascript | Low
+ | 10/9/17 | Dropdown menu with styling | More javascript functionality, understand the web server | Understanding react and Javascript, CS 356 | Moderate to Low
  
 
 ## Review
