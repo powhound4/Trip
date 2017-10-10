@@ -26,13 +26,17 @@ class Home extends React.Component {
 	constructor(props) {
     		super(props);
    	 	this.state = {
-      			modalIsOpen: false,
-			values: []
+            modalIsOpen: false,
+			values: [],
+            value: '',
     		};
    	 
     		this.openModal = this.openModal.bind(this);
     		this.afterOpenModal = this.afterOpenModal.bind(this);
     		this.closeModal = this.closeModal.bind(this);
+    		
+    		this.handleChange = this.handleChange.bind(this);
+    		this.handleSubmit = this.handleSubmit.bind(this);
   	}
 	
 	logChange(val) {
@@ -51,7 +55,15 @@ class Home extends React.Component {
   	closeModal() {
     	  this.setState({modalIsOpen: false});
   	}
-	
+	handleChange(event){
+        this.setState({value: event.target.value});
+        }
+    
+    handleSubmit(event){
+       /* alert('Search for: ' + this.state.value);
+         event.preventDefault(); */
+        }
+        
     	render() {
     
         let total = this.props.totalDist; //update the total here
@@ -129,8 +141,24 @@ class Home extends React.Component {
         		<Dropzone className="dropzone-style" onDrop={this.showPhoto.bind(this)}>
         			<center><button className="btn btn-primary btn-md">Display Map</button></center>
         		</Dropzone>
+            </div>
+            
+      
+        <center>
+        <div>
+            <form classname='search-form' onSubmit={this.handleSubmit}>
+            <input 
+                type="text"
+                placeholder="Search Destinations"
+                value ={this.state.value}
+                onChange={this.handleChange}
+                />
+                 <input className="btn btn-primary btn-md" type="submit" value="Search" />
+            </form>
+        </div>
+         </center>
+       
         
-       		 </div>
         </div>
         
     }
