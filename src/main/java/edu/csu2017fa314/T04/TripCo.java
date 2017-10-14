@@ -3,9 +3,6 @@ import edu.csu2017fa314.T04.Model.*;
 import edu.csu2017fa314.T04.View.*;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 public class TripCo
 {
 
@@ -34,21 +31,14 @@ public class TripCo
    }
 
    public static void main(String[] args) {
-	  
-      System.out.println("Welcome to TripCo");
-//       System.out.println(args[0]);
-       CSVReader csvReader = new CSVReader(args[0]);
-       ArrayList<Brewery> breweryList = new ArrayList<Brewery>(csvReader.getBreweryList());
-       ArrayList<distanceObject> test = new ArrayList<distanceObject>();
-	   
-	ArrayList<Brewery> trip = new ArrayList<Brewery>(); //create trip of brewery objects
-	shortTrip st = new shortTrip(breweryList);       //instantiate new shortTrip object
-	trip = st.getShortestTrip(breweryList);          //find the shortest
-	   
-       	test = View.calculateDistance(trip);
 
-    	BuildSVG bsvg = new BuildSVG(test,args[1]);
-   	View.writeItinerary(test);
+      System.out.println("Welcome to TripCo");
+      CSVReader csvReader = new CSVReader(args[0]);
+      ArrayList<Destination> breweryList = new ArrayList<Destination>(csvReader.getBreweryList());
+      NearestNeighbor nn = new NearestNeighbor(breweryList);       //instantiate new NearestNeighbor object
+      ArrayList<distanceObject> trip = nn.getNearestNeighborTrip();          //find the shortest
+      BuildSVG bsvg = new BuildSVG(trip,args[1]);
+      View.writeItinerary(trip);
    }
 
 }

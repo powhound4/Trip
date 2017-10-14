@@ -17,9 +17,9 @@ public class distanceObject {
 	public String[] b2Labels = null;
 
 	//Distance object that takes 2 brewery objects
-	public distanceObject(Brewery b1, Brewery b2){
-        this.b1Info = b1.getBrewInfo();
-        this.b2Info = b2.getBrewInfo();
+	public distanceObject(Destination b1, Destination b2){
+        this.b1Info = b1.getInfo();
+        this.b2Info = b2.getInfo();
         this.b1Labels = b1.getLabels();
         this.b2Labels = b2.getLabels();
         
@@ -37,17 +37,6 @@ public class distanceObject {
 		computeDistance();
 	}
 
-	/*public distanceObject(String startID, String endID, String lat1, String long1, String lat2, String long2){
-		
-		this.startID = startID;
-		this.endID = endID;
-		this.lat1 = lat1.replaceAll("\\s","");
-		this.lat2 = lat2.replaceAll("\\s","");
-		this.long1 = long1.replaceAll("\\s","");
-		this.long2 = long2.replaceAll("\\s","");
-		
-		computeDistance();
-	}*/
 	public String[] getB2Info(){
         	return this.b2Info;
 	}
@@ -77,7 +66,7 @@ public class distanceObject {
         return endName;
         }
         
-	public int getTotalDistance(){
+	public int getDistance(){
 		return totalDistance;
 	}
 	
