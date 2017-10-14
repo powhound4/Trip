@@ -16,8 +16,8 @@ public class CSVReader {
 	private String[] labels = null;
 	//private int indexId, indexName, indexCity, indexLatitude, indexLongitude, indexElevation; //indexOf
 
-	private Brewery brew = null;
-	private ArrayList<Brewery> brewList = new ArrayList<Brewery>();
+	private Destination brew = null;
+	private ArrayList<Destination> brewList = new ArrayList<Destination>();
 	
 	/*public int getLabelIndex(String lab){
         return Arrays.asList(labels).indexOf(lab);
@@ -51,7 +51,7 @@ public class CSVReader {
 	            for(int i = 0; i < values.length; i++){
 	            	values[i] = values[i].trim();
                 }
-                brew = new Brewery(values, labels);
+                brew = new Destination(values, labels);
 		    	brewList.add(brew);
 		    
 			}
@@ -71,7 +71,7 @@ public class CSVReader {
 			}
 	}
 	
-	public ArrayList<Brewery> getBreweryList(){
+	public ArrayList<Destination> getBreweryList(){
 		return brewList;
 	}
 	
