@@ -23,7 +23,7 @@ public class Destination {
 		return this.labels;
 	}
 
-	public String getInfo(String labelName){
+	public String getLabel(String labelName){
 		return Arrays.asList(this.destInfo).get(getLabelIndex(labelName));
 	}
 	public String[] getInfo(){
@@ -36,10 +36,6 @@ public class Destination {
 
 	public String getName(){
 		return Arrays.asList(this.destInfo).get(getLabelIndex("name"));
-	}
-
-	public String getCity(){
-		return Arrays.asList(this.destInfo).get(getLabelIndex("city"));
 	}
 
 	public String getLatitude(){
