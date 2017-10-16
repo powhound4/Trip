@@ -28,7 +28,7 @@ class Home extends React.Component {
    	 	this.state = {
             modalIsOpen: false,
 			values: [],
-            value: '',
+            inputValue: '',
     		};
    	 
     		this.openModal = this.openModal.bind(this);
@@ -56,12 +56,12 @@ class Home extends React.Component {
     	  this.setState({modalIsOpen: false});
   	}
 	handleChange(event){
-        this.setState({value: event.target.value});
+        this.setState({inputValue: event.target.value});
         }
     
     handleSubmit(event){
-       /* alert('Search for: ' + this.state.value);
-         event.preventDefault(); */
+         /*alert('Search for: ' + this.state.inputValue); */
+         event.preventDefault(); 
         }
         
     	render() {
@@ -150,7 +150,7 @@ class Home extends React.Component {
             <input 
                 type="text"
                 placeholder="Search Destinations"
-                value ={this.state.value}
+               /* value ={this.state.value} */
                 onChange={this.handleChange}
                 />
                  <input className="btn btn-primary btn-md" type="submit" value="Search" />
