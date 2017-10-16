@@ -263,8 +263,40 @@
 .section {
   margin-bottom: 40px;
 }
+
     
-   
+//css for search-from box
+input[type=text] {
+    background-color: #fff;
+    border-color: #d9d9d9 #ccc #b3b3b3;
+    border-radius: 6px;
+    border: 1px solid #000;
+    text-color: #000;
+    border: 2px solid black;
+    border-radius: 4px;
+    height: 36px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    cursor: default;
+    text-align:center;
+}
+
+input[type=text]#myInp {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width .4s ease-in-out;
+    transition: width .4s ease-in-out;
+}
+
+//css for the the webpage background and overall appearance
  .inner {
      background-color: #E9A447;
      padding: 5px;
