@@ -41,6 +41,7 @@ Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only)
  | 10/9/17 | Dropdown menu with styling | More javascript functionality, understand the web server | Understanding react and Javascript, CS 356 | Moderate to Low
  | 10/11/17 | A search bar and button added; pull request up | Javascript functionality, work on server.java | Understanding react and Javascript, the web server and managing with CS 356 | Low
  | 10/13/17 | Lookup table working (stores the distances) | Get server calls working, IntelliJ (download) and coverage report with white box testing | Proficiency with react, Javascript and using a web server | Low confidence
+ | 10/16/17 | Search box and dropdown work independently, search box styled | Server calls, complete a coverage report with white box testing, JSON encoding of what's entered into the search box | Work schedules, proficiency with react, Javascript and using a web server | Low confidence
 
 ## Review
 
