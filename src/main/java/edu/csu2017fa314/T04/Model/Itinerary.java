@@ -10,11 +10,11 @@ public class Itinerary {
     
     public Itinerary(ArrayList<Destination> dests, Info labels){
      this.destinations = dests;
-     this.info = new Info(labels);
+     this.info = labels;
     }
     
     public void setInfo(Info labels){
-        this.info = new Info(labels);
+        this.info = labels;
     }
     
     public void addDestination(Destination place){
