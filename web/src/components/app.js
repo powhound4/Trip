@@ -4,13 +4,15 @@ import Pair from './Home/Pair/Pair.jsx';
 import Svg from './Home/Svg/Svg.jsx';
 
 export default class App extends React.Component {
+    
     constructor(props) {
         super(props);
         let tDist = 0; //holds the value of total distance
         this.state = {
             svgImage: [],
             allPairs: [],
-            sysFile: []
+            sysFile: [],
+            vals: []
         }
     };
 
@@ -29,14 +31,18 @@ export default class App extends React.Component {
                     svgImage={this.svgImage.bind(this)} //svgImage can be referd to in home
                     svg={si}
                     browseFile={this.browseFile.bind(this)}
+                    browseInfoFile={this.browseInfoFile.bind(this)}
                     pairs={ps}
                     totalDist = {this.tDist} //totalDist can be referenced in Home.jsx via this.props.totalDist
+                    options = {this.idVals}
+                    dropdownvalues = {this.vals}
                 />
             </div>
         )
     }
     async svgImage(file){
-        console.log("Got file:", file);
+       
+        console.log("this.state.vals: ", this.state.vals);
         let svg = [];
         let s = {source: file};
         svg.push(s);
@@ -62,7 +68,7 @@ export default class App extends React.Component {
                 totalDist: totalDist
             };
             pairs.push(p); //add object to pairs array
-            console.log("Pushing pair: ", p); //log to console
+            //console.log("Pushing pair: ", p); //log to console
         }
         this.tDist = totalDist; //set tDist to the cummulative distance
         
@@ -72,6 +78,23 @@ export default class App extends React.Component {
             allPairs: pairs,
             sysFile: file
         });
+    }
+    
+    async browseInfoFile(file){
+            let idValues = [];
+            console.log("Got file!!:", file);
+            for(var i=0; i < file.length; i++){
+               // console.log(Object.values(file[i])[0]);
+                let v = {
+                    value: Object.values(file[i])[0],
+                    label: Object.values(file[i])[0]
+                };
+                idValues.push(v);
+            }
+        console.log("idValues: ", idValues);
+        this.vals = idValues;
+            this.setState({
+                idValues: this.state.vals});
     }
         
 }
