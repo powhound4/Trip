@@ -58,6 +58,7 @@ class Home extends React.Component {
         console.log(this.state.inputValue);
         console.log('drop down values: ' + this.props.dropdownvalues);
          /*alert('Search for: ' + this.state.inputValue); */
+	    this.props.fetch(this.state.inputValue);
          event.preventDefault(); 
         }
         
@@ -149,7 +150,7 @@ class Home extends React.Component {
             <input 
                 type="text"
                 placeholder="Search Destinations"
-               /* value ={this.state.value} */
+                value ={this.state.value} 
                 onChange={this.handleChange}
                 />
                  <input className="btn btn-primary btn-md" type="submit" value="Search" />
