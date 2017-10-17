@@ -35,7 +35,7 @@ public class BuildSVG {
 		writeSVG();
 	}
 
-	public void copySVG(){
+	private void copySVG(){
 		FileInputStream instream = null;
 		FileOutputStream outstream = null;
 
@@ -58,7 +58,7 @@ public class BuildSVG {
 
 	}
 
-	public void writeSVG(){
+	private void writeSVG(){
 		//begin writing to new file
 		String stroke = "blue";
 		String strokeWidth = "4";
