@@ -5,13 +5,21 @@ import java.util.Arrays;
 
 public class Destination {
 
-	private String[] destInfo;
+	private ArrayList<String> destInfo;
 	private String[] labels;
+	private String id;
+	private String name;
 
-	public Destination(){
+	public Destination(String id, String name){
+        this.id = id;
+        this.name = name;
 	}
-
-	public Destination(String[] info, String[] labels){
+    
+    public Destination(ArrayList<String> info){
+        this.destInfo = info;
+    }
+    
+	public Destination(ArrayList<String> info, String[] labels){
 		this.destInfo = info;
 		//ArrayList<String> destInfo = new ArrayList<String>(Arrays.asList(info));
 		this.labels = labels;
@@ -22,28 +30,39 @@ public class Destination {
 	public String[] getLabels(){
 		return this.labels;
 	}
-
+	
 	public String getLabel(String labelName){
-		return Arrays.asList(this.destInfo).get(getLabelIndex(labelName));
+		return this.destInfo.get(getLabelIndex(labelName));
 	}
-	public String[] getInfo(){
+
+	public String getInfo(String labelName){
+		return this.destInfo.get(getLabelIndex(labelName));
+	}
+	public ArrayList<String> getInfo(){
 		return this.destInfo;
 	}
 
 	public String getId(){
-		return Arrays.asList(this.destInfo).get(getLabelIndex("id"));
+		return this.destInfo.get(getLabelIndex("id"));
 	}
 
 	public String getName(){
-		return Arrays.asList(this.destInfo).get(getLabelIndex("name"));
+		return this.destInfo.get(getLabelIndex("name"));
 	}
 
 	public String getLatitude(){
-		return Arrays.asList(this.destInfo).get(getLabelIndex("latitude"));
+		return this.destInfo.get(getLabelIndex("latitude"));
 	}
 
 	public String getLongitude(){
-		return Arrays.asList(this.destInfo).get(getLabelIndex("longitude"));
+		return this.destInfo.get(getLabelIndex("longitude"));
+	}
+	public String toString(){
+	String res = "";
+	for(int i=0; i < destInfo.size(); i++){
+	res+=this.labels[i] + ":" + destInfo.get(i) + ", ";
+	}
+	return res;
 	}
 	private double toDecimal(String degree){
 		int countmin = 0; int countsec = 0; int countdeg = 0;
