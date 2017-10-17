@@ -1,6 +1,7 @@
 package edu.csu2017fa314.T04;
 import edu.csu2017fa314.T04.Model.*;
 import edu.csu2017fa314.T04.View.*;
+import edu.csu2017fa314.T04.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import junit.framework.JUnit4TestAdapter;
@@ -8,9 +9,15 @@ import junit.framework.JUnit4TestAdapter;
 // This section declares all of the test classes in your program.
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-   TestTripCo.class,  // Add test classes here.
-   TestModel.class,
-   TestView.class 
+        TripCoTest.class,
+        DestinationTest.class,
+        InfoTest.class,
+        ItineraryTest.class,
+        TestModel.class,
+        NearestNeighborTest.class,
+        BuildSVGTest.class,
+        distanceObjectTest.class,
+        ViewTest.class
 })
 
 public class AllTests
