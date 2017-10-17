@@ -21,6 +21,8 @@ public class Itinerary {
 
     public Info getInfo(){ return this.info; }
     
+    public Info getInfo(){ return this.info; }
+    
     public void addDestination(Destination place){
         this.destinations.add(place);
     }
