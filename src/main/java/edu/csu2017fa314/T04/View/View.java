@@ -30,23 +30,23 @@ public class View
 			JSONObject temp = new JSONObject();
 
 			temp.put("end", itinerary.get(i).endName);
-			String[] endBrew = itinerary.get(i).getB2Info();
+			ArrayList<String> endBrew = itinerary.get(i).getB2Info();
 			String[] brew2Labels = itinerary.get(i).getB2Labels();
 
-			for(int j=0; j < endBrew.length; j++){
+			for(int j=0; j < endBrew.size(); j++){
 				String end = "end_" + brew2Labels[j];
-				temp.put(end, endBrew[j]);
+				temp.put(end, endBrew.get(j));
 			}
 
 			temp.put("distance",itinerary.get(i).totalDistance);
 			temp.put("start" ,itinerary.get(i).startName);
 
-			String[] startBrew = itinerary.get(i).getB1Info();
+			ArrayList<String> startBrew = itinerary.get(i).getB1Info();
 			String[] brew1Labels = itinerary.get(i).getB1Labels();
 
-			for(int j=0; j < startBrew.length; j++){
+			for(int j=0; j < startBrew.size(); j++){
 				String start = "start_" + brew1Labels[j];
-				temp.put(start, startBrew[j]);
+				temp.put(start, startBrew.get(j));
 			}
 
 			trip.add(temp);
