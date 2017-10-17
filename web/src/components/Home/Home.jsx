@@ -14,12 +14,7 @@ const customStyles = {
   }
 };
 
-var options = [
-  { value: 'name', label: 'Name' },
-  { value: 'distance', label: 'Distance' },
-  { value: 'latitude', label: 'Latitude' },
-  { value: 'longitude', label: 'Longitude'}
-];
+
 
 class Home extends React.Component {
 	
@@ -27,8 +22,8 @@ class Home extends React.Component {
     		super(props);
    	 	this.state = {
             modalIsOpen: false,
-			values: [],
             inputValue: '',
+           
     		};
    	 
     		this.openModal = this.openModal.bind(this);
@@ -41,7 +36,7 @@ class Home extends React.Component {
 	
 	logChange(val) {
   	  this.setState({value: val}); //dropdown has selected value
-  	  this.state.values.push(val); 
+  	//  this.state.values.push(val); 
   	  console.log(val);
 	}
   	openModal() {
@@ -60,19 +55,22 @@ class Home extends React.Component {
         }
     
     handleSubmit(event){
+        console.log(this.state.inputValue);
+        console.log('drop down values: ' + this.props.dropdownvalues);
          /*alert('Search for: ' + this.state.inputValue); */
          event.preventDefault(); 
         }
         
     	render() {
-    
+        let values = this.props.dropdownvalues;
         let total = this.props.totalDist; //update the total here
+        
         return <div className="home-container">
             <div className="inner">
                 <h1>T04 - 4TheWin</h1>
                 <h3>Brewery Tour</h3>
 		    
-                <Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
+                <Dropzone className="dropzone-style" onDrop={this.dropInfo.bind(this)}>
                     <center><button type="button" className="btn btn-primary btn-md">Open Information File</button></center>
                 </Dropzone>
 		    
@@ -80,10 +78,11 @@ class Home extends React.Component {
 		<form>
 		<div className = "select-control">
 			<Select
-  			name="form-field-name"
+  			name="form-
+  			field-name"
   			value={this.state.value}
   			multi={true}
- 		 	options={options}
+ 		 	options={this.props.dropdownvalues}
   			onChange={this.logChange.bind(this)}
   			simpleValue
   			searchable={false}
@@ -171,7 +170,7 @@ class Home extends React.Component {
             		fr.onload = (function () {
                 	return function (e) {
                 		let image = e.target.result;
-                		console.log("Image = ", image);
+                		//console.log("Image = ", image);
                 		this.props.svgImage(image);
     			};
     		}) (file).bind(this);
@@ -190,6 +189,23 @@ class Home extends React.Component {
                     let JsonObj = JSON.parse(e.target.result);
                     console.log(JsonObj);
                     this.props.browseFile(JsonObj);
+                };
+            })(file).bind(this);
+
+            fr.readAsText(file);
+        });
+    }
+        dropInfo(acceptedFiles) {
+        console.log("Accepting drop!");
+        acceptedFiles.forEach(file => {
+            console.log("Filename:", file.name, "File:", file);
+            console.log(JSON.stringify(file));
+            let fr = new FileReader();
+            fr.onload = (function () {
+                return function (e) {
+                    let JsonObj = JSON.parse(e.target.result);
+                    console.log("json Object: ",JsonObj);
+                    this.props.browseInfoFile(JsonObj);
                 };
             })(file).bind(this);
 
