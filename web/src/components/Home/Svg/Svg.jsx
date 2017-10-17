@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
     
-let Svg = ({source}) => <img className="image" src={source} id="map"></img>;
+let Svg = ({source}) => <img className="image" src={source + '?dc=' + new Date().getTime()} id="map" type="svg+xml"></img>;
     
         
 
