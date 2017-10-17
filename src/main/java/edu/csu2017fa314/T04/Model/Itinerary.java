@@ -18,8 +18,6 @@ public class Itinerary {
     public void setInfo(Info labels){
         this.info = labels;
     }
-
-    public Info getInfo(){ return this.info; }
     
     public Info getInfo(){ return this.info; }
     
