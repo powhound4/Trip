@@ -1,5 +1,7 @@
 package edu.csu2017fa314.T04.View;
 import edu.csu2017fa314.T04.Model.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class distanceObject {
 	public  String startID ="";
@@ -11,8 +13,8 @@ public class distanceObject {
 	public String long1 = "";
 	public String long2 = "";
 	public int totalDistance;
-	public String[] b1Info = null;
-	public String[] b2Info = null;
+	public ArrayList<String> b1Info;
+	public ArrayList<String> b2Info;
 	public String[] b1Labels = null;
 	public String[] b2Labels = null;
 
@@ -36,11 +38,24 @@ public class distanceObject {
 		
 		computeDistance();
 	}
+	
+	public String toString(){
+	String res = "";
+	for(int i=0; i < this.b1Info.size(); i++){
+	res+="start_" + this.b1Labels[i] + " : " + this.b1Info.get(i) + ", ";
+	}
+	for(int i=0; i < this.b2Info.size(); i++){
+	res+="end_" + this.b2Labels[i] + " : " + this.b2Info.get(i) + ", ";
+	}
+	res+="totalDistance : " + this.totalDistance;
+	return res;
+	}
+	
 
-	public String[] getB2Info(){
+	public ArrayList<String> getB2Info(){
         	return this.b2Info;
 	}
-	public String[] getB1Info(){
+	public ArrayList<String> getB1Info(){
         	return this.b1Info;
 	}
 	public String[] getB1Labels(){
