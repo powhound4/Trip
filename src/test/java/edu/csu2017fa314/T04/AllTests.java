@@ -9,7 +9,7 @@ import junit.framework.JUnit4TestAdapter;
 // This section declares all of the test classes in your program.
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TripCoTest.class,
+        /*TripCoTest.class,
         DestinationTest.class,
         InfoTest.class,
         ItineraryTest.class,
@@ -17,7 +17,7 @@ import junit.framework.JUnit4TestAdapter;
         NearestNeighborTest.class,
         BuildSVGTest.class,
         distanceObjectTest.class,
-        ViewTest.class
+        ViewTest.class*/
 })
 
 public class AllTests
