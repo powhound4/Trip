@@ -1,6 +1,7 @@
 package edu.csu2017fa314.T04;
 import edu.csu2017fa314.T04.Model.*;
 import edu.csu2017fa314.T04.View.*;
+import edu.csu2017fa314.T04.Server.*;
 import java.util.ArrayList;
 
 public class TripCo
@@ -33,12 +34,14 @@ public class TripCo
    public static void main(String[] args) {
 
       System.out.println("Welcome to TripCo");
-      CSVReader csvReader = new CSVReader(args[0]);
+      Server s = new Server();
+      s.serve();
+      /*CSVReader csvReader = new CSVReader(args[0]);
       ArrayList<Destination> breweryList = new ArrayList<Destination>(csvReader.getBreweryList());
       NearestNeighbor nn = new NearestNeighbor(breweryList);       //instantiate new NearestNeighbor object
       ArrayList<distanceObject> trip = nn.getNearestNeighborTrip();          //find the shortest
       BuildSVG bsvg = new BuildSVG(trip,args[1]);
-      View.writeItinerary(trip);
+      View.writeItinerary(trip);*/
    }
 
 }
