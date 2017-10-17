@@ -41,7 +41,7 @@ public class BuildSVG {
 
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(this.SVGpath));
-			PrintWriter pw = new PrintWriter(new FileWriter("ColoradoSVGEdited.svg"));
+			PrintWriter pw = new PrintWriter(new FileWriter("web/ColoradoSVGEdited.svg"));
 			String line = br.readLine();
 			pw.println(line);//xml
 			pw.println("<svg width=\"1066.6073\" height=\"783.0824\" xmlns=\"http://www.w3.org/2000/svg\">");
@@ -66,7 +66,7 @@ public class BuildSVG {
 
 		try{
 
-			bw = new BufferedWriter(new FileWriter("ColoradoSVGEdited.svg", true));
+			bw = new BufferedWriter(new FileWriter("web/ColoradoSVGEdited.svg", true));
 			for(int i =0; i< this.route.size(); i++){
 				int [] loc1 = scale2CoSVG(route.get(i).toDecimal(route.get(i).lat1), route.get(i).toDecimal(route.get(i).long1));
 				int [] loc2 = scale2CoSVG(route.get(i).toDecimal(route.get(i).lat2), route.get(i).toDecimal(route.get(i).long2));
