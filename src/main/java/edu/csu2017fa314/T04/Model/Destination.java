@@ -32,7 +32,7 @@ public class Destination {
 	}
 	
 	public String getLabel(String labelName){
-		return Arrays.asList(this.destInfo).get(getLabelIndex(labelName));
+		return this.destInfo.get(getLabelIndex(labelName));
 	}
 
 	public String getInfo(String labelName){
