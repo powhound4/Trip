@@ -24,6 +24,10 @@ public class NearestNeighbor {
 		fillInMap();
 	}
 
+	public int getTotalDistance() {
+		return minTotalDist;
+	}
+
 	private void fillInMap() {
 		for (int i = 0; i < locations.size(); i++) {
 			for (int j = 0; j < locations.size(); j++) {
