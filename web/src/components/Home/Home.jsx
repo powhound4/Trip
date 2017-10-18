@@ -50,7 +50,6 @@ class Home extends React.Component {
             <input className="SearchDest"
                 type="text"
                 placeholder="Search Destinations"
-                value ={this.state.value} 
                 onChange={this.handleChange}/>
                 <br></br>
                  <input className="btn btn-primary btn-md" type="submit" value="Search" />
