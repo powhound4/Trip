@@ -1,34 +1,18 @@
 import React, {Component} from 'react';
-import ReactModal from 'react-modal';
 import Select from 'react-select';
 import Dropzone from 'react-dropzone';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
-
 
 class Home extends React.Component {
 	
 	constructor(props) {
     		super(props);
    	 	this.state = {
-            modalIsOpen: false,
-            inputValue: '',
+           
+            inputValue: ''
            
     		};
    	 
-    		this.openModal = this.openModal.bind(this);
-    		this.afterOpenModal = this.afterOpenModal.bind(this);
-    		this.closeModal = this.closeModal.bind(this);
+    		
     		
     		this.handleChange = this.handleChange.bind(this);
     		this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,17 +23,7 @@ class Home extends React.Component {
   	//  this.state.values.push(val); 
   	  console.log(val);
 	}
-  	openModal() {
-   	  this.setState({modalIsOpen: true});
-  	}
-
-  	afterOpenModal() {
-    	  this.subtitle.style.color = '#000';
-  	}
-
-  	closeModal() {
-    	  this.setState({modalIsOpen: false});
-  	}
+  	
 	handleChange(event){
         this.setState({inputValue: event.target.value});
         }
@@ -67,12 +41,32 @@ class Home extends React.Component {
         let total = this.props.totalDist; //update the total here
         
         return <div className="home-container">
-            <div className="inner">
+           <div className="inner">
                 <h1>T04 - 4TheWin</h1>
-                <h3>Brewery Tour</h3>
-
+                <h3>Airport Tour With Beer</h3>
+                
+                <center><div>
+            <form className='search-form' onSubmit={this.handleSubmit}>
+            <input className="SearchDest"
+                type="text"
+                placeholder="Search Destinations"
+                value ={this.state.value} 
+                onChange={this.handleChange}/>
+                <br></br>
+                 <input className="btn btn-primary btn-md" type="submit" value="Search" />
+                 <br></br>
+            </form>
+        </div></center>
+                
+                <div className="map">
+            		<center>{this.props.svg}</center>
+        		
+            </div>
+		    
+                
+		    
 		<center>
-		<form>
+		<form className="Drop-down-form">
 		<div className = "select-control">
 			<Select
   			name="form-
@@ -90,26 +84,7 @@ class Home extends React.Component {
 		</form>
 		</center>
                 
-		<div>
-         		<center><button type="button" className="btn btn-primary btn-md" onClick={this.openModal}>Open JSON FILE</button></center>
-        		<ReactModal
-         			isOpen={this.state.modalIsOpen}
-         	 		onAfterOpen={this.afterOpenModal}
-          			onRequestClose={this.closeModal}
-          			style={customStyles}
-          			contentLabel="TripCo Modal"
-        		>
-					<h3>Upload a JSON File:</h3>
-          			<form>
-            
-            		<Dropzone className="dropzone-style" onDrop={this.drop.bind(this)}>
-                		<center><button type="button" className="btn btn-primary btn-md">Open JSON File</button></center> 
-                	</Dropzone>
-            		<center><button type="button" className="btn btn-primary btn-md" onClick={this.closeModal}>Close Window</button></center>
-      
-          			</form>
-        		</ReactModal>
-      		</div>
+		
 		    <br></br>
                 <table className="pair-table">
                     <thead>
@@ -132,25 +107,11 @@ class Home extends React.Component {
                     </tbody>
                 </table>
             </div>
-		<div className="right">
-            		{this.props.svg}
-        		<Dropzone className="dropzone-style" onDrop={this.showPhoto.bind(this)}>
-        			<center><button className="btn btn-primary btn-md">Display Map</button></center>
-        		</Dropzone>
-            </div>
+		
             
       
         <center>
-        <div>
-            <form classname='search-form' onSubmit={this.handleSubmit}>
-            <input 
-                type="text"
-                placeholder="Search Destinations"
-                onChange={this.handleChange}
-                />
-                 <input className="btn btn-primary btn-md" type="submit" value="Search" />
-            </form>
-        </div>
+        
          </center>
        
         
@@ -191,7 +152,7 @@ class Home extends React.Component {
             fr.readAsText(file);
         });
     }
-
+        
 }
 
 export default Home
