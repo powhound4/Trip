@@ -18,6 +18,10 @@ public class Itinerary {
         this.info = labels;
     }
     
+    public Info getInfo(){
+        return this.info;
+    }
+    
     public void addDestination(Destination place){
         this.destinations.add(place);
     }
