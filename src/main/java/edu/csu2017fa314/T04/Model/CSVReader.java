@@ -51,7 +51,8 @@ public class CSVReader {
 	            for(int i = 0; i < values.length; i++){
 	            	values[i] = values[i].trim();
                 }
-                //brew = new Destination(values, labels);
+                ArrayList<String> vals = new ArrayList<>(Arrays.asList(values));
+                brew = new Destination(vals, labels);
 		    	brewList.add(brew);
 		    
 			}
