@@ -53,7 +53,7 @@ public class Server {
         
         // Get something from the server
         QueryBuilder q = new QueryBuilder("powhound", "828940106"); // Create new QueryBuilder instance and pass in credentials
-        String queryString = String.format("SELECT * FROM airports WHERE municipality LIKE '%s' OR name LIKE '%s' OR type LIKE '%s' LIMIT 10", searched, searched, searched);
+        String queryString = String.format("SELECT * FROM airports WHERE municipality LIKE '%s' OR name LIKE '%s' OR type LIKE '%s'", searched, searched, searched);
 
         ArrayList<distanceObject> queryResults = q.query(queryString);
         
