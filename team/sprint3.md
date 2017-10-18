@@ -42,6 +42,7 @@ Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only)
  | 10/11/17 | A search bar and button added; pull request up | Javascript functionality, work on server.java | Understanding react and Javascript, the web server and managing with CS 356 | Low
  | 10/13/17 | Lookup table working (stores the distances) | Get server calls working, IntelliJ (download) and coverage report with white box testing | Proficiency with react, Javascript and using a web server | Low confidence
  | 10/16/17 | Search box and dropdown work independently, search box styled | Server calls, complete a coverage report with white box testing, JSON encoding of what's entered into the search box | Work schedules, proficiency with react, Javascript and using a web server | Low confidence
+ | 10/18/17 | Web server functioning and querying database, dropdown menu of location information dynamically created based on labels from JSON file | 2 Opt functioning properly, display only selected information about locations based on selection from dropdown | Javascript code from sprint 2 not yet completed, one path crossing in 2-opt algorithm | fairly confident 
 
 ## Review
 
