@@ -70,11 +70,7 @@ class Home extends React.Component {
             <div className="inner">
                 <h1>T04 - 4TheWin</h1>
                 <h3>Brewery Tour</h3>
-		    
-                <Dropzone className="dropzone-style" onDrop={this.dropInfo.bind(this)}>
-                    <center><button type="button" className="btn btn-primary btn-md">Open Information File</button></center>
-                </Dropzone>
-		    
+
 		<center>
 		<form>
 		<div className = "select-control">
@@ -150,7 +146,6 @@ class Home extends React.Component {
             <input 
                 type="text"
                 placeholder="Search Destinations"
-                value ={this.state.value} 
                 onChange={this.handleChange}
                 />
                  <input className="btn btn-primary btn-md" type="submit" value="Search" />
@@ -196,23 +191,7 @@ class Home extends React.Component {
             fr.readAsText(file);
         });
     }
-        dropInfo(acceptedFiles) {
-        console.log("Accepting drop!");
-        acceptedFiles.forEach(file => {
-            console.log("Filename:", file.name, "File:", file);
-            console.log(JSON.stringify(file));
-            let fr = new FileReader();
-            fr.onload = (function () {
-                return function (e) {
-                    let JsonObj = JSON.parse(e.target.result);
-                    console.log("json Object: ",JsonObj);
-                    this.props.browseInfoFile(JsonObj);
-                };
-            })(file).bind(this);
 
-            fr.readAsText(file);
-        });
-    }
 }
 
 export default Home
