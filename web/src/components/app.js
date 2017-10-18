@@ -93,6 +93,8 @@ export default class App extends React.Component {
             });
             this.browseFile(this.state.serverReturned.destinations);
             this.svgImage(this.state.serverReturned.svg);
+            let infoPath = require('../../info.json');
+            this.browseInfoFile(infoPath);
             
             
             // Print on console what was returned
