@@ -42,8 +42,10 @@ class Home extends React.Component {
         
         return <div className="home-container">
            <div className="inner">
-                <h1>T04 - 4TheWin</h1>
-                <h3>Airport Tour With Beer</h3>
+		<div className="heading">
+                	<h1>T04 - 4TheWin</h1>
+                	<h3>Airport Tour With Beer</h3>
+		</div>
                 
                 <center><div>
             <form className='search-form' onSubmit={this.handleSubmit}>
