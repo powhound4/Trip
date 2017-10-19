@@ -1,13 +1,33 @@
 import React, {Component} from 'react';
 
-let Pair = ({start, end, dist, totalDist}) => <tbody
+function listInfo(values){
+   
+   let stringTag = [];
+   for(let i = 0; i < values.length; i++){
+   console.log("values[i]: " , values[i]);
+   
+   stringTag.push(<li>{values[i]}</li>);
+
+   }
+  
+
+   return <ul>{stringTag}</ul>
+   
+};
+
+
+let Pair = ({start, end, dist, totalDist, startValues, endValues}) => <tbody //startvalues //end.values
     className="pair">
     <tr>
         <td id="start">
             <h5>{start}</h5>
+            {listInfo(startValues)}
+          
         </td>
         <td id = "end">
             <h5>{end}</h5>
+            {listInfo(endValues)}
+         
         </td>
         <td id = "distance">
             <h5>{dist}</h5>
@@ -17,5 +37,7 @@ let Pair = ({start, end, dist, totalDist}) => <tbody
         </td>
     </tr>
 </tbody>;
+
+
 
 export default Pair;
