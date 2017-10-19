@@ -272,10 +272,6 @@
 .virtual-scroll {
   z-index: 1;
 }
-.section {
-  margin-bottom: 40px;
-}
-
     
 //css for search-from box
     
@@ -296,6 +292,10 @@
     width: 90%;
 }
     
+input{
+    width: 36%;
+}
+    
 input[type=text] {
     background-color: #fff;
     border-color: #d9d9d9 #ccc #b3b3b3;
@@ -311,20 +311,39 @@ input[type=text] {
     cursor: pointer;
     text-align:center;
 }
+ 
+input[type=text]:hover {
+    border-top: 1px solid rgba(0, 0, 0, 0.075);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+    border-left: 1px solid rgba(0, 0, 0, 0.075);
+    border-right: 1px solid rgba(0, 0, 0, 0.075);
+}
 
-input[type=text]#myInp {
-    width: 25%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: white;
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width .4s ease-in-out;
-    transition: width .4s ease-in-out;
+input[type=text]:focus {
+    cursor: text;
+    width: 85%;
+    outline: none;
+    -webkit-transition: all .6s ease;
+    -moz-transition: all .6s ease;
+    transition: all .6s ease;
+}
+    
+.separator{
+    border-top: 8px solid #434;
+}
+
+.heading,.subheading {
+     color: white;
+     cursor: default;
+     font-size: 60px;
+     font-family: Impact;
+     background-color: #666666;
+     text-align: center;
+     -webkit-background-clip: text;
+     -moz-background-clip: text;
+     -webkit-text-stroke: 1px black;
+     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 //css for the the webpage background and overall appearance
