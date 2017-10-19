@@ -47,22 +47,34 @@ Date | Tasks done this time (Issue # Only) | Tasks done next time (Issue # Only)
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *web server*:  
+*the web page is now loaded from a web server, rather than a file; one can now interact with the server rather than a local file system; user may select destinations from a large database.*
+* *2-opt*:
+*the 2-opt optimization algorithm is now applied to all of the nearest neighbor tours to find the shortest*
+* *useful information in itinerary*: 
+*a user can now dynamically select the information they would like to see in their itinerary from the web server database.*
 
-Completed *number of issues completed* issues associated with these user stories.
+Completed *17* issues associated with these user stories.
 
 #### Incomplete user stories / epics in Sprint Backlog 
-* *user story*: *Explanation...*
-*
+* *Saved trips (optional)*: 
+*This was one of the optional epics and it was not completed. A user can select items for an itinerary, but it will not be saved if they choose to start a new trip itinerary.*
+* *Select a starting location (optional)*: 
+*This was one of the optional epics and it was not completed. A user is not yet able to select a starting location.  At this point, the starting location is always the first destination in the ordering of them in the data file.*
+* *Fast Response (optional)*: 
+*This was one of the optional epics and it was not completed.  A user is not yet able to get a fast response.*
 
 #### What went well
-* *something*
-*
+* *The team collaborated more on the tasks of their respective epics.*      
+* *Additionally, the team spent more time working together than in previous sprints.*
+* *Progress was also made and on the epics not completed in sprint 2.*
+* *The team is now caught up on the required epics.*
 
 #### Problems encountered and resolutions
-* *something*
-*
+* *Iterating through Objects and arrays of objects.  Working with the TAs helped to resolve this difficulty.*
+* *Understanding how to work with a server, as it is something new for everyone in the group. The Piazza post helped with this.*
+* *Understanding SQL, for those who didn't already have experience.  The Piazza post was a great help in doing this.*
+* *Working around assignments for other classes.  This was resolved with other team members helping each other out where necessary, to still get the user stories completed it time.*
 
 ## Retrospective
 
