@@ -43,9 +43,13 @@ class Home extends React.Component {
         let total = this.props.totalDist; //update the total here
         
         return <div className="home-container">
+		<div className="separater">
+           	</div>
            <div className="inner">
-                <h1>T04 - 4TheWin</h1>
-                <h3>Airport Tour With Beer</h3>
+                <div className="heading">
+                    T04 - 4TheWin
+                    <h1>Airport Tour With Beer</h1>
+                </div>
                 
                 <center><div>
             <form className='search-form' onSubmit={this.handleSubmit}>
@@ -91,6 +95,9 @@ class Home extends React.Component {
                 
 		
 		    <br></br>
+		<div className="subheading">
+			<h1>Your Itinerary</h1>
+		</div>
                 <table className="pair-table">
                     <thead>
                         <tr>
