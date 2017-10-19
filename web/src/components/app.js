@@ -13,7 +13,11 @@ export default class App extends React.Component {
             allPairs: [],
             sysFile: [],
             vals: [],
-            serverReturned:null
+            serverReturned:null,
+            selectedColumns: "",
+            list: []
+            
+            //add all labels
         }
     };
 
@@ -58,6 +62,9 @@ export default class App extends React.Component {
                     totalDist = {this.tDist} //totalDist can be referenced in Home.jsx via this.props.totalDist
                     options = {this.idVals}
                     dropdownvalues = {this.vals}
+                    getColumns = {this.getColumns.bind(this)}
+        
+                    
                 />
             </div>
         )
@@ -94,7 +101,7 @@ export default class App extends React.Component {
             this.browseFile(this.state.serverReturned.destinations);
             this.svgImage(this.state.serverReturned.svg);
             let infoPath = require('../../info.json');
-            this.browseInfoFile(infoPath);
+            this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
             
             
             // Print on console what was returned
@@ -103,6 +110,13 @@ export default class App extends React.Component {
             console.error("Error talking to server");
             console.error(e);
         }
+    }
+    
+    async getColumns(list){
+        console.log(list); //set to global
+        this.setState({
+            list: list
+        });
     }
     async svgImage(file){
         console.log("Got File: ", file);
@@ -115,6 +129,7 @@ export default class App extends React.Component {
     }
 
     async browseFile(file) {
+      
         console.log("Got file:", file);
         //For loop that goes through all pairs,
         let pairs = [];
@@ -124,12 +139,69 @@ export default class App extends React.Component {
             let end = file[i].endName; //get end from file i
             let dist = file[i].totalDistance;
             totalDist+=dist;
+            
+            let startValues= [];
+            let endValues = []; 
+            let index = 0;
+            let columns = [];
+            
+            if(this.state.list.length > 0){
+            columns =
+            this.state.list[this.state.list.length-1].split(',');
+            console.log("this is columns: ", columns);
+            }
+         
+            let b1 = "";
+            let b2 = "";
+        
+            if(columns.length > 0){
+            for(let j = 0; j < columns.length; j++){
+                //loop through selected labels
+                        
+               let regex = new RegExp((columns[j]));
+               
+               //regex matching based on label, if it matches the pattern grab that info from the b1 or b2 info array
+               
+               for(let k = 0; k < file[i].b1Labels.length; k++){
+                        //loop through all the labels
+                       if(regex.test(file[i].b1Labels[k])){
+                           index = k;
+                       }
+                  
+                           let label = file[i].b1Labels[index];
+                           label = label.charAt(0).toUpperCase() + label.slice(1) + "\n";
+                           if(file[i].b1Info[index] == null){
+                           b1 = label + ": Not Available";
+                           }
+                           else{
+                           b1 = label + ": " + file[i].b1Info[index];
+                           }
+                           if(file[i].b2Info[index] == null){
+                               b2 = label + ": Not Available";
+                           }else{
+                               
+                           
+                           b2 = label + ": " + file[i].b2Info[index];
+                           }
+
+                } 
+               startValues.push(b1);
+               endValues.push(b2);     
+            
+                               
+                }
+            }
+
             let p = { //create object with start, end, and dist variable
                 start: start,
                 end: end,
                 dist: dist,
-                totalDist: totalDist
+                totalDist: totalDist,
+                startValues: startValues,
+                endValues: endValues
+                //add all values
             };
+                       
             pairs.push(p); //add object to pairs array
             console.log("Pushing pair: ", p); //log to console
         }
@@ -147,10 +219,10 @@ export default class App extends React.Component {
             let idValues = [];
             console.log("Got file!!:", file);
             for(var i=0; i < file.length; i++){
-               // console.log(Object.values(file[i])[0]);
+                console.log("this thing: ",(file[i]));
                 let v = {
-                    value: Object.values(file[i])[0],
-                    label: Object.values(file[i])[0]
+                    value: file[i],
+                    label: file[i]
                 };
                 idValues.push(v);
             }
