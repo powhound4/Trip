@@ -43,7 +43,7 @@ class Home extends React.Component {
         let total = this.props.totalDist; //update the total here
         
         return <div className="home-container">
-		<div className="separater">
+		<div className="separator">
            	</div>
            <div className="inner">
                 <div className="heading">
