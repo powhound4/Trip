@@ -69,7 +69,7 @@ class Home extends React.Component {
        
 		    
 		<center>
-		<form className="Drop-down-form" onSubmit={this.logChange.bind(this)}>
+		<form className="Drop-down-form" onSubmit={this.handleSubmit}>
 		<div className = "select-control">
 			<Select
   			name="form-
