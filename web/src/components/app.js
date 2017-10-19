@@ -154,8 +154,8 @@ export default class App extends React.Component {
             let b1 = "";
             let b2 = "";
         
-            if(columns.length > 0){
-            for(let j = 0; j < columns.length; j++){
+            if(columns.length > 0 && columns[0] != ""){
+                for(let j = 0; j < columns.length; j++){
                 //loop through selected labels
                         
                let regex = new RegExp((columns[j]));
