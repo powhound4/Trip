@@ -8,19 +8,19 @@ public class NearestNeighbor {
 	private int disTable[][];
 	private int visTable[][];
 	private int bestTrip[];
-	private int alreadyUsed[];
-	private int usedPtr;
+	private int currentTrip[];
+	private int curTripPtr;
 	private int minTotalDist;
-	private int totalDist;
+	private int curTotalDist;
 
 	public NearestNeighbor(ArrayList<Destination> locations) {
 		this.locations = locations;
 		disTable = new int[locations.size()][locations.size()];
 		visTable = new int[locations.size()][locations.size()];
-		alreadyUsed = new int[disTable.length];
-		usedPtr = 0;
+		currentTrip = new int[disTable.length];
+		curTripPtr = 0;
 		minTotalDist = Integer.MAX_VALUE;
-		totalDist = 0;
+		curTotalDist = 0;
 		fillInMap();
 	}
 
@@ -41,12 +41,68 @@ public class NearestNeighbor {
 	}
 
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
-		bestTrip= calcShortestTrip();
-		ArrayList<Destination> orderedLocations = new ArrayList<Destination>(locations.size());
+		bestTrip = calcShortestTrip();
+		//FIXME call 2opt with bestTrip HERE
+		twoOpt();
+		ArrayList<Destination> orderedDestinations = new ArrayList<>(locations.size());
 		for(int i = 0; i < locations.size(); i++){
-			orderedLocations.add(locations.get(bestTrip[i]));
+			orderedDestinations.add(locations.get(bestTrip[i]));
 		}
-		return disObjectify(orderedLocations);
+		return disObjectify(orderedDestinations);
+	}
+
+	private int[] twoOptSwap(int[] trip, int i1, int k){
+		/*
+		Implemented from sprint 3 slides
+		 */
+		int temp;
+		while(i1 < k){
+			temp = trip[i1];
+			trip[i1] = trip[k];
+			trip[k] = temp;
+			i1++; k--;
+		}
+		return trip;
+	}
+
+
+
+	private void twoOpt(){
+		/*
+		Implemented from sprint 3 slides
+		 */
+		boolean improvement = true;
+		int delta;
+		int trip[] = new int[bestTrip.length+1];
+		System.arraycopy(bestTrip, 0, trip, 0, bestTrip.length);
+		trip[trip.length-1] = trip[0]; //round trip
+		int n = trip.length-1;	//length or length-1 FIXME
+		while (improvement){
+			improvement = false;
+			//0 <= i < i+1 < k < k+1 <= n
+			for(int i = 0; i <= n-3; i++){
+				for(int k = i+2; k <= n-1; k++){
+					/*if(k+1 >= n) {
+						trip[n] = trip[0];//it's already set at top but if index 0 changed during 2opt this will update
+						delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k+1]])
+								+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k+1]]);
+						if (delta < 0) {
+							trip = twoOptSwap(trip, i + 1, k);
+							improvement = true;
+						}
+					}else {
+					*/
+						delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
+								+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+						if (delta < 0) {
+							trip = twoOptSwap(trip, i + 1, k);
+							improvement = true;
+						}
+					}
+				}
+			}
+		//}
+		bestTrip = trip;
 	}
 
 	private ArrayList<distanceObject> disObjectify(ArrayList<Destination> orderedLocations){
@@ -66,19 +122,20 @@ public class NearestNeighbor {
 		//loops through each starting node and calls calDist with that start node
 		int trip[] = new int[disTable.length];
 		for(int i = 0; i < disTable.length; i++){
-			alreadyUsed[usedPtr] = i;
+			currentTrip[curTripPtr] = i;
 			calDist(i);
 			//add the distance of the last destination to the first destination
-			totalDist += disTable[alreadyUsed[alreadyUsed.length-1]][alreadyUsed[0]];
+			curTotalDist += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
 
-			if(totalDist < minTotalDist){
-				minTotalDist = totalDist;
-				for(int k = 0; k < alreadyUsed.length; k++){
-					trip[k] = alreadyUsed[k];
+			if(curTotalDist < minTotalDist){
+				minTotalDist = curTotalDist;
+				for(int k = 0; k < currentTrip.length; k++){
+					trip[k] = currentTrip[k];
 				}
+
 			}
-			usedPtr = 0;
-			totalDist = 0;
+			curTripPtr = 0;
+			curTotalDist = 0;
 			visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
 		}
 		return trip;
@@ -89,8 +146,8 @@ public class NearestNeighbor {
 		for(int i = 0; i < disTable.length; i++){
 			visTable[i][startIndex] = 1;
 		}
-		usedPtr++;
-		if(usedPtr < alreadyUsed.length) {
+		curTripPtr++;
+		if(curTripPtr < currentTrip.length) {
 			int min = Integer.MAX_VALUE;
 			for (int i = 0; i < disTable[startIndex].length; i++) {
 				if(i == startIndex){
@@ -98,11 +155,11 @@ public class NearestNeighbor {
 				}
 				if (disTable[startIndex][i] < min && visTable[startIndex][i] != 1) {
 					min = disTable[startIndex][i];
-					alreadyUsed[usedPtr] = i;
+					currentTrip[curTripPtr] = i;
 				}
 			}
-			totalDist += min;
-			calDist(alreadyUsed[usedPtr]);
+			curTotalDist += min;
+			calDist(currentTrip[curTripPtr]);
 		}
 	}
 
