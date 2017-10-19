@@ -42,8 +42,7 @@ public class NearestNeighbor {
 
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
 		bestTrip = calcShortestTrip();
-		//FIXME call 2opt with bestTrip HERE
-		twoOpt();
+		twoOpt(bestTrip);
 		ArrayList<Destination> orderedDestinations = new ArrayList<>(locations.size());
 		for(int i = 0; i < locations.size(); i++){
 			orderedDestinations.add(locations.get(bestTrip[i]));
@@ -65,43 +64,32 @@ public class NearestNeighbor {
 		return trip;
 	}
 
-
-
-	private void twoOpt(){
+	private void twoOpt(int[] possibleTrip){
 		/*
 		Implemented from sprint 3 slides
 		 */
 		boolean improvement = true;
 		int delta;
-		int trip[] = new int[bestTrip.length+1];
-		System.arraycopy(bestTrip, 0, trip, 0, bestTrip.length);
+		int trip[] = new int[possibleTrip.length+1];
+		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length-1] = trip[0]; //round trip
-		int n = trip.length-1;	//length or length-1 FIXME
-		while (improvement){
+		int n = trip.length-1;
+		while (improvement) {
 			improvement = false;
 			//0 <= i < i+1 < k < k+1 <= n
-			for(int i = 0; i <= n-3; i++){
-				for(int k = i+2; k <= n-1; k++){
-					/*if(k+1 >= n) {
-						trip[n] = trip[0];//it's already set at top but if index 0 changed during 2opt this will update
-						delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k+1]])
-								+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k+1]]);
-						if (delta < 0) {
-							trip = twoOptSwap(trip, i + 1, k);
-							improvement = true;
-						}
-					}else {
-					*/
-						delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
-								+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
-						if (delta < 0) {
-							trip = twoOptSwap(trip, i + 1, k);
-							improvement = true;
-						}
+			for (int i = 0; i <= n - 3; i++) {
+				for (int k = i + 2; k <= n - 1; k++) {
+					delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
+							+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+					if (delta < 0) {
+						trip = twoOptSwap(trip, i + 1, k);
+						improvement = true;
+						curTotalDist += delta;    //subtract the change from totalDist. FIXME might need to change dist w/in swap call
+
 					}
 				}
 			}
-		//}
+		}
 		bestTrip = trip;
 	}
 
@@ -122,10 +110,14 @@ public class NearestNeighbor {
 		//loops through each starting node and calls calDist with that start node
 		int trip[] = new int[disTable.length];
 		for(int i = 0; i < disTable.length; i++){
-			currentTrip[curTripPtr] = i;
+			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calDist(i);
 			//add the distance of the last destination to the first destination
 			curTotalDist += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
+			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
+			twoOpt(currentTrip);
+
+
 
 			if(curTotalDist < minTotalDist){
 				minTotalDist = curTotalDist;
@@ -162,5 +154,4 @@ public class NearestNeighbor {
 			calDist(currentTrip[curTripPtr]);
 		}
 	}
-
 }
