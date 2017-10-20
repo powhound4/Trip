@@ -6,19 +6,22 @@ function listInfo(values){
    for(let i = 0; i < values.length; i++){
    console.log("values[i]: " , values[i]);
    
-   stringTag.push(<li>{values[i]}</li>);
+   stringTag.push(<li className="ListItem">{values[i]}</li>);
 
    }
   
 
-   return <ul>{stringTag}</ul>
+   return <ul className="UList">{stringTag}</ul>
    
 };
 
 
-let Pair = ({start, end, dist, totalDist, startValues, endValues}) => <tbody //startvalues //end.values
+let Pair = ({leg, start, end, dist, totalDist, startValues, endValues}) => <tbody //startvalues //end.values
     className="pair">
     <tr>
+         <td id="leg">
+            <h5>{leg}</h5>
+        </td>
         <td id="start">
             <h5>{start}</h5>
             {listInfo(startValues)}
