@@ -276,7 +276,7 @@
 //css for search-from box
     
 .search-form {
-    background-color: #434;
+    background-color: #23170F;
     border-color: #d9d9d9 #ccc #b3b3b3;
     border-radius: 4px;
     border: 1px solid #333;
@@ -329,42 +329,36 @@ input[type=text]:focus {
 }
     
 .separator{
-    border-top: 8px solid #434;
+    border-top: 5px solid #2A1001;
 }
 
 .heading,.subheading {
-     color: white;
+     color: #2A1001;
      cursor: default;
      font-size: 60px;
-     font-family: Impact;
+     font-family: Papyrus;
      background-color: #666666;
      text-align: center;
      -webkit-background-clip: text;
-     -moz-background-clip: text;
+     //-moz-background-clip: text;
      -webkit-text-stroke: 1px black;
-     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-        -1px 1px 0 #000, 1px 1px 0 #000;
+     
 }
 
 //css for the the webpage background and overall appearance
  .inner {
      background-color: #E9A447;
      padding: 5px;
-     //border-top: 5px solid #434;
-     border-bottom: 5px solid #434;
-     border-right:5px solid #434;
-     border-left:5px solid #434;
+     border-bottom: 5px solid #2A1001;
+     border-right:5px solid #2A1001;
+     border-left:5px solid #2A1001;
      margin-right:auto;
      margin-left:auto;
      
      width: 75%;
 
 }
-  .dropzone-style button {
-    text-align: center;
-    //border-radius:1px;
-  }
-  
+
  
   .pair-table {
     background-color:#DACA78;
@@ -381,10 +375,20 @@ input[type=text]:focus {
     }
 
     td {
+        
       padding: 10px;
       margin: 5px;
     }
+    
   }
+  
+  .UList {
+        float: left;
+  }
+    .ListItem {
+        float: left;
+    }
+    
   
   .SearchDest {
       margin:5px;

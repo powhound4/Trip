@@ -135,6 +135,7 @@ export default class App extends React.Component {
         let pairs = [];
         let totalDist = 0;
         for (let i = 0; i < Object.values(file).length; i++) {
+            let leg = i+1;
             let start = file[i].startName; //get start from file i
             let end = file[i].endName; //get end from file i
             let dist = file[i].totalDistance;
@@ -193,6 +194,7 @@ export default class App extends React.Component {
             }
 
             let p = { //create object with start, end, and dist variable
+                leg: leg,
                 start: start,
                 end: end,
                 dist: dist,
