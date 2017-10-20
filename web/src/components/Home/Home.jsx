@@ -74,7 +74,7 @@ class Home extends React.Component {
 		    
 		<center>
 		<form className="Drop-down-form" onSubmit={this.handleSubmit}>
-		<div className = "select-control">
+		<div className = "Select-control">
 			<Select
   			name="form-
   			field-name"
@@ -88,19 +88,19 @@ class Home extends React.Component {
   			backspaceToRemoveMessage=""
 			/>
 		</div>
-		   <input className="btn btn-primary btn-md" type="submit" value="Get Info" />
+		   <input className="btn btn-primary btn-md" type="submit" value="Get Info" style={{margin:'5px', width:'98%'}}/>
                  <br></br>
 		</form>
 		</center>
                 
 		
-		    <br></br>
 		<div className="subheading">
 			<h1>Your Itinerary</h1>
 		</div>
                 <table className="pair-table">
                     <thead>
                         <tr>
+                            <th>Leg</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Distance</th>
@@ -112,9 +112,9 @@ class Home extends React.Component {
                     {this.props.pairs}
                     <tbody>
                         <tr>
-                            <td colSpan="2">Total:</td>
-                            <td>{total}</td>
-                            <td></td>
+                            <td colSpan="3">Total:</td>
+                            <td colSpan="2">{total}</td>
+                            
                         </tr>
                     </tbody>
                 </table>
