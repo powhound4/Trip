@@ -37,8 +37,8 @@ Total story points in the Sprint Backlog: *total number of story points in sprin
 
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
-*date* | *issue numbers only* | *issue numbers only* | *None* | *High*
- | | | | 
+10/23/2017 | none | planning| None | High
+ 10/25/2017 |planning | #356 #336 #357 #355 #339| None | High
  
 
 ## Review
