@@ -152,6 +152,7 @@ class Home extends React.Component {
                             <th>End</th>
                             <th>Distance</th>
                             <th>Cumulative Distance</th>
+                            <th>Add to Itinerary</th>
                         </tr>
                     </thead>
                 
@@ -160,7 +161,6 @@ class Home extends React.Component {
                         <tr>
                             <td colSpan="3">Total:</td>
                             <td colSpan="2">{total}</td>
-                            
                         </tr>
                     </tbody>
                 </table>
