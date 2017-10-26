@@ -9,14 +9,25 @@ function listInfo(values){
    stringTag.push(<li className="ListItem">{values[i]}</li>);
 
    }
-  
 
    return <ul className="UList">{stringTag}</ul>
    
 };
+  
+function changeChecked(checked){
+   
+   console.log("checked is: ", checked);
+   checked = !checked;
+      console.log("checked is: ", checked);
+ //   if(checked == true){
+ //       console.log("checked is: ", checked);
+ //       }
+    
+
+};
 
 
-let Pair = ({leg, start, end, dist, totalDist, startValues, endValues}) => <tbody //startvalues //end.values
+let Pair = ({leg, start, end, dist, totalDist, startValues, endValues, checked}) => <tbody //startvalues //end.values
     className="pair">
     <tr>
          <td id="leg">
@@ -25,7 +36,6 @@ let Pair = ({leg, start, end, dist, totalDist, startValues, endValues}) => <tbod
         <td id="start">
             <h5>{start}</h5>
             {listInfo(startValues)}
-          
         </td>
         <td id = "end">
             <h5>{end}</h5>
@@ -38,6 +48,12 @@ let Pair = ({leg, start, end, dist, totalDist, startValues, endValues}) => <tbod
         <td id = "totalDistance">
             <h5>{totalDist}</h5>
         </td>
+        <td id = "Add to Itinerary">
+            <input type="checkbox"
+            //checked={checked}
+            //onClick={changeChecked(checked)} 
+            />
+         </td>
     </tr>
 </tbody>;
 
