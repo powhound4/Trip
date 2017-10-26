@@ -7,13 +7,12 @@ class Home extends React.Component {
 	constructor(props) {
     		super(props);
    	 	this.state = {
-           
-            inputValue: '',
-            columnValues: []
+			inputValue: '',
+            		columnValues: [],
+			isCheckedM: true,
+                	isCheckedK: true
     		};
    	 
-    		
-    		
     		this.handleChange = this.handleChange.bind(this);
     		this.handleSubmit = this.handleSubmit.bind(this);
   	}
@@ -25,12 +24,34 @@ class Home extends React.Component {
   	  this.props.getColumns(this.state.columnValues);
 
 	}
-  	
+
+    	logCheck(val){
+        	this.setState({checked: val});
+        	console.log(val);
+    	}
+
+    	toggleMiles(event) {
+        	this.setState({
+            	    isCheckedM: !this.state.isCheckedM
+        	});
+    	}
+
+    	toggleKilo(event) {
+        	this.setState({
+            	    isCheckedK: !this.state.isCheckedK
+        	});
+    	}
+	
+  	handleOnSubmit(event) {
+		const selectedUnits = [];
+        	event.preventDefault();
+    	}
+	
 	handleChange(event){
         this.setState({inputValue: event.target.value});
         }
     
-    handleSubmit(event){
+    	handleSubmit(event){
         console.log(this.state.inputValue);
         console.log('drop down values: ' + this.props.dropdownvalues);
 	    this.props.fetch(this.state.inputValue);
@@ -39,6 +60,28 @@ class Home extends React.Component {
         
     	render() {
     	
+           const milesCheckbox = (
+                <div className = "checkbox">
+                    <input type="checkbox"
+                    name="checkbox"
+                    onClick={this.toggleMiles.bind(this)}
+                    multi={false}
+                    />
+                    <label>Miles</label>
+                </div>
+            );
+
+            const kiloCheckbox = (
+                <div className = "checkbox">
+                    <input type="checkbox"
+                    name="checkbox"
+                    onClick={this.toggleKilo.bind(this)}
+                    multi={false}
+                    />
+                    <label>Kilometers</label>
+                </div>
+            );
+	
         let values = this.props.dropdownvalues;
         let total = this.props.totalDist; //update the total here
         
@@ -68,10 +111,6 @@ class Home extends React.Component {
         		
             </div>
 		    
-                
-              
-       
-		    
 		<center>
 		<form className="Drop-down-form" onSubmit={this.handleSubmit}>
 		<div className = "Select-control">
@@ -93,7 +132,15 @@ class Home extends React.Component {
 		</form>
 		</center>
                 
-		
+		<center>
+        	<div className = "checkbox">
+            		<form onSubmit={this.handleOnSubmit.bind(this)}>
+                	{milesCheckbox}
+			{kiloCheckbox}
+            		</form>
+        	</div>
+        	</center>
+		   
 		<div className="subheading">
 			<h1>Your Itinerary</h1>
 		</div>
@@ -108,7 +155,6 @@ class Home extends React.Component {
                         </tr>
                     </thead>
                 
-                
                     {this.props.pairs}
                     <tbody>
                         <tr>
@@ -119,14 +165,11 @@ class Home extends React.Component {
                     </tbody>
                 </table>
             </div>
-		
-            
-      
+		 
         <center>
         
          </center>
-       
-        
+     
         </div>
         
     }
