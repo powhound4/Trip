@@ -327,6 +327,18 @@ input[type=text]:focus {
     -moz-transition: all .6s ease;
     transition: all .6s ease;
 }
+
+//checkboxes
+.checkbox{
+    top: -1px;
+    font-size: 20px;
+    font-family: Impact;
+    color: white;
+    cursor: default;
+    -webkit-text-stroke: 1px black;
+    display: inline-block 20px;
+
+}
     
 .separator{
     border-top: 5px solid #2A1001;
@@ -359,7 +371,6 @@ input[type=text]:focus {
 
 }
 
- 
   .pair-table {
     background-color:#DACA78;
     margin-left: auto;
