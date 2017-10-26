@@ -15,7 +15,8 @@ export default class App extends React.Component {
             vals: [],
             serverReturned:null,
             selectedColumns: "",
-            list: []
+            list: [],
+            checked: false
             
             //add all labels
         }
@@ -146,6 +147,8 @@ export default class App extends React.Component {
             let index = 0;
             let columns = [];
             
+            let checked = false;
+            
             if(this.state.list.length > 0){
             columns =
             this.state.list[this.state.list.length-1].split(',');
@@ -188,7 +191,7 @@ export default class App extends React.Component {
                 } 
                startValues.push(b1);
                endValues.push(b2);     
-            
+             
                                
                 }
             }
@@ -200,11 +203,13 @@ export default class App extends React.Component {
                 dist: dist,
                 totalDist: totalDist,
                 startValues: startValues,
-                endValues: endValues
+                endValues: endValues,
+                checked: checked
                 //add all values
             };
                        
             pairs.push(p); //add object to pairs array
+           
             console.log("Pushing pair: ", p); //log to console
         }
         this.tDist = totalDist; //set tDist to the cummulative distance
