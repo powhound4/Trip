@@ -27,11 +27,11 @@
 
 ## Plan 
 
-Epics in the Sprint Backlog: *list the epics in your sprint backlog here*.  
+Epics in the Sprint Backlog: *3-opts (#126), Destination Selection (#124), Manually Reorder Destionations (#350), Optimization Selection (#335), Remove Destinations (#349), Saved Trips, Stage 2 (#123), Website Transition (#334), Units of Measure (#121), Worldwide (#120)*.  
 
-Total planned tasks in the Sprint Backlog: *total number of issues in sprint backlog at start* 
+Total planned tasks in the Sprint Backlog: *28* 
 
-Total story points in the Sprint Backlog: *total number of story points in sprint backlog at start*
+Total story points in the Sprint Backlog: *43*
 
 ## Daily Scrums
 
