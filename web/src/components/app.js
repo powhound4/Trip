@@ -16,6 +16,7 @@ export default class App extends React.Component {
             serverReturned:null,
             selectedColumns: "",
             list: [],
+            units: [],
             checked: false
             
             //add all labels
@@ -64,7 +65,7 @@ export default class App extends React.Component {
                     options = {this.idVals}
                     dropdownvalues = {this.vals}
                     getColumns = {this.getColumns.bind(this)}
-        
+                    getUnits = {this.getUnits.bind(this)}
                     
                 />
             </div>
@@ -119,6 +120,14 @@ export default class App extends React.Component {
             list: list
         });
     }
+
+    async getUnits(units){
+        console.log(units);
+        this.setState({
+            units: units
+        });
+    }
+
     async svgImage(file){
         console.log("Got File: ", file);
         let svg = [];
