@@ -9,12 +9,15 @@ class Home extends React.Component {
    	 	this.state = {
 			inputValue: '',
             		columnValues: [],
+			selectedUnits: ["miles"],
 			isCheckedM: true,
-                	isCheckedK: true
+                	isCheckedK: false
     		};
    	 
     		this.handleChange = this.handleChange.bind(this);
     		this.handleSubmit = this.handleSubmit.bind(this);
+     		this.logCheckM = this.logCheckM.bind(this);
+     		this.logCheckK = this.logCheckK.bind(this);		
   	}
 	
 	logChange(val) {
@@ -25,23 +28,64 @@ class Home extends React.Component {
 
 	}
 
-    	logCheck(val){
-        	this.setState({checked: val});
-        	console.log(val);
-    	}
-
-    	toggleMiles(event) {
-        	this.setState({
-            	    isCheckedM: !this.state.isCheckedM
-        	});
-    	}
-
-    	toggleKilo(event) {
-        	this.setState({
-            	    isCheckedK: !this.state.isCheckedK
-        	});
+    	logCheckM(event){
+            if (this.state.isCheckedM == true)
+                this.state.isCheckedM = false;
+            else if (this.state.isCheckedM == false)
+                this.state.isCheckedM = true;
+            this.state.selectedUnits = ["miles"];
+            if (((this.state.isCheckedM) == false)&&((this.state.isCheckedK) == true)){
+                console.log("Only kilometers selected");
+                this.state.selectedUnits.pop(0);
+                this.state.selectedUnits.push("kilometers");
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else if ((this.state.isCheckedM)&&(this.state.isCheckedK)){
+                console.log("Kilometers and miles selected");
+                this.state.selectedUnits.push("kilometers");
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else if (((this.state.isCheckedM)&&(this.state.isCheckedK)) == false){
+                console.log("Defaulting to miles");
+                this.state.selectedUnits = ["miles"];
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else{
+                console.log("Default of miles");
+                this.state.selectedUnits = ["miles"]
+                this.props.getUnits(this.state.selectedUnits);
+            }
     	}
 	
+    	logCheckK(event){
+            console.log("old state: " + this.state.isCheckedK);
+            if (this.state.isCheckedK == true)
+                this.state.isCheckedK = false;
+            else if (this.state.isCheckedK == false)
+                this.state.isCheckedK = true;
+            if (((this.state.isCheckedM) == false)&&((this.state.isCheckedK) == true)){
+                console.log("Only kilometers selected");
+                this.state.selectedUnits.pop(0);
+                this.state.selectedUnits.push("kilometers");
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else if ((this.state.isCheckedM)&&(this.state.isCheckedK)){
+                console.log("Kilometers and miles selected");
+                this.state.selectedUnits.push("kilometers");
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else if (((this.state.isCheckedM)&&(this.state.isCheckedK)) == false){
+                console.log("Defaulting to miles");
+                this.state.selectedUnits = ["miles"];
+                this.props.getUnits(this.state.selectedUnits);
+            }
+            else{
+                console.log("Default of miles");
+                this.state.selectedUnits = ["miles"]
+                this.props.getUnits(this.state.selectedUnits);
+            }
+    	}
+
   	handleOnSubmit(event) {
 		const selectedUnits = [];
         	event.preventDefault();
@@ -59,28 +103,6 @@ class Home extends React.Component {
         }
         
     	render() {
-    	
-           const milesCheckbox = (
-                <div className = "checkbox">
-                    <input type="checkbox"
-                    name="checkbox"
-                    onClick={this.toggleMiles.bind(this)}
-                    multi={false}
-                    />
-                    <label>Miles</label>
-                </div>
-            );
-
-            const kiloCheckbox = (
-                <div className = "checkbox">
-                    <input type="checkbox"
-                    name="checkbox"
-                    onClick={this.toggleKilo.bind(this)}
-                    multi={false}
-                    />
-                    <label>Kilometers</label>
-                </div>
-            );
 	
         let values = this.props.dropdownvalues;
         let total = this.props.totalDist; //update the total here
@@ -132,12 +154,20 @@ class Home extends React.Component {
 		</form>
 		</center>
                 
-		<center>
+        	<center>
         	<div className = "checkbox">
-            		<form onSubmit={this.handleOnSubmit.bind(this)}>
-                	{milesCheckbox}
-			{kiloCheckbox}
-            		</form>
+                	<input type="checkbox"
+                	defaultChecked={true}
+                	onClick={this.logCheckM.bind(this)}
+                	/>
+                	<label>Miles</label>
+        	</div>
+        	<div className = "checkbox">
+                	<input type="checkbox"
+                	defaultChecked={false}
+                	onClick={this.logCheckK.bind(this)}
+                	/>
+                	<label>Kilometers</label>
         	</div>
         	</center>
 		   
