@@ -9,10 +9,10 @@ Checklist | *(Java Code Review Checklist (Dalbey)) http://users.csc.calpoly.edu/
 ### Roles
 Name | Role | Preparation Time
 ---- | ---- | ----
-Alison Finnman| |
-Evan Salzman| |
-Chris Schaffer| |
-George Hatch| |
+Alison Finnman| End User/Developer|
+Evan Salzman|Maintainer/Developer |
+Chris Schaffer|Tester/Developer |
+George Hatch| Moderator/Developer|
 
 ### Log
 file:line | defect | h/m/l | github# | who
