@@ -38,8 +38,10 @@ Total story points in the Sprint Backlog: *43*
 Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 :--- | :--- | :--- | :--- | :---
 10/23/2017 | none | planning| None | High
- 10/25/2017 |planning | #356 #336 #357 #355 #339| None | High
- 
+10/25/2017 |planning | #356 #336 #357 #355 #339| None | High
+10/27/2017 |#336| #356 #357 #355 #339| Halloweekend, other assignments | Moderate
+10/30/2017 |#376| Inspection1 and #356 #357 #355 #339| Inspection1, Halloween, other assignments | Moderate
+
 
 ## Review
 
