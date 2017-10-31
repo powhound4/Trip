@@ -16,7 +16,7 @@ export default class App extends React.Component {
             serverReturned:null,
             selectedColumns: "",
             list: [],
-            units: [],
+            units: ["miles"],
             checked: false
             
             //add all labels
