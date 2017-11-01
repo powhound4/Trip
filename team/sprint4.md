@@ -41,6 +41,7 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 10/25/2017 |planning | #356 #336 #357 #355 #339| None | High
 10/27/2017 |#336| #356 #357 #355 #339| Halloweekend, other assignments | Moderate
 10/30/2017 |#376| Inspection1 and #356 #357 #355 #339| Inspection1, Halloween, other assignments | Moderate
+11/1/2017 |#337, #378, #379, Inspection1| #381, #382, #384, #386, #390, #388, #389, #387, #356, #357, #355, #339| Other assignments, Work schedules | Moderate
 
 
 ## Review
