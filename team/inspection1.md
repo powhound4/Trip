@@ -10,7 +10,7 @@ Checklist | *(Java Code Review Checklist (Dalbey)) http://users.csc.calpoly.edu/
 Name | Role | Preparation Time
 ---- | ---- | ----
 Alison Finnman| End User/Developer|
-Evan Salzman|Maintainer/Developer |
+Evan Salzman|Maintainer/Developer | Approx. 2 hrs, 10 min
 Chris Schaffer|Tester/Developer |
 George Hatch| Moderator/Developer|
 
