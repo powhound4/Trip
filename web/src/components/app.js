@@ -7,7 +7,6 @@ export default class App extends React.Component {
     
     constructor(props) {
         super(props);
-        let tDist = 0; //holds the value of total distance
         this.state = {
             svgImage: [],
             allPairs: [],
@@ -17,7 +16,8 @@ export default class App extends React.Component {
             selectedColumns: "",
             list: [],
             units: ["miles"],
-            checked: false
+            checked: false,
+            tDist = 0;
             
             //add all labels
         }
