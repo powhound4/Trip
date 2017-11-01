@@ -211,8 +211,6 @@ export default class App extends React.Component {
             let index = 0;
             let columns = [];
             
-            let checked = false;
-            
             if(this.state.list.length > 0){
             columns =
             this.state.list[this.state.list.length-1].split(',');
@@ -289,7 +287,7 @@ export default class App extends React.Component {
     async browseInfoFile(file){
             let idValues = [];
             console.log("Got file!!:", file);
-            for(var i=0; i < file.length; i++){
+            for(let i=0; i < file.length; i++){
                 console.log("this thing: ",(file[i]));
                 let v = {
                     value: file[i],
