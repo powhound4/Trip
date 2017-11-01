@@ -66,10 +66,10 @@ export default class App extends React.Component {
                     totalDist = {this.tDist} //totalDist can be referenced in Home.jsx via this.props.totalDist
                     options = {this.idVals}
                     dropdownvalues = {this.vals}
-                    setColumns = {this.getColumns.bind(this)}
-                    setUnits = {this.getUnits.bind(this)}
+                    getColumns = {this.getColumns.bind(this)}
+                    getUnits = {this.getUnits.bind(this)}
                     resultList={this.state.res}
-                    setDests={this.getDests.bind(this)}
+                    getDests={this.getDests.bind(this)}
                     
                 />
             </div>
