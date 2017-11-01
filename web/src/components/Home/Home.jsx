@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
 
+
 class Home extends React.Component {
 	
 	constructor(props) {
     		super(props);
    	 	this.state = {
 			inputValue: '',
+			type: '',
             		columnValues: [],
+            		selectedDests: [],
 			selectedUnits: ["miles"],
 			isCheckedM: true,
-                	isCheckedK: false
+            		isCheckedK: false
     		};
-   	 
+            
+            	this.handleFirstSubmit = this.handleFirstSubmit.bind(this);
     		this.handleChange = this.handleChange.bind(this);
     		this.handleSubmit = this.handleSubmit.bind(this);
      		this.logCheckM = this.logCheckM.bind(this);
@@ -95,14 +99,39 @@ class Home extends React.Component {
         }
     
     	handleSubmit(event){
-        console.log(this.state.inputValue);
+        console.log("Input Value = " + this.state.inputValue);
+        console.log("Selected Dests = " +this.state.selectedDests);
         console.log('drop down values: ' + this.props.dropdownvalues);
-	    this.props.fetch(this.state.inputValue);
+	    this.props.fetch("query", this.state.inputValue);
+        event.preventDefault(); 
+        }
+        handleFirstSubmit(event){
+        console.log("Input Value = " + this.state.inputValue);
+        console.log("Selected Dests = " +this.state.selectedDests);
+        console.log('drop down values: ' + this.props.dropdownvalues);
+	    this.props.fetch("initial", this.state.inputValue);
         event.preventDefault(); 
         }
         
+        setSelectedDests(event){
+            //console.log("State of destVal", this.state.destVal);
+            //this.props.setDests(this.state.destVal);
+            //console.log('Selected Destinations' + this.state.selectedDests);
+            this.props.fetch("query", this.state.inputValue);
+            event.preventDefault();
+        }
+        
+        logDest(val) {
+        this.setState({destVal: val});
+            console.log("destVal = ", val);
+            this.props.setDests(val);
+            event.preventDefault();
+        }
+        
     	render() {
-	
+        //console.log("Result list = ", this.props.resultList);
+        //console.log('Selected Destinations' + this.state.selectedDests);
+        let resList = this.props.resultList;
         let values = this.props.dropdownvalues;
         let total = this.props.totalDist; //update the total here
         
@@ -116,7 +145,7 @@ class Home extends React.Component {
                 </div>
                 
                 <center><div>
-            <form className='search-form' onSubmit={this.handleSubmit}>
+            <form className='search-form' onSubmit={this.handleFirstSubmit}>
             <input className="SearchDest"
                 type="text"
                 placeholder="Search Destinations"
@@ -125,6 +154,30 @@ class Home extends React.Component {
                 <input className="btn btn-primary btn-md" type="submit" value="Search" />
                 <br></br>
             </form>
+            
+            
+            <center>
+		<form className="Drop-down-form" onSubmit={this.setSelectedDests.bind(this)}>
+		<div className = "Select-control">
+			<Select
+  			name="form-
+  			field-name"
+  			value={this.state.destVal}
+  			multi={true}
+ 		 	options={resList} //must be labeled label and value to work
+  			onChange={this.logDest.bind(this)}
+  			simpleValue
+  			searchable={false}
+  			placeholder = "Select Destinations"
+  			backspaceToRemoveMessage=""
+			/>
+		</div>
+		   <input className="btn btn-primary btn-md" type="submit" value="Build Itinerary" style={{margin:'5px', width:'98%'}}/>
+                 <br></br>
+		</form>
+		</center>
+            
+            
         </div></center>
                 
                 <div className="map">
@@ -196,7 +249,9 @@ class Home extends React.Component {
             </div>
 		 
         <center>
+        
          </center>
+     
         </div>
         
     }
@@ -216,6 +271,9 @@ class Home extends React.Component {
         	fr.readAsDataURL(file);
     	});
     }
+
+   
+        
 }
 
 export default Home
