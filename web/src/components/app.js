@@ -17,7 +17,9 @@ export default class App extends React.Component {
             list: [],
             units: ["miles"],
             checked: false,
-            tDist: 0;
+            tDist: 0,
+            res: [],
+            destList: ""
             
             //add all labels
         }
@@ -66,21 +68,38 @@ export default class App extends React.Component {
                     dropdownvalues = {this.vals}
                     setColumns = {this.getColumns.bind(this)}
                     setUnits = {this.getUnits.bind(this)}
+                    resultList={this.state.res}
+                    setDests={this.getDests.bind(this)}
                     
                 />
             </div>
         )
     }
-    // This function sends `input` the server and updates the state with whatever is returned
-    async fetch(input) {
+   async fetch(type, input) {
         // Create object to send to server
 
         /*  IMPORTANT: This object must match the structure of whatever
             object the server is reading into (in this case Server) */
-        let newMap = {
-            name: input,
-            id: "1",
-        };
+        console.log("type = "+ type + ", input= "+ input);
+        let newMap;
+        if(type === "initial"){
+            newMap = {
+                name: input,
+                dests: "",
+                id: "0"
+            };
+        }
+        
+         if(type === "query"){
+             console.log("destList state = ", this.state.destList);
+            newMap = {
+                name: input,
+                dests: this.state.destList,
+                id: "1"
+            };
+        }
+        
+        console.log("Json to string = " + JSON.stringify(newMap));
         try {
             // Attempt to send `newMap` via a POST request
             // Notice how the end of the url below matches what the server is listening on (found in java code)
@@ -100,10 +119,16 @@ export default class App extends React.Component {
             this.setState({
                 serverReturned: JSON.parse(ret)
             });
-            this.browseFile(this.state.serverReturned.destinations);
-            this.svgImage(this.state.serverReturned.svg);
-            let infoPath = require('../../info.json');
-            this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
+            if(this.state.serverReturned.id == "0"){
+                 this.listResults(this.state.serverReturned.searchResults);
+            }
+            
+            else if(this.state.serverReturned.id == "1"){
+                this.browseFile(this.state.serverReturned.destinations);
+                this.svgImage(this.state.serverReturned.svg);
+                let infoPath = require('../../info.json');
+                this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
+            }
             
             
             // Print on console what was returned
@@ -112,6 +137,36 @@ export default class App extends React.Component {
             console.error("Error talking to server");
             console.error(e);
         }
+    }
+    async listResults(results){
+        console.log("Search Results", results);
+        let resultNames = [];
+        for (let i = 0; i < Object.values(results).length; i++) {
+            console.log("Name:", results[i]);
+            let name=results[i];
+        
+            let r= {
+                label : name,
+                value : name
+            };
+            console.log("Pushing Name: ", r);
+            resultNames.push(r);
+        }
+        console.log("Result Names = ", resultNames);
+        
+        this.setState({
+            res: resultNames
+        });
+        
+        
+    }
+    async getDests(list){
+        console.log("DestList = ", list); //set to global
+        let destAr = list.split(',');
+        console.log("destAr state = ", destAr);
+        this.setState({
+            destList: list
+        });
     }
     
     async getColumns(list){
