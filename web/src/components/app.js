@@ -17,7 +17,7 @@ export default class App extends React.Component {
             list: [],
             units: ["miles"],
             checked: false,
-            tDist = 0;
+            tDist: 0;
             
             //add all labels
         }
