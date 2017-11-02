@@ -212,9 +212,8 @@ export default class App extends React.Component {
             let columns = [];
             
             if(this.state.list.length > 0){
-            columns =
-            this.state.list[this.state.list.length-1].split(',');
-            console.log("this is columns: ", columns);
+                columns = this.state.list[this.state.list.length-1].split(',');
+                console.log("this is columns: ", columns);
             }
          
             let b1 = "";
@@ -222,39 +221,31 @@ export default class App extends React.Component {
         
             if(columns.length > 0 && columns[0] != ""){
                 for(let j = 0; j < columns.length; j++){
-                //loop through selected labels
-                        
-               let regex = new RegExp((columns[j]));
-               
-               //regex matching based on label, if it matches the pattern grab that info from the b1 or b2 info array
-               
-               for(let k = 0; k < file[i].b1Labels.length; k++){
+                    //loop through selected labels
+                    let regex = new RegExp((columns[j]));
+                    //regex matching based on label, if it matches the pattern grab that info from the b1 or b2 info array
+                    for(let k = 0; k < file[i].b1Labels.length; k++){
                         //loop through all the labels
                        if(regex.test(file[i].b1Labels[k])){
                            index = k;
-                       }
-                  
                            let label = file[i].b1Labels[index];
                            label = label.charAt(0).toUpperCase() + label.slice(1) + "\n";
                            if(file[i].b1Info[index] == null){
-                           b1 = label + ": Not Available";
+                               b1 = label + ": Not Available";
                            }
                            else{
-                           b1 = label + ": " + file[i].b1Info[index];
+                               b1 = label + ": " + file[i].b1Info[index];
                            }
                            if(file[i].b2Info[index] == null){
                                b2 = label + ": Not Available";
                            }else{
-                               
-                           
-                           b2 = label + ": " + file[i].b2Info[index];
+                               b2 = label + ": " + file[i].b2Info[index];
                            }
-
-                } 
-               startValues.push(b1);
-               endValues.push(b2);     
-             
-                               
+                           break;
+                        }
+                    } 
+                    startValues.push(b1);
+                    endValues.push(b2);                    
                 }
             }
 
