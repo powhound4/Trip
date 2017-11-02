@@ -48,12 +48,6 @@ let Pair = ({leg, start, end, dist, totalDist, startValues, endValues, checked})
         <td id = "totalDistance">
             <h5>{totalDist}</h5>
         </td>
-        <td id = "Add to Itinerary">
-            <input type="checkbox"
-            //checked={checked}
-            //onClick={changeChecked(checked)} 
-            />
-         </td>
     </tr>
 </tbody>;
 
