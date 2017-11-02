@@ -3,10 +3,10 @@ package edu.csu2017fa314.T04.Server;
 public class ServerRequest {
     private String name = "";
     private String id = "";
-    private String dests = "";
+    private String[] dests;
     
     
-    public ServerRequest(String name, String id, String dests){
+    public ServerRequest(String name, String id, String[] dests){
         this.name = name;
         this.id = id;
         this.dests = dests;
@@ -31,8 +31,13 @@ public class ServerRequest {
     
     public String getDests(){
     String queryDest = "";
-    String[] destArr = this.dests.split(",");
+    String[] destArr = this.dests;
         for(int i = 0; i< destArr.length; i++){
+            if(destArr[i].contains("'")){
+             //System.out.println("found apostrophe in "+destArr[i]);
+                destArr[i]= destArr[i].replaceAll("\\'", "\\'\\'");
+              //  System.out.println("found apostrophe in "+destArr[i]);
+            }
             if(i<destArr.length-1){
                 queryDest+= destArr[i] + "', '";
             }
@@ -42,7 +47,6 @@ public class ServerRequest {
         }
         return queryDest;
     }
-
     @Override
     public String toString() {
         return "Request{" +
