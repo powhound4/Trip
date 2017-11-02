@@ -69,7 +69,7 @@ export default class App extends React.Component {
                     getColumns = {this.getColumns.bind(this)}
                     getUnits = {this.getUnits.bind(this)}
                     resultList={this.state.res}
-                    getDests={this.getDests.bind(this)}
+                    setDests={this.getDests.bind(this)}
                     
                 />
             </div>
