@@ -18,7 +18,8 @@ export default class App extends React.Component {
             units: ["miles"],
             tDist: 0,
             res: [],
-            destList: ""
+            destList: [],
+            allResults: []
             
             //add all labels
         }
@@ -69,6 +70,7 @@ export default class App extends React.Component {
                     getUnits = {this.getUnits.bind(this)}
                     resultList={this.state.res}
                     setDests={this.getDests.bind(this)}
+                    allResults={this.state.allResults}
                     
                 />
             </div>
@@ -137,12 +139,15 @@ export default class App extends React.Component {
             console.error(e);
         }
     }
-    async listResults(results){
+   async listResults(results){
         console.log("Search Results", results);
+        let allTempRes = [];
+        allTempRes = results;
         let resultNames = [];
         for (let i = 0; i < Object.values(results).length; i++) {
             console.log("Name:", results[i]);
             let name=results[i];
+            //tempResults+=name + ",";
         
             let r= {
                 label : name,
@@ -151,21 +156,20 @@ export default class App extends React.Component {
             console.log("Pushing Name: ", r);
             resultNames.push(r);
         }
+        console.log("allTempResults = ", allTempRes);
         console.log("Result Names = ", resultNames);
         
         this.setState({
-            res: resultNames
+            res: resultNames,
+            allResults: allTempRes
         });
         
         
     }
     async getDests(list){
-        console.log("DestList = ", list); //set to global
-        let destAr = list.split(',');
-        console.log("destAr state = ", destAr);
-        this.setState({
-            destList: list
-        });
+        console.log("DestList item = ", list);
+        //console.log("destAr state = ", destAr);
+        this.state.destList.push(list);
     }
     
     async getColumns(list){
