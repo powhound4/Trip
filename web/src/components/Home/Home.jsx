@@ -234,7 +234,6 @@ class Home extends React.Component {
                             <th>End</th>
                             <th>Distance</th>
                             <th>Cumulative Distance</th>
-                            <th>Add to Itinerary</th>
                         </tr>
                     </thead>
                 
