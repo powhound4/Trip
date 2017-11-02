@@ -13,14 +13,16 @@ class Home extends React.Component {
             		selectedDests: [],
 			selectedUnits: ["miles"],
 			isCheckedM: true,
-            		isCheckedK: false
+            		isCheckedK: false,
+			isCheckedSelectAll: false
     		};
             
             	this.handleFirstSubmit = this.handleFirstSubmit.bind(this);
     		this.handleChange = this.handleChange.bind(this);
     		this.handleSubmit = this.handleSubmit.bind(this);
      		this.logCheckM = this.logCheckM.bind(this);
-     		this.logCheckK = this.logCheckK.bind(this);		
+     		this.logCheckK = this.logCheckK.bind(this);	
+		this.logCheckSelectAll = this.logCheckSelectAll.bind(this);
   	}
 	
 	logChange(val) {
@@ -113,9 +115,13 @@ class Home extends React.Component {
         event.preventDefault(); 
         }
         
-        setSelectedDests(event){
+         setSelectedDests(event){
             //console.log("State of destVal", this.state.destVal);
-            //this.props.setDests(this.state.destVal);
+            for(let i = 0; i< this.state.selectedDests.length; i++){
+                console.log("selected dests i = ",this.state.selectedDests[i]);
+                this.props.setDests(this.state.selectedDests[i]);
+            }
+            
             //console.log('Selected Destinations' + this.state.selectedDests);
             this.props.fetch("query", this.state.inputValue);
             event.preventDefault();
@@ -124,9 +130,33 @@ class Home extends React.Component {
         logDest(val) {
         this.setState({destVal: val});
             console.log("destVal = ", val);
-            this.props.setDests(val);
+            this.state.selectedDests.push(val);
             event.preventDefault();
         }
+        
+        
+        logCheckSelectAll(event){
+            console.log("old state: " + this.state.isCheckedSelectAll);
+            if (this.state.isCheckedSelectAll == true){
+                this.state.isCheckedSelectAll = false;
+                if(this.state.selectedDests.length > 0){
+                let length = this.state.selectedDests.length;
+                    for(let i = 0; i < length; i++){
+                        this.state.selectedDests.pop(0);
+                    }
+                    console.log("After pops = ",this.state.selectedDests);
+                }
+                
+            }
+            else if (this.state.isCheckedSelectAll == false){
+                this.state.isCheckedSelectAll = true;
+                for(let i = 0; i< this.props.allResults.length; i++){
+                this.state.selectedDests.push(this.props.allResults[i]);
+                //this.state.destVal.push(this.props.allResults[i]);
+                }
+                //this.props.setDestListToAll(this.props.allResults);
+            }
+    	}
         
     	render() {
         //console.log("Result list = ", this.props.resultList);
@@ -172,8 +202,9 @@ class Home extends React.Component {
   			backspaceToRemoveMessage=""
 			/>
 		</div>
-		   <input className="btn btn-primary btn-md" type="submit" value="Build Itinerary" style={{margin:'5px', width:'98%'}}/>
-                 <br></br>
+		<input className="btn btn-primary btn-md" type="submit" value="Build Itinerary" style={{margin:'5px', width:'40%'}}/>
+		<label>Select All:</label> 
+		<input className="SelectAll" type="checkbox" onClick={this.logCheckSelectAll.bind(this)} style={{ width:'30%'}}/>                 <br></br>
 		</form>
 		</center>
             
