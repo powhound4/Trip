@@ -16,7 +16,6 @@ export default class App extends React.Component {
             selectedColumns: "",
             list: [],
             units: ["miles"],
-            checked: false,
             tDist: 0,
             res: [],
             destList: ""
@@ -257,7 +256,6 @@ export default class App extends React.Component {
                 totalDist: totalDist,
                 startValues: startValues,
                 endValues: endValues,
-                checked: checked
                 //add all values
             };
                        
