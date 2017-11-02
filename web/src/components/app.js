@@ -86,7 +86,7 @@ export default class App extends React.Component {
         if(type === "initial"){
             newMap = {
                 name: input,
-                dests: "",
+                dests: [],
                 id: "0"
             };
         }
