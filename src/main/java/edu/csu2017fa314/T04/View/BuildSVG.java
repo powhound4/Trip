@@ -5,6 +5,7 @@ import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class BuildSVG {
 
@@ -89,7 +90,7 @@ public class BuildSVG {
 				
 				int [] loc2 = scale2WorldSVG(route.get(i).toDecimal(route.get(i).lat2), route.get(i).toDecimal(route.get(i).long2));
 				
-				
+                System.out.println("iteration = " + i);
 				int [] coordinate = toMapWrap(loc1, loc2);
 				System.out.println("Coor length = " + coordinate.length);
 				
@@ -106,13 +107,13 @@ public class BuildSVG {
 				}
 				else{
 				
-				bw.write("<circle cx=\"" + coordinate[1] + "\" cy=\"" + coordinate[0] + "\" stroke=\"" + stroke + "\" stroke-width=\"" + strokeWidth + "\" fill=\"" + stroke + "\"/>" + "\n");
+				//bw.write("<circle cx=\"" + coordinate[1] + "\" cy=\"" + coordinate[0] + "\" stroke=\"" + stroke + "\" stroke-width=\"" + strokeWidth + "\" fill=\"" + stroke + "\"/>" + "\n");
 				
 				//bw.write("<circle cx=\"" + coordinate[3] + "\" cy=\"" + coordinate[2] + "\" stroke=\"" + stroke + "\" stroke-width=\"" + strokeWidth + "\" fill=\"" + stroke + "\"/>"+ "\n");
 				
-				bw.write("<line x1=\"" + coordinate[1] + "\" y1=\"" + coordinate[0] + "\" x2=\"" + coordinate[5] + "\" y2=\"" + coordinate[2] + "\" style=\"" + style + "\"/>"+ "\n");
+				bw.write("<line x1=\"" + coordinate[0] + "\" y1=\"" + coordinate[1] + "\" x2=\"" + coordinate[2] + "\" y2=\"" + coordinate[5] + "\" style=\"" + style + "\"/>"+ "\n");
 				
-				bw.write("<line x1=\"" + coordinate[5] + "\" y1=\"" + coordinate[3] + "\" x2=\"" + coordinate[5] + "\" y2=\"" + coordinate[4] + "\" style=\"" + style + "\"/>"+ "\n");
+				bw.write("<line x1=\"" + coordinate[3] + "\" y1=\"" + coordinate[1] + "\" x2=\"" + coordinate[4] + "\" y2=\"" + coordinate[5] + "\" style=\"" + style + "\"/>"+ "\n");
 				}
 				
 				}
@@ -141,12 +142,18 @@ public class BuildSVG {
             cord1 = b;
             cord2 = a;
         }
+        System.out.println("Cord1 = " + Arrays.toString(cord1));
+        System.out.println("Cord2 = " + Arrays.toString(cord2));
+
         int distToRightEdge = 1024 - cord1[1];
         int distToLeftEdge = cord2[1];
+        int wrapped = distToRightEdge + cord2[1];
+        System.out.println("wrapped = " + wrapped);
         
-        int distNorm = (int)Math.sqrt(Math.pow(cord1[1]-cord2[1],2) + Math.pow(cord1[0]-cord2[0], 2));
-        int distWrapped = (int)Math.sqrt(Math.pow(cord1[1]-cord2[1],2) + Math.pow(distToRightEdge + distToLeftEdge, 2));
-        
+        int distNorm = (int) Math.sqrt(Math.pow(cord1[1]-cord2[1],2) + Math.pow(cord1[0] - cord2[0], 2));
+        int distWrapped = (int) Math.sqrt(Math.pow((wrapped +1024) - cord1[1],2) + Math.pow(cord1[0] - cord2[0], 2));
+        System.out.println("Dist norm = " + distNorm);
+        System.out.println("Dist Wrapped = " + distWrapped);
         if(distNorm <= distWrapped){
         resCord = new int[4];
             resCord[0] = a[0];//a lat
@@ -157,12 +164,12 @@ public class BuildSVG {
         }
         else{
         resCord = new int[6];
-            resCord[0] = cord1[0];//furthest right x
-            resCord[1] = cord1[1];//y stay same
-            resCord[2] = cord1[0] + distToLeftEdge + distToRightEdge;//resCord[4] = point right off map 1024 + distance to left edge
-            resCord[3] = cord2[0] - distToLeftEdge - distToRightEdge;// 0 - distToRightEdge
-            resCord[4] = cord2[0];//left x
-            resCord[5] = cord2[1];// y stay same
+            resCord[0] = cord1[1];//furthest right x
+            resCord[1] = cord1[0];//y stay same
+            resCord[2] = cord1[1] + distToLeftEdge + distToRightEdge;//resCord[2] = point right off map 1024 + distance to left edge
+            resCord[3] = cord2[1] - distToLeftEdge - distToRightEdge;// 0 - distToRightEdge
+            resCord[4] = cord2[1];//left x
+            resCord[5] = cord2[0];// y stay same
             return resCord;
         }
         
