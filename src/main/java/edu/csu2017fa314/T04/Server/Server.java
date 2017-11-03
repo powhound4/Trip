@@ -89,7 +89,7 @@ public class Server {
         String result = gsonNew.toJson(queryResults, resType);
         System.out.println(result);*/
          // Create object with svg file path and list to return to server
-        sRes = new ServerResponse("ColoradoSVGEdited.svg", queryResults, queryID); //TODO update file path to your svg, change to "./testing.png" for a sample image
+        sRes = new ServerResponse("World.svg", queryResults, queryID); //TODO update file path to your svg, change to "./testing.png" for a sample image
         
         System.out.println("Sending \"" + sRes.toString() + "\" to server.");
 
