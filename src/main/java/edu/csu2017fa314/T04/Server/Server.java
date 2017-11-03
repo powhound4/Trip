@@ -91,7 +91,7 @@ public class Server {
          // Create object with svg file path and list to return to server
         sRes = new ServerResponse("World.svg", queryResults, queryID); //TODO update file path to your svg, change to "./testing.png" for a sample image
         
-        System.out.println("Sending \"" + sRes.toString() + "\" to server.");
+        //System.out.println("Sending \"" + sRes.toString() + "\" to server.");
 
         //Convert response to json
         //ret = gson.toJson(sRes, ServerResponse.class);
