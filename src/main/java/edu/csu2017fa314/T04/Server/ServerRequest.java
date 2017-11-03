@@ -5,13 +5,15 @@ public class ServerRequest {
     private String id = "";
     private String[] dests;
     private String[] units;
+    private String[] optimization;
     
     
-    public ServerRequest(String name, String id, String[] dests, String [] units){
+    public ServerRequest(String name, String id, String[] dests, String [] units, String[] optimization){
         this.name = name;
         this.id = id;
         this.dests = dests;
         this.units = units;
+        this.optimization = optimization;
     }
 
 
@@ -44,6 +46,10 @@ public class ServerRequest {
         return u;
     }
     
+    public String getOptimization(){
+    return optimization[0];
+        }
+        
     public String getDests(){
     String queryDest = "";
     String[] destArr = this.dests;
