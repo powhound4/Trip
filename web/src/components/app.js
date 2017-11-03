@@ -87,7 +87,8 @@ export default class App extends React.Component {
             newMap = {
                 name: input,
                 dests: [],
-                id: "0"
+                id: "0",
+                units: this.state.units               
             };
         }
         
@@ -96,7 +97,8 @@ export default class App extends React.Component {
             newMap = {
                 name: input,
                 dests: this.state.destList,
-                id: "1"
+                id: "1",
+                units: this.state.units                
             };
         }
         

@@ -50,7 +50,8 @@ public class Server {
         
         String queryID = sRec.getId();
         
-        
+        String units = sRec.getUnits();
+
 
         //Create object with svg file path and list to return to server
         //ServerResponse sRes = new ServerResponse("../ColoradoSVGEdited.svg"); //TODO update file path to your svg, change to "./testing.png" for a sample image
