@@ -19,7 +19,9 @@ export default class App extends React.Component {
             tDist: 0,
             res: [],
             destList: [],
-            allResults: []
+            allResults: [],
+            optimization: ["2opt"],
+            optimizationOptions: [{label: "I'm not in a hurry! (In Order)", value: "In Order"}, {label: "A little faster trip! (Nearest Neighbor)", value: "Nearest Neighbor"}, {label:"Make my trip even faster! (2 Opt)", value: "2 Opt"}, {label:"I want the fastest trip possible! (3 Opt)", value: "3 Opt"}]
             
             //add all labels
         }
@@ -71,6 +73,9 @@ export default class App extends React.Component {
                     resultList={this.state.res}
                     setDests={this.getDests.bind(this)}
                     allResults={this.state.allResults}
+                    optimizationOptions={this.state.optimizationOptions}
+                    optimization={this.state.optimization}
+                    
                     
                 />
             </div>
@@ -88,7 +93,8 @@ export default class App extends React.Component {
                 name: input,
                 dests: [],
                 id: "0",
-                units: this.state.units               
+                units: this.state.units, 
+                optimization: this.state.optimization
             };
         }
         
@@ -98,7 +104,8 @@ export default class App extends React.Component {
                 name: input,
                 dests: this.state.destList,
                 id: "1",
-                units: this.state.units                
+                units: this.state.units,
+                optimization: this.state.optimization                
             };
         }
         
