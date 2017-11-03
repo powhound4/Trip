@@ -133,7 +133,27 @@ class Home extends React.Component {
             this.state.selectedDests.push(val);
             event.preventDefault();
         }
+          setOptimization(event){
+        this.setState({optimization: event.target.value});
+        event.preventDefault();
+        }
         
+        logOptimization(val){
+
+           this.props.optimization.pop(0);
+           this.props.optimization.push(val);
+           console.log("this is the state var ", this.props.optimization);
+           event.preventDefault();
+        }
+        
+        runOptimization(event){
+            console.log("State of destVal", this.state.destVal);
+            this.props.setDests(this.state.destVal);
+            console.log('Selected Destinations' + this.state.selectedDests);
+            this.props.fetch("query", this.state.inputValue);
+            event.preventDefault();
+        
+        }
         
         logCheckSelectAll(event){
             console.log("old state: " + this.state.isCheckedSelectAll);
@@ -210,6 +230,27 @@ class Home extends React.Component {
             
             
         </div></center>
+        
+         <center>
+        <form className="Drop-down-form2" onSubmit={this.runOptimization.bind(this)}>
+		<div className = "Select-control">
+			<Select
+  			name="form-
+  			field-name"
+  			value={this.state.optVal}
+  			multi={false}
+ 		 	options={this.props.optimizationOptions} //must be labeled label and value to work
+  			onChange={this.logOptimization.bind(this)}
+  			simpleValue
+  			searchable={false}
+  			placeholder = "Select Trip Optimization"
+  			backspaceToRemoveMessage=""
+			/>
+		</div>
+		   <input className="btn btn-primary btn-md" type="submit" value="Get Optimized Trip" style={{margin:'5px', width:'98%'}}/>
+                 <br></br>
+		</form>
+        </center>
                 
                 <div className="map">
             		<center>{this.props.svg}</center>
