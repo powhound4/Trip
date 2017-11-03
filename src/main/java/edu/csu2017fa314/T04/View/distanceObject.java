@@ -165,6 +165,7 @@ public class distanceObject {
 		deltalat = Math.atan(sin/cos);
 		distance = earthradmi * deltalat;
 		totalDistance = (int)Math.round(distance);
-		return Math.abs(totalDistance);
+		totalDistance = Math.abs(totalDistance);
+		return totalDistance;
 	}
 }
