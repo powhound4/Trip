@@ -62,7 +62,7 @@ package edu.csu2017fa314.T04.Database;
  
  
      public ArrayList<distanceObject> query(String query) { // Command line args contain username and password
-     File f = new File("web/ColoradoSVGEdited.svg");
+     File f = new File("web/World.svg");
 		if(f.exists()){
 		f.delete();
 		}
