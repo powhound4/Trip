@@ -56,7 +56,8 @@ public class distanceObjectTest {
     }
     @Test
     public void getDistance() throws Exception {
-        assertEquals(d.getDistance(), 167);
+        assertEquals(d.getDistanceInM(), 167);
+        assertEquals(d.getDistanceInK(), 269);
     }
     @Test
     public void toDecimal() throws Exception {
@@ -67,7 +68,8 @@ public class distanceObjectTest {
 
     @Test
     public void computeDistance() throws Exception {
-        assertEquals(d.computeDistance(), 167);
+        assertEquals(d.computeDistanceM(), 167);
+        assertEquals(d.computeDistanceK(), 269);
     }
 
 }
