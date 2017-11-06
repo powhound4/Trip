@@ -168,14 +168,10 @@ public class distanceObject {
 	    }
 	    
 	}
-
+	
     public int [] computeDistance(){
-        for (int i = 0; i < dUnits.length; i++){
-            if (dUnits[i].equals(miles))
-                dists[0] = computeDistanceM();
-            else
-                dists[1] = computeDistanceK();
-        }
+        dists[0] = computeDistanceM();
+        dists[1] = computeDistanceK();
         return dists;
     }
     
