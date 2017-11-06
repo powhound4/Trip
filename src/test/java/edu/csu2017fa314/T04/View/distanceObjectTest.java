@@ -14,6 +14,7 @@ public class distanceObjectTest {
     private distanceObject d;
     private String[] labels;
     private ArrayList<String> info1, info2;
+    private int [] tDists = int [2];
 
     @Before
     public void setUp() throws Exception {
@@ -21,6 +22,7 @@ public class distanceObjectTest {
         info2  = new ArrayList<>(Arrays.asList("Kit Carson County Airport", "39.24250031", "-102.2850037", "KITR"));
         labels = new String[]{"name", "latitude", "longitude", "id"};
         d = new distanceObject(new Destination(info1, labels), new Destination(info2, labels));
+        tDists[0] = 167; tDists[1] = 269;
     }
     @Test
     public void getB2Info() throws Exception {
@@ -55,9 +57,12 @@ public class distanceObjectTest {
         assertEquals(d.getEndName(), "Kit Carson County Airport");
     }
     @Test
-    public void getDistance() throws Exception {
-        assertEquals(d.getDistanceInM(), 167);
-        assertEquals(d.getDistanceInK(), 269);
+    public void getDistanceInM() throws Exception {
+        assertEquals(167, d.getDistanceInM());
+    }
+    @Test
+    public void getDistanceInK() throws Exception {
+        assertEquals(269, d.getDistanceInK());
     }
     @Test
     public void toDecimal() throws Exception {
@@ -65,11 +70,13 @@ public class distanceObjectTest {
         assertTrue(distanceObject.toDecimal("123.123") == 123.123);
         assertTrue(distanceObject.toDecimal("-4.002") == -4.002);
     }
-
     @Test
     public void computeDistance() throws Exception {
-        assertEquals(d.computeDistanceM(), 167);
-        assertEquals(d.computeDistanceK(), 269);
+        assertEquals(167, d.computeDistanceM());
+        assertEquals(269, d.computeDistanceK());
+        int [] dists = d.computeDistance();
+        for (int i = 0; i < dists.length; i++)
+            assertEquals(tDists[i], dists[i]);
     }
 
 }
