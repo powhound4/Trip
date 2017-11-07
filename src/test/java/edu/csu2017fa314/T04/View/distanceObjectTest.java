@@ -1,4 +1,5 @@
 package edu.csu2017fa314.T04.View;
+
 import edu.csu2017fa314.T04.Model.Destination;
 import org.junit.After;
 import org.junit.Before;
@@ -54,26 +55,9 @@ public class distanceObjectTest {
         assertEquals(d.getEndName(), "Kit Carson County Airport");
     }
     @Test
-    public void getDistanceInM() throws Exception {
-        assertEquals(167, d.getDistanceInM());
-    }
-    @Test
-    public void getDistanceInK() throws Exception {
-        assertEquals(269, d.getDistanceInK());
-    }
-    @Test
     public void toDecimal() throws Exception {
         assertTrue(distanceObject.toDecimal("0") == 0);
         assertTrue(distanceObject.toDecimal("123.123") == 123.123);
         assertTrue(distanceObject.toDecimal("-4.002") == -4.002);
     }
-    @Test
-    public void computeDistanceM() throws Exception {
-        assertEquals(167, d.computeDistanceM());
-    }
-    @Test
-    public void computeDistanceK() throws Exception {
-        assertEquals(269, d.computeDistanceK());
-    }
-
 }
