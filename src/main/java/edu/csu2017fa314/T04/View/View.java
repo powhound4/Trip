@@ -1,29 +1,52 @@
 package edu.csu2017fa314.T04.View;
+import edu.csu2017fa314.T04.Server.*;
 import edu.csu2017fa314.T04.Model.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.*;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class View
-{
-	private int totalDistance;
+public class View{
+	
+	private int totalDistanceM;
+    	private int totalDistanceK;
+    	public static String [] dUnits = {"miles"};
+    	private static String kilometers = "kilometers";
+    	private static String miles = "miles";
+    
+    	public View(){
+        	setDistUnits();
+    	}
+    
+    	public static void setDistUnits() {
+       		Server s = new Server();
+        	String [] units = s.distUnits;
+        	if (units == null){
+            		String [] startup = {"miles"};
+            		units = startup;
+        		}
+        	dUnits = units;
+     	}
 
-	public void setTotalDistance(int distance)
-	{
-		totalDistance = distance;
-	}
-
-	public int getTotalDistance()
-	{
-		return totalDistance;
-	}
-
-
+    	public void setTotalDistanceM(int distance){
+        	totalDistanceM = distance;
+    	}
+    
+    	public void setTotalDistanceK(int distance){
+        	totalDistanceK = distance;
+    	}
+    
+    	public int getTotalDistanceM(){
+        	return totalDistanceM;
+    	}
+    
+    	public int getTotalDistanceK(){
+       		return totalDistanceK;
+    	}
+	
 	public static void writeItinerary(ArrayList<distanceObject> itinerary){
 		JSONArray trip = new JSONArray();
 		for(int i =0; i < itinerary.size(); i++){
@@ -37,8 +60,11 @@ public class View
 				String end = "end_" + brew2Labels[j];
 				temp.put(end, endBrew.get(j));
 			}
-
-			temp.put("distance",itinerary.get(i).totalDistance);
+			if (dUnits[0].equals(miles))
+                		temp.put("distance:",itinerary.get(i).totalDistanceM);
+            		else
+                		temp.put("distance:",itinerary.get(i).totalDistanceK);
+			
 			temp.put("start" ,itinerary.get(i).startName);
 
 			ArrayList<String> startBrew = itinerary.get(i).getB1Info();
