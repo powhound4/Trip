@@ -71,9 +71,5 @@ public class distanceObjectTest {
     public void computeDistanceM() throws Exception {
         assertEquals(167, d.computeDistanceM());
     }
-    @Test
-    publiv void computeDistanceK() throws Exception {
-        assertEquals(269, d.computeDistanceK());
-    }
 
 }
