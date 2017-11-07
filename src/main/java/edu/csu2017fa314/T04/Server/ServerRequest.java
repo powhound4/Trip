@@ -46,6 +46,10 @@ public class ServerRequest {
         return u;
     }
     
+    public String [] getDistUnits(){
+        return this.units;
+    }
+    
     public String getOptimization(){
     return optimization[0];
         }
