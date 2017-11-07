@@ -1,6 +1,7 @@
 package edu.csu2017fa314.T04.View;
-import edu.csu2017fa314.T04.Server.*;
-import edu.csu2017fa314.T04.Model.*;
+
+import edu.csu2017fa314.T04.Server.Server;
+import edu.csu2017fa314.T04.Model.Destination;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,12 +19,13 @@ public class View{
     	private static String miles = "miles";
     
     	public View(){
-        	setDistUnits();
+        	setViewUnits();
     	}
-    
-    	public static void setDistUnits() {
-       		Server s = new Server();
-        	String [] units = s.distUnits;
+	
+        //sets the units for the view class
+    	public static void setViewUnits() {
+       		Server sView = new Server();
+        	String [] units = sView.distUnits;
         	if (units == null){
             		String [] startup = {"miles"};
             		units = startup;
@@ -46,25 +48,26 @@ public class View{
     	public int getTotalDistanceK(){
        		return totalDistanceK;
     	}
-	
+	//put together the pieces of the itinerary
 	public static void writeItinerary(ArrayList<distanceObject> itinerary){
 		JSONArray trip = new JSONArray();
 		for(int i =0; i < itinerary.size(); i++){
-			JSONObject temp = new JSONObject();
+			JSONObject makeTrip = new JSONObject();
 
-			temp.put("end", itinerary.get(i).endName);
+			makeTrip.put("end", itinerary.get(i).endName);
 			ArrayList<String> endBrew = itinerary.get(i).getB2Info();
 			String[] brew2Labels = itinerary.get(i).getB2Labels();
 
 			for(int j=0; j < endBrew.size(); j++){
 				String end = "end_" + brew2Labels[j];
-				temp.put(end, endBrew.get(j));
+				makeTrip.put(end, endBrew.get(j));
 			}
-			if (dUnits[0].equals(miles))
-                		temp.put("distance:",itinerary.get(i).totalDistanceM);
-            		else
-                		temp.put("distance:",itinerary.get(i).totalDistanceK);
-			
+			if (dUnits[0].equals(miles)){
+                		makeTrip.put("distance:",itinerary.get(i).totalDistanceM);
+			}
+            		else{
+                		makeTrip.put("distance:",itinerary.get(i).totalDistanceK);
+			}
 			temp.put("start" ,itinerary.get(i).startName);
 
 			ArrayList<String> startBrew = itinerary.get(i).getB1Info();
@@ -72,16 +75,14 @@ public class View{
 
 			for(int j=0; j < startBrew.size(); j++){
 				String start = "start_" + brew1Labels[j];
-				temp.put(start, startBrew.get(j));
+				makeTrip.put(start, startBrew.get(j));
 			}
 
-			trip.add(temp);
+			trip.add(makeTrip);
 		}
 		writeFile(trip);
 	}
-
-
-
+	//write the json file
 	public static void writeFile(JSONArray locations){
 
 		try{
@@ -96,21 +97,12 @@ public class View{
 		}
 
 	}
-
+	//create the arraylist to hold the itinerary
 	public static void createItinerary(ArrayList<Destination> breweries){
-
 		//use info from brewery objects to calculate distance, create distanceObjects using constructor and add them to
 		//distanceObject ArrayList
-//	
 		ArrayList<distanceObject> test = new ArrayList<distanceObject>();
-
-
 		writeItinerary(test);
-
-
 	}
 
 }
-
-
-
