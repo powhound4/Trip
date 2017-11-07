@@ -168,7 +168,7 @@ public class Destination {
         cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
 
         deltalat = Math.atan(sin/cos);
-        distance = earthradmi * deltalat; * 1.60934
+        distance = earthradmi * deltalat;
         totalDistanceK = (int)Math.round(distance);
         return Math.abs(totalDistanceK);
     }
