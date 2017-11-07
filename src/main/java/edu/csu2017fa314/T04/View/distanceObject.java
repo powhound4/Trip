@@ -1,5 +1,6 @@
 package edu.csu2017fa314.T04.View;
 import edu.csu2017fa314.T04.Model.*;
+import edu.csu2017fa314.T04.Server.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,8 +22,7 @@ public class distanceObject {
 	public ArrayList<String> b2Info;
 	public String[] b1Labels = null;
 	public String[] b2Labels = null;
-   	public static String [] dUnits = null;
-    	public int [] dists = new int [2];	
+    	public static String [] dUnits = {"miles"};
 
 	//Distance object that takes 2 brewery objects
 	public distanceObject(Destination b1, Destination b2){
@@ -43,7 +43,8 @@ public class distanceObject {
 		this.long2 = b2.getLongitude().replaceAll("\\s","");
 		
 		setDistUnits();
-		computeDistance();
+	        computeDistanceM();
+        	computeDistanceK();
 	}
 	
     public String toString(){
@@ -56,12 +57,9 @@ public class distanceObject {
             res+="end_" + this.b2Labels[i] + " : " + this.b2Info.get(i) + ", ";
         }
         if(units.equals(miles))
-            res += "Total distance in miles: " + this.dists[0];
-        else if(units.equals(kilometers))
-            res += "Total distance in kilometers: " + this.dists[1];
-        else{
-            res += "Total distance in miles: " + this.dists[0] + ", Total distance in kilometers: " + this.dists[1];
-        }
+            res += "Total distance in miles: " + this.totalDistanceM;
+        else
+            res += "Total distance in kilometers: " + this.totalDistanceK;
         return res;
     }
 	
@@ -91,7 +89,7 @@ public class distanceObject {
         return startName;
         }
     
-    public String getEndName(){
+    	public String getEndName(){
         return endName;
         }
         
@@ -106,7 +104,6 @@ public class distanceObject {
            		String [] startup = {"miles"};
             	units = startup;
         	}
-        
         	dUnits = units;
      	}
 	
@@ -168,12 +165,6 @@ public class distanceObject {
 	    }
 	    
 	}
-	
-    public int [] computeDistance(){
-        dists[0] = computeDistanceM();
-        dists[1] = computeDistanceK();
-        return dists;
-    }
     
     public int computeDistanceM(){
         double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
