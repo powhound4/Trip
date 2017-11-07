@@ -1,4 +1,5 @@
 package edu.csu2017fa314.T04.Model;
+
 import edu.csu2017fa314.T04.View.distanceObject;
 import edu.csu2017fa314.T04.Server.*;
 import java.util.ArrayList;
@@ -30,13 +31,13 @@ public class NearestNeighbor {
         	curTotalDistM = 0;
         	minTotalDistK = Integer.MAX_VALUE;
         	curTotalDistK = 0;
-        	setDistUnits();
+        	setNNUnits();
 		fillInMap();
 	}
 	
-    	public static void setDistUnits() {
-        	Server s = new Server();
-        	String [] units = s.distUnits;
+    	public static void setNNUnits() {
+        	Server sNN = new Server();
+        	String [] units = sNN.distUnits;
         	if (units == null){
             		String [] startup = {"miles"};
             		units = startup;
@@ -58,10 +59,14 @@ public class NearestNeighbor {
 				if (i == j) {
 					disTable[i][j] = Integer.MAX_VALUE;
 				} else {
-                    			if (dUnits[0].equals(miles))
-                        			disTable[i][j] = locations.get(i).computeDistanceM(locations.get(j));
-                    			else
-                        			disTable[i][j] = locations.get(i).computeDistanceK(locations.get(j));
+                    			if (dUnits[0].equals(miles)){
+                        			disTable[i][j] = 
+							locations.get(i).computeDistanceM(locations.get(j));
+					}
+					else{
+                        			disTable[i][j] = 
+							locations.get(i).computeDistanceK(locations.get(j));
+					}
 				}
 			}
 		}
@@ -111,10 +116,12 @@ public class NearestNeighbor {
 					if (delta < 0) {
 						trip = twoOptSwap(trip, i + 1, k);
 						improvement = true;
-						if (dUnits[0].equals(miles))
+						if (dUnits[0].equals(miles)){
                             				curTotalDistM += delta;    //subtract the change from totalDist. FIXME might need to change dist w/in swap call
-                        			else
+						}
+						else{
                             				curTotalDistK += delta;
+						}
 					}
 				}
 			}
@@ -135,42 +142,37 @@ public class NearestNeighbor {
 		return trip;
 	}
 
-	private int[] calcShortestTrip(){
-		//loops through each starting node and calls calDist with that start node
+	private int[] calcShortestTrip(){//loops through each starting node and calls calDist with that start node
 		int trip[] = new int[disTable.length];
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calDist(i);
+			twoOpt(currentTrip);
+			//add the distance of the last destination to the first destination
+			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
             		if (dUnits[0].equals(miles)){
-                		curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-                		//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
-                		twoOpt(currentTrip);
+                		curTotalDistM += 
+					disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
                 		if(curTotalDistM < minTotalDistM){
                     			minTotalDistM = curTotalDistM;
-                    			for(int k = 0; k < currentTrip.length; k++){
-                        			trip[k] = currentTrip[k];
-                    			}
-
                 		}
-                		curTripPtr = 0;
                 		curTotalDistM = 0;
-                		visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
             		}
             		else{
-                		curTotalDistK += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-	                	twoOpt(currentTrip);
-        	        	if(curTotalDistK < minTotalDistK){
-                	    		minTotalDistK = curTotalDistK;
-                    			for(int k = 0; k < currentTrip.length; k++){
-                        			trip[k] = currentTrip[k];
-          	          		}
-           		     	}
-                		curTripPtr = 0;
-                		curTotalDistK = 0;
-                		visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
-            		}
-		}
-		return trip;
+                		curTotalDistK += 
+					disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
+                	if(curTotalDistK < minTotalDistK){
+                   		minTotalDistK = curTotalDistK;
+                	}
+                	curTotalDistK = 0;
+            	}
+            	for(int k = 0; k < currentTrip.length; k++){
+                	trip[k] = currentTrip[k];
+            	}
+            	curTripPtr = 0;
+            	visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
+        	}
+        	return trip;
 	}
 
 	private void calDist(int startIndex){
@@ -190,10 +192,12 @@ public class NearestNeighbor {
 					currentTrip[curTripPtr] = i;
 				}
 			}
-            		if (dUnits[0].equals(miles))
+            		if (dUnits[0].equals(miles)){
                 		curTotalDistM += min;
-            		else
+			}
+			else{
                 		curTotalDistK += min;
+			}
 			calDist(currentTrip[curTripPtr]);
 		}
 	}
