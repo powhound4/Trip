@@ -1,5 +1,4 @@
 package edu.csu2017fa314.T04.View;
-
 import edu.csu2017fa314.T04.Model.Destination;
 import org.junit.After;
 import org.junit.Before;
@@ -69,8 +68,11 @@ public class distanceObjectTest {
         assertTrue(distanceObject.toDecimal("-4.002") == -4.002);
     }
     @Test
-    public void computeDistance() throws Exception {
+    public void computeDistanceM() throws Exception {
         assertEquals(167, d.computeDistanceM());
+    }
+    @Test
+    publiv void computeDistanceK() throws Exception {
         assertEquals(269, d.computeDistanceK());
     }
 
