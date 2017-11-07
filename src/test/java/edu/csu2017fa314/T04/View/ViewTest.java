@@ -29,9 +29,15 @@ public class ViewTest {
     }
 
     @Test
-    public void setGetTotalDistance() throws Exception {
-        view.setTotalDistance(10);
-        assertEquals(view.getTotalDistance(), 10);
+    public void setGetTotalDistanceM() throws Exception {
+        view.setTotalDistanceM(10);
+        assertEquals(view.getTotalDistanceM(), 10);
+    }
+    
+    @Test
+    public void setGetTotalDistanceK() throws Exception {
+        view.setTotalDistanceK(17);
+        assertEquals(view.getTotalDistanceK(), 17);
     }
 
     @Test
