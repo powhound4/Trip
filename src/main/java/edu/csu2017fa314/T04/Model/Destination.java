@@ -9,15 +9,17 @@ public class Destination {
 	private String[] labels;
 	private String id;
 	private String name;
+	private int totalDistanceM = 0;
+	private int totalDistanceK = 0;
 
 	public Destination(String id, String name){
         this.id = id;
         this.name = name;
 	}
     
-    public Destination(ArrayList<String> info){
-        this.destInfo = info;
-    }
+    	public Destination(ArrayList<String> info){
+        	this.destInfo = info;
+    	}
     
 	public Destination(ArrayList<String> info, String[] labels){
 		this.destInfo = info;
@@ -123,29 +125,51 @@ public class Destination {
 	}
 
 
-	public int computeDistance(Destination location2){
-		int totalDistance = 0;
-		double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
-		double sin = 0.0; double cos = 0.0; double distance = 0.0;
-		double deltalat = 0.0; double deltalong = 0.0; double earthradmi = 3958.7613;
+    public int computeDistanceM(Destination location2){
+        double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
+        double sin = 0.0; double cos = 0.0; double distance = 0.0;
+        double deltalat = 0.0; double deltalong = 0.0;
+        double earthradmi = 3958.7613;
 
-		latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));		//φ1 remove whitespace before passed to toDecimal method
-		longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s",""))); 	//φ2
-		latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));		//λ1
-		longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));	//λ2
-		deltalong = Math.abs(longB - longA); 		//Δλ
+        latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));          //φ1 remove whitespace before passed to toDecimal method
+        longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s","")));        //φ2
+        latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));	    //λ1
+        longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));   //λ2
+        deltalong = Math.abs(longB - longA); 		//Δλ
 
-		sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
-				+ ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
-				* (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
-				* (Math.cos(deltalong))))));
-		cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
+        sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
+                + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                * (Math.cos(deltalong))))));
+        cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
 
-		deltalat = Math.atan(sin/cos);
-		distance = earthradmi * deltalat;
-		totalDistance = (int)Math.round(distance);
-		return Math.abs(totalDistance);
-	}
+        deltalat = Math.atan(sin/cos);
+        distance = earthradmi * deltalat;
+        totalDistanceM = (int)Math.round(distance);
+        return Math.abs(totalDistanceM);
+    }
+    
+    public int computeDistanceK(Destination location2){
+        double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
+        double sin = 0.0; double cos = 0.0; double distance = 0.0;
+        double deltalat = 0.0; double deltalong = 0.0;
+        double earthradmi = 3958.7613;
 
+        latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));          //φ1 remove whitespace before passed to toDecimal method
+        longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s","")));        //φ2
+        latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));	    //λ1
+        longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));   //λ2
+        deltalong = Math.abs(longB - longA); 		//Δλ
 
+        sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
+                + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                * (Math.cos(deltalong))))));
+        cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
+
+        deltalat = Math.atan(sin/cos);
+        distance = earthradmi * deltalat; * 1.60934
+        totalDistanceK = (int)Math.round(distance);
+        return Math.abs(totalDistanceK);
+    }
 }
