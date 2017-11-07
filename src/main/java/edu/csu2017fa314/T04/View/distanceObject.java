@@ -92,10 +92,14 @@ public class distanceObject {
     	public String getEndName(){
         return endName;
         }
-        
-	public int getDistance(){
-		return totalDistance;
-	}
+    
+    	public int getDistanceInM(){
+        	return totalDistanceM;
+    	}
+    
+    	public int getDistanceInK(){
+        	return totalDistanceK;
+    	}
 	
 	public static void setDistUnits() {
         	Server s = new Server();
