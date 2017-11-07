@@ -1,5 +1,4 @@
 package edu.csu2017fa314.T04.Server;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -12,7 +11,6 @@ import edu.csu2017fa314.T04.Model.*;
 import edu.csu2017fa314.T04.View.*;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
-
 import static spark.Spark.post;
 
 
@@ -109,7 +107,11 @@ public class Server {
         Object ret = gson.toJson(sRes,ServerResponse.class);
         return ret;
     }
-
+    
+    public static String [] getDistUnits(){
+        return distUnits;
+    }
+    
     private void setHeaders(Response res) {
         // Declares returning type json
         res.header("Content-Type", "application/json");
