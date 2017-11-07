@@ -53,23 +53,19 @@ public class View{
 		JSONArray trip = new JSONArray();
 		for(int i =0; i < itinerary.size(); i++){
 			JSONObject makeTrip = new JSONObject();
-
 			makeTrip.put("end", itinerary.get(i).endName);
 			ArrayList<String> endBrew = itinerary.get(i).getB2Info();
 			String[] brew2Labels = itinerary.get(i).getB2Labels();
-
 			for(int j=0; j < endBrew.size(); j++){
 				String end = "end_" + brew2Labels[j];
 				makeTrip.put(end, endBrew.get(j));
 			}
 			if (dUnits[0].equals(miles)){
                 		makeTrip.put("distance:",itinerary.get(i).totalDistanceM);
-			}
-            		else{
+			}else{
                 		makeTrip.put("distance:",itinerary.get(i).totalDistanceK);
 			}
-			temp.put("start" ,itinerary.get(i).startName);
-
+			makeTrip.put("start" ,itinerary.get(i).startName);
 			ArrayList<String> startBrew = itinerary.get(i).getB1Info();
 			String[] brew1Labels = itinerary.get(i).getB1Labels();
 
@@ -77,7 +73,6 @@ public class View{
 				String start = "start_" + brew1Labels[j];
 				makeTrip.put(start, startBrew.get(j));
 			}
-
 			trip.add(makeTrip);
 		}
 		writeFile(trip);
