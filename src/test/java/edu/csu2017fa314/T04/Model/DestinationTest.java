@@ -57,8 +57,13 @@ public class DestinationTest {
     }
 
     @Test
-    public void computeDistance() throws Exception {
-        assertEquals(d.computeDistance(d), 0);
+    public void computeDistanceM() throws Exception {
+        assertEquals(d.computeDistanceM(d), 0);
+    }
+    
+    @Test
+    public void computeDistanceK() throws Exception {
+        assertEquals(d.computeDistanceK(d), 0);
     }
 
 }
