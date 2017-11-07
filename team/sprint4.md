@@ -43,7 +43,7 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 10/30/2017 |#376| Inspection1 and #356 #357 #355 #339| Inspection1, Halloween, other assignments | Moderate
 11/1/2017 |#337, #378, #379, Inspection1| #381, #382, #384, #386, #390, #388, #389, #387, #356, #357, #355, #339| Other assignments, Work schedules | Moderate
 11/3/2017 |#338, #341, #342, #343, #344, #345, #346, #347, #380, #386, #388, #389, #400 |#339, #351, #353, #356, #357, #367, #382, #387, #390, #422| Other assignments, work schedules, weekend | Fairly Confident
-
+11/6/2017 |#340 #358 |Inspection 2, #339, #351, #353, #356, #357, #367, #382, #387, #390, #422| CS356 Assignment, Work Schedules, other classes | Low
 
 ## Review
 
