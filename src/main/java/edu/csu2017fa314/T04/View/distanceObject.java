@@ -1,4 +1,5 @@
 package edu.csu2017fa314.T04.View;
+
 import edu.csu2017fa314.T04.Model.*;
 import edu.csu2017fa314.T04.Server.*;
 import java.util.ArrayList;
@@ -42,9 +43,8 @@ public class distanceObject {
 		this.long1 = b1.getLongitude().replaceAll("\\s","");
 		this.long2 = b2.getLongitude().replaceAll("\\s","");
 		
-		setDistUnits();
-	        computeDistanceM();
-        	computeDistanceK();
+		toStringUnits();
+
 	}
 	
     public String toString(){
@@ -92,18 +92,10 @@ public class distanceObject {
     	public String getEndName(){
         return endName;
         }
-    
-    	public int getDistanceInM(){
-        	return totalDistanceM;
-    	}
-    
-    	public int getDistanceInK(){
-        	return totalDistanceK;
-    	}
 	
-	public static void setDistUnits() {
-        	Server s = new Server();
-        	String [] units = s.distUnits;
+	public static void toStringUnits() {
+        	Server sDist = new Server();
+        	String [] units = sDist.distUnits;
         	if (units == null){
            		String [] startup = {"miles"};
             	units = startup;
@@ -169,54 +161,4 @@ public class distanceObject {
 	    }
 	    
 	}
-    
-    public int computeDistanceM(){
-        double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
-        double sin = 0.0; double cos = 0.0; double distance = 0.0;
-        double deltalat = 0.0; double deltalong = 0.0; 
-        double earthradmi = 3958.7613;         
-
-        latA = Math.toRadians(toDecimal(lat1));     //φ1
-        longA = Math.toRadians(toDecimal(long1));   //φ2
-        latB = Math.toRadians(toDecimal(lat2));     //λ1
-        longB = Math.toRadians(toDecimal(long2));   //λ2
-        deltalong = Math.abs(longB - longA);        //Δλ
-    
-        sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong))) 
-                + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                    * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                        * (Math.cos(deltalong))))));
-        cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
-        
-        deltalat = Math.atan(sin/cos);
-        distance = earthradmi * deltalat;
-        totalDistanceM = (int)Math.round(distance);
-        totalDistanceM = Math.abs(totalDistanceM);
-        return totalDistanceM;
-    }
-    
-    public int computeDistanceK(){
-        double latA = 0.0; double latB = 0.0; double longA = 0.0; double longB = 0.0;
-        double sin = 0.0; double cos = 0.0; double distance = 0.0;
-        double deltalat = 0.0; double deltalong = 0.0; 
-        double earthradkm = 6371.0088;
-
-        latA = Math.toRadians(toDecimal(lat1));     //φ1
-        longA = Math.toRadians(toDecimal(long1));   //φ2
-        latB = Math.toRadians(toDecimal(lat2));     //λ1
-        longB = Math.toRadians(toDecimal(long2));   //λ2
-        deltalong = Math.abs(longB - longA);        //Δλ
-    
-        sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong))) 
-                + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                    * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                        * (Math.cos(deltalong))))));
-        cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
-        
-        deltalat = Math.atan(sin/cos);
-        distance = earthradkm * deltalat;
-        totalDistanceK = (int)Math.round(distance);
-        totalDistanceK = Math.abs(totalDistanceK);
-        return totalDistanceK;
-    }
 }
