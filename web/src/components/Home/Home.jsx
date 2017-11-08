@@ -108,10 +108,7 @@ class Home extends React.Component {
         this.state.selectedDests.push(val);
         event.preventDefault();
     }
-    setOptimization(event){
-        this.setState({optimization: event.target.value});
-        event.preventDefault();
-    }
+
 
     logOptimization(val){
 
@@ -296,6 +293,7 @@ class Home extends React.Component {
         </div>
 
     }
+
     // File reading is almost identical how you did it in Sprint 1
      uploadFileClicked(acceptedFiles) {
          console.log("Accepting drop");
@@ -315,23 +313,6 @@ class Home extends React.Component {
              fr.readAsText(file);
          });
      }
-    
-    showPhoto(svgFile){
-        console.log("Accepting drop");
-        svgFile.forEach(file => {
-            console.log("Filename:", file.name, "File:", file);
-            console.log(JSON.stringify(file));
-            let fr = new FileReader();
-            fr.onload = (function () {
-                return function (e) {
-                    let image = e.target.result;
-                    //console.log("Image = ", image);
-                    this.props.svgImage(image);
-                };
-            }) (file).bind(this);
-            fr.readAsDataURL(file);
-        });
-    }
 }
 
 export default Home
