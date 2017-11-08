@@ -8,6 +8,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            sysFile: null,
             svgImage: [],
             allPairs: [],
             sysFile: [],
@@ -75,6 +76,8 @@ export default class App extends React.Component {
                     allResults={this.state.allResults}
                     optimizationOptions={this.state.optimizationOptions}
                     optimization={this.state.optimization}
+                    browseUploadedFile={this.browseUploadedFile.bind(this)}
+
                     
                     
                 />
@@ -108,6 +111,15 @@ export default class App extends React.Component {
                 optimization: this.state.optimization                
             };
         }
+       if(type === "upload"){
+            newMap = {
+                name: "",
+                dests: input,
+                id: "2",
+                units: this.state.units,
+                optimization: this.state.optimization                
+            };
+        }
         
         console.log("Json to string = " + JSON.stringify(newMap));
         try {
@@ -133,7 +145,7 @@ export default class App extends React.Component {
                  this.listResults(this.state.serverReturned.searchResults);
             }
             
-            else if(this.state.serverReturned.id == "1"){
+            else if(this.state.serverReturned.id == "1" || this.state.serverReturned.id == "2"){
                 this.browseFile(this.state.serverReturned.destinations);
                 this.svgImage(this.state.serverReturned.svg);
                 let infoPath = require('../../info.json');
@@ -203,6 +215,14 @@ export default class App extends React.Component {
         this.setState({
             svgImage: svg
         });
+    }
+
+    async browseUploadedFile(file) {
+        console.log("Got file:", file);
+        this.setState({
+            sysFile: file
+        })
+        this.fetch("upload", this.state.sysFile.destinations);
     }
 
     async browseFile(file) {
