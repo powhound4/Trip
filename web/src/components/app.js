@@ -231,6 +231,15 @@ export default class App extends React.Component {
               lng: lng
             };
             r.push(line);
+		if(i == Object.values(file).length -1 ){
+			let lat = parseFloat(file[i].lat2);
+       	   		let lng = parseFloat(file[i].long2);
+            		let line = {
+              			lat: lat,
+             			lng: lng
+          		};
+            		r.push(line);
+		}
         }
 	console.log("route = ", r);
         this.setState({
