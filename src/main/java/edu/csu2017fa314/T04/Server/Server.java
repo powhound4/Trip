@@ -63,8 +63,7 @@ public class Server {
         
         if(queryID.equals("0")){
             String searched = "%" + sRec.getName() + "%";
-            String queryString = String.format("SELECT * FROM airports WHERE municipality LIKE '%s' OR name LIKE '%s' OR type LIKE '%s'", searched, searched, searched); // TODO this needs to be changed so that it looks for the destinations selected by user. 
-           
+            String queryString = String.format("SELECT airports.name, airports.id, airports.code, airports.municipality, regions.name, countries.name, continents.name FROM continents INNER JOIN countries ON continents.code = countries.continent INNER JOIN regions ON countries.code = regions.iso_country INNER JOIN airports ON regions.code = airports.iso_region WHERE countries.name LIKE '%s' OR regions.name LIKE '%s' OR airports.name LIKE '%s' OR airports.municipality LIKE '%s' ORDER BY continents.name, countries.name, regions.name, airports.municipality, airports.name ASC", searched, searched, searched, searched);           
             
             ArrayList<String> queryDests = q.queryTerm(queryString);
             
@@ -78,8 +77,7 @@ public class Server {
         String name = "%" + sRec.getName() + "%";
         String searched = sRec.getDests();
         System.out.println("Searched = " + searched);
-         String queryString = queryString =  String.format("SELECT * FROM airports WHERE name IN ('%s') AND municipality LIKE '%s' OR type LIKE '%s'",searched, name, name);
-            
+        String queryString = String.format("SELECT airports.id, airports.name, airports.code, airports.municipality, regions.name as region, countries.name as country, continents.name as continent, airports.latitude, airports.longitude, airports.elevation FROM continents INNER JOIN countries ON continents.code = countries.continent INNER JOIN regions ON countries.code = regions.iso_country INNER JOIN airports ON regions.code = airports.iso_region WHERE airports.name IN ('%s') and countries.name LIKE '%s' OR regions.name LIKE '%s' OR airports.name LIKE '%s' OR airports.municipality LIKE '%s' ORDER BY continents.name, countries.name, regions.name, airports.municipality, airports.name ASC", searched, name, name, name, name);            
 
             ArrayList<distanceObject> queryResults = q.query(queryString);
         
