@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
+import Dropzone from 'react-dropzone';
 
 
 class Home extends React.Component {
@@ -157,6 +158,11 @@ class Home extends React.Component {
                 </div>
 
                 <center><div>
+                   <h3>Upload a file</h3>
+                  <Dropzone className="dropzone-style" onDrop={this.uploadFileClicked.bind(this)}>
+                 <input className="btn btn-primary btn-md" type="submit" value="Upload a location file" />
+ 
+                 </Dropzone>
                     <form className='search-form' onSubmit={this.handleFirstSubmit}>
                         <input className="SearchDest"
                                type="text"
@@ -290,6 +296,26 @@ class Home extends React.Component {
         </div>
 
     }
+    // File reading is almost identical how you did it in Sprint 1
+     uploadFileClicked(acceptedFiles) {
+         console.log("Accepting drop");
+         acceptedFiles.forEach(file => {
+             console.log("Filename:", file.name, "File:", file);
+             console.log(JSON.stringify(file));
+             let fr = new FileReader();
+             fr.onload = (function () {
+                 return function (e) {
+                     let JsonObj = JSON.parse(e.target.result);
+                     console.log(JsonObj);
+                     // Do something with the file:
+                     this.props.browseUploadedFile(JsonObj);
+                 };
+             })(file).bind(this);
+ 
+             fr.readAsText(file);
+         });
+     }
+    
     showPhoto(svgFile){
         console.log("Accepting drop");
         svgFile.forEach(file => {
