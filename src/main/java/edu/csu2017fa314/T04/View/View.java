@@ -14,7 +14,7 @@ public class View{
 	
 	private int totalDistanceM;
     	private int totalDistanceK;
-    	public static String [] dUnits = {"miles"};
+    	public static String [] vUnits = {"miles"};
     	private static String kilometers = "kilometers";
     	private static String miles = "miles";
     
@@ -106,7 +106,7 @@ public class View{
 		//use info from brewery objects to calculate distance, create distanceObjects using constructor and add them to
 		//distanceObject ArrayList
 		ArrayList<distanceObject> test = new ArrayList<distanceObject>();
-		writeItinerary(test);
+		writeItinerarySetup(test);
 	}
 
 }
