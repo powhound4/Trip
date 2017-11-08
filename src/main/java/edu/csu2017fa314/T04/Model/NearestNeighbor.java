@@ -17,7 +17,7 @@ public class NearestNeighbor {
     	private int curTotalDistM;
     	private int minTotalDistK;
     	private int curTotalDistK;
-    	public static String [] dUnits = {"miles"};
+    	public static String [] nnUnits = {"miles"};
     	public String kilometers = "kilometers";
     	public String miles = "miles";
 
