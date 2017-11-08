@@ -1,314 +1,302 @@
-import React from 'react';
-import Home from './Home/Home.jsx';
-import Pair from './Home/Pair/Pair.jsx';
-import Svg from './Home/Svg/Svg.jsx';
+import React, {Component} from 'react';
+import Select from 'react-select';
 
-export default class App extends React.Component {
-    
+
+class Home extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            svgImage: [],
-            allPairs: [],
-            sysFile: [],
-            vals: [],
-            serverReturned:null,
-            selectedColumns: "",
-            list: [],
-            units: ["miles"],
-            tDist: 0,
-            res: [],
-            destList: [],
-            allResults: [],
-            optimization: ["2opt"],
-            optimizationOptions: [{label: "I'm not in a hurry! (In Order)", value: "In Order"}, {label: "A little faster trip! (Nearest Neighbor)", value: "Nearest Neighbor"}, {label:"Make my trip even faster! (2 Opt)", value: "2 Opt"}, {label:"I want the fastest trip possible! (3 Opt)", value: "3 Opt"}]
-            
-            //add all labels
+            inputValue: '',
+            type: '',
+            columnValues: [],
+            selectedDests: [],
+            selectedUnits: ["miles"],
+            isCheckedM: true,
+            isCheckedK: false,
+            isCheckedSelectAll: false
+        };
+
+        this.handleFirstSubmit = this.handleFirstSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.logCheckM = this.logCheckM.bind(this);
+        this.logCheckK = this.logCheckK.bind(this);
+        this.logCheckSelectAll = this.logCheckSelectAll.bind(this);
+    }
+
+    logChange(val) {
+        this.setState({value: val}); //dropdown has selected value
+        console.log(val);
+        this.state.columnValues.push(val);
+        this.props.getColumns(this.state.columnValues);
+
+    }
+
+
+    logCheckM(event){
+        if (this.state.isCheckedM) {
+            this.state.isCheckedM = false;
         }
-    };
+        else {
+            this.state.isCheckedM = true;
+        }
+        this.updateCheck();
+    }
+
+    logCheckK(event){
+        if (this.state.isCheckedK) {
+            this.state.isCheckedK = false;
+        }
+        else {
+            this.state.isCheckedK = true;
+        }
+        this.updateCheck();
+    }
+
+    updateCheck(){
+        if (!(this.state.isCheckedM) && (this.state.isCheckedK)){
+            console.log("Only kilometers selected");
+            this.state.selectedUnits = ["kilometers"];
+        }
+        else if ((this.state.isCheckedM) && (this.state.isCheckedK)){
+            console.log("Kilometers and miles selected");
+            this.state.selectedUnits = ["miles", "kilometers"];
+        }
+        else{
+            console.log("Default of miles");
+            this.state.selectedUnits = ["miles"];
+        }
+        this.props.getUnits(this.state.selectedUnits);
+
+    }
+
+    handleChange(event){
+        this.setState({inputValue: event.target.value});
+    }
+
+    handleSubmit(event){
+        console.log("Input Value = " + this.state.inputValue);
+        console.log("Selected Dests = " +this.state.selectedDests);
+        console.log('drop down values: ' + this.props.dropdownvalues);
+        this.props.fetch("query", this.state.inputValue);
+        event.preventDefault();
+    }
+    handleFirstSubmit(event){
+        console.log("Input Value = " + this.state.inputValue);
+        console.log("Selected Dests = " +this.state.selectedDests);
+        console.log('drop down values: ' + this.props.dropdownvalues);
+        this.props.fetch("initial", this.state.inputValue);
+        event.preventDefault();
+    }
+
+    setSelectedDests(event){
+        //console.log("State of destVal", this.state.destVal);
+        for(let i = 0; i< this.state.selectedDests.length; i++){
+            console.log("selected dests i = ",this.state.selectedDests[i]);
+            this.props.setDests(this.state.selectedDests[i]);
+        }
+
+        //console.log('Selected Destinations' + this.state.selectedDests);
+        this.props.fetch("query", this.state.inputValue);
+        event.preventDefault();
+    }
+
+    logDest(val) {
+        this.setState({destVal: val});
+        console.log("destVal = ", val);
+        this.state.selectedDests.push(val);
+        event.preventDefault();
+    }
+
+    logOptimization(val){
+
+        this.props.optimization.pop(0);
+        this.props.optimization.push(val);
+        console.log("this is the state var ", this.props.optimization);
+        event.preventDefault();
+    }
+
+    runOptimization(event){
+        console.log("State of destVal", this.state.destVal);
+        this.props.setDests(this.state.destVal);
+        console.log('Selected Destinations' + this.state.selectedDests);
+        this.props.fetch("query", this.state.inputValue);
+        event.preventDefault();
+
+    }
+
+    logCheckSelectAll(event){
+        console.log("old state: " + this.state.isCheckedSelectAll);
+        if (this.state.isCheckedSelectAll == true){
+            this.state.isCheckedSelectAll = false;
+            if(this.state.selectedDests.length > 0){
+                let length = this.state.selectedDests.length;
+                for(let i = 0; i < length; i++){
+                    this.state.selectedDests.pop(0);
+                }
+                console.log("After pops = ",this.state.selectedDests);
+            }
+
+        }
+        else if (this.state.isCheckedSelectAll == false){
+            this.state.isCheckedSelectAll = true;
+            for(let i = 0; i< this.props.allResults.length; i++){
+                this.state.selectedDests.push(this.props.allResults[i]);
+                //this.state.destVal.push(this.props.allResults[i]);
+            }
+            //this.props.setDestListToAll(this.props.allResults);
+        }
+    }
 
     render() {
-        let serverDestinations;
-        let dest;
-        let svg = this.state.svgImage;
-        let si = svg.map((s) => {
-            return <Svg {...s}/>;
-        });
-        let pairs = this.state.allPairs;
-        let ps = pairs.map((pp) => {
-            return <Pair {...pp}/>;
-        });
-        if (this.state.serverReturned) { // if this.state.serverReturned is not null
-            //for stage 2
-            //Get list of numbers
-            //serverLocations = this.state.serverReturned.locations;
-          
-            /*Create an array of HTML list items. The Array.map function in Javascript passes each individual element
-            * of an array (in this case serverLocations is the array and "location" is the name chosen for the individual element)
-            * through a function and returns a new array with the mapped elements.
-            * In this case f: location -> <li>location.name</li>, so the array will look like:
-            * [<li>[name1]</li>,<li>[name2]</li>...]
-            */
-            /*locs = serverLocations.map((location) => {
-                return <li>{location.name}</li>;
-            });
+        //console.log("Result list = ", this.props.resultList);
+        //console.log('Selected Destinations' + this.state.selectedDests);
+        let resList = this.props.resultList;
+        let values = this.props.dropdownvalues;
+        let total = this.props.totalDist; //update the total here
 
-            // set the local variable scg to this.state.serverReturned.svg
-            svg = this.state.serverReturned.svg;*/
-        }
-        return (
-            <div className="app-container">
-                <Home
-                    fetch={this.fetch.bind(this)}
-                    svgImage={this.svgImage.bind(this)} //svgImage can be referd to in home
-                    svg={si}
-                    browseFile={this.browseFile.bind(this)}
-                    browseInfoFile={this.browseInfoFile.bind(this)}
-                    pairs={ps}
-                    totalDist = {this.tDist} //totalDist can be referenced in Home.jsx via this.props.totalDist
-                    options = {this.idVals}
-                    dropdownvalues = {this.vals}
-                    getColumns = {this.getColumns.bind(this)}
-                    getUnits = {this.getUnits.bind(this)}
-                    resultList={this.state.res}
-                    setDests={this.getDests.bind(this)}
-                    allResults={this.state.allResults}
-                    optimizationOptions={this.state.optimizationOptions}
-                    optimization={this.state.optimization}
-                    
-                    
-                />
+        return <div className="home-container">
+            <div className="separator">
             </div>
-        )
-    }
-   async fetch(type, input) {
-        // Create object to send to server
+            <div className="inner">
+                <div className="heading">
+                    T04 - 4TheWin
+                    <h1>Airport Tour With Beer</h1>
+                </div>
 
-        /*  IMPORTANT: This object must match the structure of whatever
-            object the server is reading into (in this case Server) */
-        console.log("type = "+ type + ", input= "+ input);
-        let newMap;
-        if(type === "initial"){
-            newMap = {
-                name: input,
-                dests: [],
-                id: "0",
-                units: this.state.units, 
-                optimization: this.state.optimization
-            };
-        }
-        
-         if(type === "query"){
-             console.log("destList state = ", this.state.destList);
-            newMap = {
-                name: input,
-                dests: this.state.destList,
-                id: "1",
-                units: this.state.units,
-                optimization: this.state.optimization                
-            };
-        }
-        
-        console.log("Json to string = " + JSON.stringify(newMap));
-        try {
-            // Attempt to send `newMap` via a POST request
-            // Notice how the end of the url below matches what the server is listening on (found in java code)
-            // By default, Spark uses port 4567
-            let jsonReturned = await fetch(`http://localhost:4567/testing`,
-                {
-                    method: "POST",
-                    body: JSON.stringify(newMap)
-                });
-            // Wait for server to return and convert it to json.
-            let ret = await jsonReturned.json();
-            // Log the received JSON to the browser console
-            console.log("Got back ", JSON.parse(ret));
-            // set the serverReturned state variable to the received json.
-            // this way, attributes of the json can be accessed via this.state.serverReturned.[field]
-            
-            this.setState({
-                serverReturned: JSON.parse(ret)
-            });
-            if(this.state.serverReturned.id == "0"){
-                 this.listResults(this.state.serverReturned.searchResults);
-            }
-            
-            else if(this.state.serverReturned.id == "1"){
-                this.browseFile(this.state.serverReturned.destinations);
-                this.svgImage(this.state.serverReturned.svg);
-                let infoPath = require('../../info.json');
-                this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
-            }
-            
-            
-            // Print on console what was returned
-            // Update the state so we can see it on the web
-        } catch (e) {
-            console.error("Error talking to server");
-            console.error(e);
-        }
-    }
-   async listResults(results){
-        console.log("Search Results", results);
-        let allTempRes = [];
-        allTempRes = results;
-        let resultNames = [];
-        for (let i = 0; i < Object.values(results).length; i++) {
-            console.log("Name:", results[i]);
-            let name=results[i];
-            //tempResults+=name + ",";
-        
-            let r= {
-                label : name,
-                value : name
-            };
-            console.log("Pushing Name: ", r);
-            resultNames.push(r);
-        }
-        console.log("allTempResults = ", allTempRes);
-        console.log("Result Names = ", resultNames);
-        
-        this.setState({
-            res: resultNames,
-            allResults: allTempRes
-        });
-        
-        
-    }
-    async getDests(list){
-        console.log("DestList item = ", list);
-        //console.log("destAr state = ", destAr);
-        this.state.destList.push(list);
-    }
-    
-    async getColumns(list){
-        console.log(list); //set to global
-        this.setState({
-            list: list
-        });
-    }
+                <center><div>
+                    <form className='search-form' onSubmit={this.handleFirstSubmit}>
+                        <input className="SearchDest"
+                               type="text"
+                               placeholder="Search Destinations"
+                               onChange={this.handleChange}/>
+                        <br></br>
+                        <input className="btn btn-primary btn-md" type="submit" value="Search" />
+                        <br></br>
+                    </form>
 
-    async getUnits(units){
-        console.log(units);
-        this.setState({
-            units: units
-        });
-    }
 
-    async svgImage(file){
-        console.log("Got File: ", file);
-        let svg = [];
-        let s = {source: file};
-        svg.push(s);
-        this.setState({
-            svgImage: svg
-        });
-    }
+                    <center>
+                        <form className="Drop-down-form" onSubmit={this.setSelectedDests.bind(this)}>
+                            <div className = "Select-control">
+                                <Select
+                                    name="form-
+  			field-name"
+                                    value={this.state.destVal}
+                                    multi={true}
+                                    options={resList} //must be labeled label and value to work
+                                    onChange={this.logDest.bind(this)}
+                                    simpleValue
+                                    searchable={false}
+                                    placeholder = "Select Destinations"
+                                    backspaceToRemoveMessage=""
+                                />
+                            </div>
+                            <input className="btn btn-primary btn-md" type="submit" value="Build Itinerary" style={{margin:'5px', width:'40%'}}/>
+                            <label>Select All:</label>
+                            <input className="SelectAll" type="checkbox" onClick={this.logCheckSelectAll.bind(this)} style={{ width:'30%'}}/>                 <br></br>
+                        </form>
+                    </center>
 
-    async browseFile(file) {
-      
-        console.log("Got file:", file);
-        //For loop that goes through all pairs,
-        let pairs = [];
-        let totalDist = 0;
-        let dist = 0;
-        for (let i = 0; i < Object.values(file).length; i++) {
-            let leg = i+1;
-            let start = file[i].startName; //get start from file i
-            let end = file[i].endName; //get end from file i
-            
-            if (this.state.units[0] == "miles"){
-                dist = file[i].totalDistanceM;
-                totalDist+=dist;
-            }
-            else{
-                dist = file[i].totalDistanceK;
-                totalDist+=dist;
-            }
-            
-            let startValues= [];
-            let endValues = []; 
-            let index = 0;
-            let columns = [];
-            
-            if(this.state.list.length > 0){
-                columns = this.state.list[this.state.list.length-1].split(',');
-                console.log("this is columns: ", columns);
-            }
-         
-            let b1 = "";
-            let b2 = "";
-        
-            if(columns.length > 0 && columns[0] != ""){
-                for(let j = 0; j < columns.length; j++){
-                    //loop through selected labels
-                    let regex = new RegExp((columns[j]));
-                    //regex matching based on label, if it matches the pattern grab that info from the b1 or b2 info array
-                    for(let k = 0; k < file[i].b1Labels.length; k++){
-                        //loop through all the labels
-                       if(regex.test(file[i].b1Labels[k])){
-                           index = k;
-                           let label = file[i].b1Labels[index];
-                           label = label.charAt(0).toUpperCase() + label.slice(1) + "\n";
-                           if(file[i].b1Info[index] == null){
-                               b1 = label + ": Not Available";
-                           }
-                           else{
-                               b1 = label + ": " + file[i].b1Info[index];
-                           }
-                           if(file[i].b2Info[index] == null){
-                               b2 = label + ": Not Available";
-                           }else{
-                               b2 = label + ": " + file[i].b2Info[index];
-                           }
-                           break;
-                        }
-                    } 
-                    startValues.push(b1);
-                    endValues.push(b2);                    
-                }
-            }
 
-            let p = { //create object with start, end, and dist variable
-                leg: leg,
-                start: start,
-                end: end,
-                dist: dist,
-                totalDist: totalDist,
-                startValues: startValues,
-                endValues: endValues,
-                //add all values
-            };
-                       
-            pairs.push(p); //add object to pairs array
-           
-            console.log("Pushing pair: ", p); //log to console
-        }
-        this.tDist = totalDist; //set tDist to the cummulative distance
-        
-        //Here we will update the state of app.
-        // Anything component (i.e. pairs) referencing it will be re-rendered
-        this.setState({
-            allPairs: pairs,
-            sysFile: file
-        });
+                </div></center>
+
+                <center>
+                    <form className="Drop-down-form2" onSubmit={this.runOptimization.bind(this)}>
+                        <div className = "Select-control">
+                            <Select
+                                name="form-
+  			field-name"
+                                value={this.state.optVal}
+                                multi={false}
+                                options={this.props.optimizationOptions} //must be labeled label and value to work
+                                onChange={this.logOptimization.bind(this)}
+                                simpleValue
+                                searchable={false}
+                                placeholder = "Select Trip Optimization"
+                                backspaceToRemoveMessage=""
+                            />
+                        </div>
+                        <input className="btn btn-primary btn-md" type="submit" value="Get Optimized Trip" style={{margin:'5px', width:'98%'}}/>
+                        <br></br>
+                    </form>
+                </center>
+
+                <div className="map">
+                    <center>{this.props.svg}</center>
+
+                </div>
+
+                <center>
+                    <form className="Drop-down-form" onSubmit={this.handleSubmit}>
+                        <div className = "Select-control">
+                            <Select
+                                name="form-
+  			field-name"
+                                value={this.state.value}
+                                multi={true}
+                                options={this.props.dropdownvalues}
+                                onChange={this.logChange.bind(this)}
+                                simpleValue
+                                searchable={false}
+                                placeholder = "Select trip itinerary information to display..."
+                                backspaceToRemoveMessage=""
+                            />
+                        </div>
+                        <input className="btn btn-primary btn-md" type="submit" value="Get Info" style={{margin:'5px', width:'98%'}}/>
+                        <br></br>
+                    </form>
+                </center>
+
+                <center>
+                    <div className = "checkbox">
+                        <input type="checkbox"
+                               defaultChecked={true}
+                               onClick={this.logCheckM.bind(this)}
+                        />
+                        <label>Miles</label>
+                    </div>
+                    <div className = "checkbox">
+                        <input type="checkbox"
+                               defaultChecked={false}
+                               onClick={this.logCheckK.bind(this)}
+                        />
+                        <label>Kilometers</label>
+                    </div>
+                </center>
+
+                <div className="subheading">
+                    <h1>Your Itinerary</h1>
+                </div>
+                <table className="pair-table">
+                    <thead>
+                    <tr>
+                        <th>Leg</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Distance</th>
+                        <th>Cumulative Distance</th>
+                    </tr>
+                    </thead>
+
+                    {this.props.pairs}
+                    <tbody>
+                    <tr>
+                        <td colSpan="3">Total:</td>
+                        <td colSpan="2">{total}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <center>
+
+            </center>
+
+        </div>
+
     }
-    
-    async browseInfoFile(file){
-            let idValues = [];
-            console.log("Got file!!:", file);
-            for(let i=0; i < file.length; i++){
-                console.log("this thing: ",(file[i]));
-                let v = {
-                    value: file[i],
-                    label: file[i]
-                };
-                idValues.push(v);
-            }
-        console.log("idValues: ", idValues);
-        this.vals = idValues;
-            this.setState({
-                idValues: this.state.vals});
-    }
-        
 }
+
+export default Home
