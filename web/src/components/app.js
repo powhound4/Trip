@@ -211,20 +211,12 @@ export default class App extends React.Component {
         //For loop that goes through all pairs,
         let pairs = [];
         let totalDist = 0;
-        let dist = 0;
         for (let i = 0; i < Object.values(file).length; i++) {
             let leg = i+1;
             let start = file[i].startName; //get start from file i
             let end = file[i].endName; //get end from file i
-            
-            if (this.state.units[0] == "miles"){
-                dist = file[i].totalDistanceM;
-                totalDist+=dist;
-            }
-            else{
-                dist = file[i].totalDistanceK;
-                totalDist+=dist;
-            }
+            let dist = file[i].totalDistance;
+            totalDist+=dist;
             
             let startValues= [];
             let endValues = []; 
