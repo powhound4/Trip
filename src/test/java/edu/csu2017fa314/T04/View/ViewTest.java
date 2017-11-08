@@ -41,8 +41,8 @@ public class ViewTest {
     }
 
     @Test
-    public void writeItinerary() throws Exception {
-        view.writeItinerary(list);
+    public void writeItinerarySetup() throws Exception {
+        view.writeItinerarySetup(list);
     }
 
     @Test
