@@ -84,15 +84,15 @@ package edu.csu2017fa314.T04.Database;
                      System.out.println("Col Count: " + rsmd.getColumnCount());
                      String[] cols = new String[rsmd.getColumnCount()];
                      for(int i = 1; i <= cols.length; ++i){
-                        System.out.println("Col Name: " + rsmd.getColumnName(i));
-                        cols[i-1] = rsmd.getColumnName(i);
+                        System.out.println("Col Name: " + rsmd.getColumnLabel(i));
+                        cols[i-1] = rsmd.getColumnLabel(i);
                      }
                      Info queryCols = new Info(cols);
                      try { // Iterate through the query results and print selected columns
                          while(rs.next()) {
                          ArrayList<String> data = new ArrayList<String>();
                             for(int i = 0; i < cols.length; ++i){
-                                data.add(rs.getString(cols[i]));
+                                data.add(rs.getString(i+1));
                             }
                              String id = rs.getString("id");
                              String name = rs.getString("name");
