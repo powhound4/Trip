@@ -71,11 +71,6 @@ class Home extends React.Component {
 
     }
 
-    handleOnSubmit(event) {
-        const selectedUnits = [];
-        event.preventDefault();
-    }
-
     handleChange(event){
         this.setState({inputValue: event.target.value});
     }
