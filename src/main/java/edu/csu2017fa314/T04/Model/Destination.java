@@ -12,30 +12,27 @@ public class Destination {
 	private String name;
 	private int totalDistanceM = 0;
 	private int totalDistanceK = 0;
-        private double latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));          //φ1 remove whitespace before passed to toDecimal method
-        private double longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s","")));        //φ2
-        private double latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));	    //λ1
-        private double longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));   //λ2
-        private double sin = 0.0; 
-        private double cos = 0.0; 
-        private double distance = 0.0;
+    	private double sin = 0.0; 
+    	private double cos = 0.0;
+	private double distance = 0.0;
 	private double deltalong = 0.0;
 	private double deltalat = 0.0; 
 
 	public Destination(String id, String name){
-        this.id = id;
-        this.name = name;
+        	this.id = id;
+        	this.name = name;
 	}
     
-    public Destination(ArrayList<String> info){
-        this.destInfo = info;
-    }
+    	public Destination(ArrayList<String> info){
+        	this.destInfo = info;
+    	}
     
 	public Destination(ArrayList<String> info, String[] labels){
 		this.destInfo = info;
 		//ArrayList<String> destInfo = new ArrayList<String>(Arrays.asList(info));
 		this.labels = labels;
 	}
+	
 	private int getLabelIndex(String lab){
 		return Arrays.asList(this.labels).indexOf(lab);
 	}
@@ -69,13 +66,15 @@ public class Destination {
 	public String getLongitude(){
 		return this.destInfo.get(getLabelIndex("longitude"));
 	}
+	
 	public String toString(){
-	String res = "";
-	for(int i=0; i < destInfo.size(); i++){
-	res+=this.labels[i] + ":" + destInfo.get(i) + ", ";
+		String res = "";
+		for(int i=0; i < destInfo.size(); i++){
+			res+=this.labels[i] + ":" + destInfo.get(i) + ", ";
+		}
+		return res;
 	}
-	return res;
-	}
+	
 	private double toDecimal(String degree){
 		int countmin = 0; int countsec = 0; int countdeg = 0;
 		boolean negative = false;
@@ -136,7 +135,11 @@ public class Destination {
 
     public int computeDistanceM(Destination location2){
 	//computes the distance between two destinations in miles
-	distance = 0.0;
+        double latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));          //φ1 remove whitespace before passed to toDecimal method
+        double longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s","")));        //φ2
+        double latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));	    //λ1
+        double longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));   //λ2
+        distance = 0.0;
         deltalong = Math.abs(longB - longA); 		//Δλ
 
         sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
@@ -145,7 +148,7 @@ public class Destination {
                 * (Math.cos(deltalong))))));
         cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
         
-	double earthradmi = 3958.7613;
+        double earthradmi = 3958.7613;
         deltalat = Math.atan(sin/cos);
         distance = earthradmi * deltalat;
         totalDistanceM = (int)Math.round(distance);
@@ -154,7 +157,11 @@ public class Destination {
 
     public int computeDistanceK(Destination location2){
     //computes the distance between two destinations in kilometers
-	distance = 0.0;
+        double latA = Math.toRadians(toDecimal(this.getLatitude().replaceAll("\\s","")));          //φ1 remove whitespace before passed to toDecimal method
+        double longA = Math.toRadians(toDecimal(this.getLongitude().replaceAll("\\s","")));        //φ2
+        double latB = Math.toRadians(toDecimal(location2.getLatitude().replaceAll("\\s","")));	    //λ1
+        double longB = Math.toRadians(toDecimal(location2.getLongitude().replaceAll("\\s","")));   //λ2
+        distance = 0.0;
         deltalong = Math.abs(longB - longA); 		//Δλ
 
         sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
@@ -163,7 +170,7 @@ public class Destination {
                 * (Math.cos(deltalong))))));
         cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
 
-	double earthradkm = 6371.0088; 
+        double earthradkm = 6371.0088; 
         deltalat = Math.atan(sin/cos);
         distance = earthradkm * deltalat;
         totalDistanceK = (int)Math.round(distance);
