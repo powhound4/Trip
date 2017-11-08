@@ -60,7 +60,7 @@ public class NearestNeighbor {
 				if (i == j) {
 					disTable[i][j] = Integer.MAX_VALUE;
 				} else {
-                    			if (dUnits[0].equals(miles)){
+                    			if (nnUnits[0].equals(miles)){
                         			disTable[i][j] = 
 							locations.get(i).computeDistanceM(locations.get(j));
 					}
