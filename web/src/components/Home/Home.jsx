@@ -14,7 +14,7 @@ class Home extends React.Component {
             selectedUnits: ["miles"],
             isCheckedM: true,
             isCheckedK: false,
-            isCheckedSelectAll: false
+            destVal:[]
         };
 
         this.handleFirstSubmit = this.handleFirstSubmit.bind(this);
@@ -22,7 +22,6 @@ class Home extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logCheckM = this.logCheckM.bind(this);
         this.logCheckK = this.logCheckK.bind(this);
-        this.logCheckSelectAll = this.logCheckSelectAll.bind(this);
     }
 
     logChange(val) {
@@ -129,29 +128,17 @@ class Home extends React.Component {
         event.preventDefault();
 
     }
-
-    logCheckSelectAll(event){
-        console.log("old state: " + this.state.isCheckedSelectAll);
-        if (this.state.isCheckedSelectAll == true){
-            this.state.isCheckedSelectAll = false;
-            if(this.state.selectedDests.length > 0){
-                let length = this.state.selectedDests.length;
-                for(let i = 0; i < length; i++){
-                    this.state.selectedDests.pop(0);
+     logSelectAll(event){
+           
+                for(let i = 0; i < this.props.allResults.length; i++){
+                   console.log("resultList[i] = ", this.props.resultList[i].label);
+                   this.state.selectedDests.push(this.props.allResults[i]);
+                   this.state.destVal.push(this.props.resultList[i].value);
                 }
-                console.log("After pops = ",this.state.selectedDests);
-            }
+            
+    	}
 
-        }
-        else if (this.state.isCheckedSelectAll == false){
-            this.state.isCheckedSelectAll = true;
-            for(let i = 0; i< this.props.allResults.length; i++){
-                this.state.selectedDests.push(this.props.allResults[i]);
-                //this.state.destVal.push(this.props.allResults[i]);
-            }
-            //this.props.setDestListToAll(this.props.allResults);
-        }
-    }
+    
 
     render() {
         //console.log("Result list = ", this.props.resultList);
@@ -182,6 +169,7 @@ class Home extends React.Component {
 
 
                     <center>
+                        <h3>Selected Destinations</h3>
                         <form className="Drop-down-form" onSubmit={this.setSelectedDests.bind(this)}>
                             <div className = "Select-control">
                                 <Select
@@ -198,8 +186,8 @@ class Home extends React.Component {
                                 />
                             </div>
                             <input className="btn btn-primary btn-md" type="submit" value="Build Itinerary" style={{margin:'5px', width:'40%'}}/>
-                            <label>Select All:</label>
-                            <input className="SelectAll" type="checkbox" onClick={this.logCheckSelectAll.bind(this)} style={{ width:'30%'}}/>                 <br></br>
+                            <input className="btn btn-primary btn-md" type="button" value="Select All" onClick={this.logSelectAll.bind(this)} style={{margin:'5px', width:'40%'}}/>
+                            <br></br>
                         </form>
                     </center>
 
@@ -233,7 +221,8 @@ class Home extends React.Component {
                 </div>
 
                 <center>
-                    <form className="Drop-down-form" onSubmit={this.handleSubmit}>
+                    <h3>Additional Information</h3>
+                    <form className="Drop-down-form2" onSubmit={this.handleSubmit}>
                         <div className = "Select-control">
                             <Select
                                 name="form-
