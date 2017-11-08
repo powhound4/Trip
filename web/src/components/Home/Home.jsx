@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
 import Dropzone from 'react-dropzone';
+import Map from './Map.jsx';
 
 
 class Home extends React.Component {
@@ -217,11 +218,15 @@ class Home extends React.Component {
                         <br></br>
                     </form>
                 </center>
-
                 <div className="map">
-                    <center>{this.props.svg}</center>
+                <Map
+                containerElement={<div style={{ height: `100%` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+		        routes={this.props.getCords}
+                />
+		        </div>
 
-                </div>
+                
 
                 <center>
                     <h3>Additional Information</h3>
