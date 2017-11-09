@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NearestNeighbor {
-	  
+
 	private ArrayList<Destination> locations;
 	private int disTable[][];
 	private int visTable[][];
@@ -14,13 +14,13 @@ public class NearestNeighbor {
 	private int currentTrip[];
 	private int curTripPtr;
 	private int minTotalDistM;
-    	private int curTotalDistM;
-    	private int minTotalDistK;
-    	private int curTotalDistK;
-    	public static String [] nnUnits = {"miles"};
-    	public String kilometers = "kilometers";
-    	public String miles = "miles";
-    	public String optimization; 
+	private int curTotalDistM;
+	private int minTotalDistK;
+	private int curTotalDistK;
+	public static String [] nnUnits = {"miles"};
+	public String kilometers = "kilometers";
+	public String miles = "miles";
+	public String optimization;
 
 	public NearestNeighbor(ArrayList<Destination> locations, String optimization) {
 		this.locations = locations;
@@ -28,37 +28,37 @@ public class NearestNeighbor {
 		visTable = new int[locations.size()][locations.size()];
 		currentTrip = new int[disTable.length];
 		curTripPtr = 0;
-       		minTotalDistM = Integer.MAX_VALUE;
-        	curTotalDistM = 0;
-        	minTotalDistK = Integer.MAX_VALUE;
-        	curTotalDistK = 0;
-        	setNnUnits();
-        	this.optimization = optimization;
+		minTotalDistM = Integer.MAX_VALUE;
+		curTotalDistM = 0;
+		minTotalDistK = Integer.MAX_VALUE;
+		curTotalDistK = 0;
+		setNnUnits();
+		this.optimization = optimization;
 		fillInMap();
 	}
-	
-   	public static void setNnUnits() {
-        	Server serveNn = new Server();
-        	if (serveNn.distUnits == null){
-            		String [] nnStart = {"miles"};
-            		nnUnits = nnStart;
-        	}
-        	else{
-            		nnUnits = serveNn.distUnits;
-        	}
-     	}
-	
-    	public int getTotalDistanceM() {
-        	return minTotalDistM;
-    	}
-    
-    	public int getTotalDistanceK() {
-        	return minTotalDistK;
-    	}
-    	
-        public String getOptimization(){
-        return this.optimization;
-        }
+
+	public static void setNnUnits() {
+		Server serveNn = new Server();
+		if (serveNn.distUnits == null){
+			String [] nnStart = {"miles"};
+			nnUnits = nnStart;
+		}
+		else{
+			nnUnits = serveNn.distUnits;
+		}
+	}
+
+	public int getTotalDistanceM() {
+		return minTotalDistM;
+	}
+
+	public int getTotalDistanceK() {
+		return minTotalDistK;
+	}
+
+	public String getOptimization(){
+		return this.optimization;
+	}
 
 	private void fillInMap() {
 		for (int i = 0; i < locations.size(); i++) {
@@ -66,13 +66,13 @@ public class NearestNeighbor {
 				if (i == j) {
 					disTable[i][j] = Integer.MAX_VALUE;
 				} else {
-                    			if (nnUnits[0].equals(miles)){
-                        			disTable[i][j] = 
-							locations.get(i).computeDistanceM(locations.get(j));
+					if (nnUnits[0].equals(miles)){
+						disTable[i][j] =
+								locations.get(i).computeDistanceM(locations.get(j));
 					}
 					else{
-                        			disTable[i][j] = 
-							locations.get(i).computeDistanceK(locations.get(j));
+						disTable[i][j] =
+								locations.get(i).computeDistanceK(locations.get(j));
 					}
 				}
 			}
@@ -80,16 +80,16 @@ public class NearestNeighbor {
 	}
 
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
-	
-        if(this.optimization.equals("In Order")){
-            System.out.println("In Order");
-            return disObjectify(locations);      //no optimization, just return disobject array
-        }
-	
-        if(this.optimization.equals("Nearest Neighbor")){
-            System.out.println("Calling Nearest Neighbor");
-        }
-      
+
+		if(this.optimization.equals("In Order")){
+			System.out.println("In Order");
+			return disObjectify(locations);      //no optimization, just return disobject array
+		}
+
+		if(this.optimization.equals("Nearest Neighbor")){
+			System.out.println("Calling Nearest Neighbor");
+		}
+
 		bestTrip = calcShortestTrip();
 		twoOpt(bestTrip);
 		ArrayList<Destination> orderedDestinations = new ArrayList<>(locations.size());
@@ -129,11 +129,11 @@ public class NearestNeighbor {
 					delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
 							+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
 					if (delta < 0) {  //subtract the change from totalDist. FIXME might need to change dist w/in swap call
-                        			trip = twoOptSwap(trip, i + 1, k);
-                        			improvement = true;
-                       				curTotalDistM += delta;  
-                        			curTotalDistK += delta;
-                    			}
+						trip = twoOptSwap(trip, i + 1, k);
+						improvement = true;
+						curTotalDistM += delta;
+						curTotalDistK += delta;
+					}
 				}
 			}
 		}
@@ -159,26 +159,26 @@ public class NearestNeighbor {
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calDist(i);
 			if(this.optimization.equals("2 Opt")){
-                System.out.println("Calling 2 opt");
-                twoOpt(currentTrip);
-                }
+				System.out.println("Calling 2 opt");
+				twoOpt(currentTrip);
+			}
 			//add the distance of the last destination to the first destination
 			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
-            		curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-            		curTotalDistK += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-            		if((curTotalDistM < minTotalDistM)&&(curTotalDistK < minTotalDistK)){
-                		minTotalDistM = curTotalDistM;
-                		minTotalDistK = curTotalDistK;
-                		for(int k = 0; k < currentTrip.length; k++){
-                    			trip[k] = currentTrip[k];
-                		}
-            		}
-            		curTotalDistM = 0;
-            		curTotalDistK = 0;
-            		curTripPtr = 0;
-            		visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
-        	}
-        	return trip;
+			curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
+			curTotalDistK += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
+			if((curTotalDistM < minTotalDistM)&&(curTotalDistK < minTotalDistK)){
+				minTotalDistM = curTotalDistM;
+				minTotalDistK = curTotalDistK;
+				for(int k = 0; k < currentTrip.length; k++){
+					trip[k] = currentTrip[k];
+				}
+			}
+			curTotalDistM = 0;
+			curTotalDistK = 0;
+			curTripPtr = 0;
+			visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
+		}
+		return trip;
 	}
 
 	private void calDist(int startIndex){
@@ -198,9 +198,57 @@ public class NearestNeighbor {
 					currentTrip[curTripPtr] = i;
 				}
 			}
-                	curTotalDistM += min;
-                	curTotalDistK += min;
+			curTotalDistM += min;
+			curTotalDistK += min;
 			calDist(currentTrip[curTripPtr]);
 		}
 	}
+
+	public static void main(String args[]) {
+
+
+		String[] labels = new String[]{"name", "latitude", "longitude", "id", "city"};
+
+		ArrayList<String> info1 = new ArrayList<>(Arrays.asList("A", "45.0", "-90.0", "KFNL", "FoCo"));
+		ArrayList<String> info2 = new ArrayList<>(Arrays.asList("B", "45.0", "90", "KFNL", "FoCo"));
+		ArrayList<String> info3 = new ArrayList<>(Arrays.asList("C", "50", "-75.0", "KFNL", "FoCo"));
+		ArrayList<String> info4 = new ArrayList<>(Arrays.asList("D", "35.0", "-105", "KFNL", "FoCo"));
+		ArrayList<String> info5 = new ArrayList<>(Arrays.asList("E", "35.0", "-135.0", "KFNL", "FoCo"));
+		ArrayList<String> info6 = new ArrayList<>(Arrays.asList("F", "50", "-155.0", "KFNL", "FoCo"));
+
+
+		ArrayList<Destination> dests = new ArrayList<>();
+		dests.add(new Destination(info1, labels));
+		dests.add(new Destination(info3, labels));
+		dests.add(new Destination(info2, labels));
+		dests.add(new Destination(info4, labels));
+		dests.add(new Destination(info5, labels));
+		dests.add(new Destination(info6, labels));
+
+		NearestNeighbor nn = new NearestNeighbor(dests, "2 Opt");
+		ArrayList<distanceObject> dobj = nn.getNearestNeighborTrip();
+
+		int totalDist = 0;
+	/*	for (int i = 0; i < dobj.size(); i++) {
+			totalDist += dobj.get(i).totalDistance;
+			System.out.print(dobj.get(i).startName + " " + dobj.get(i).endName + " : " + dobj.get(i).totalDistance);
+			System.out.println();
+
+
+			}
+			*/
+		Destination d = new Destination(info1,labels);
+		Double test = d.toDecimal("13° E");
+		System.out.println("this is test: " + test);
+		System.out.println("TotalDist: " + totalDist);
+
+		for (int i = 0; i < nn.disTable.length; i++) {
+			for (int j = 0; j < nn.disTable.length; j++) {
+				System.out.print(nn.disTable[i][j] + "\t");
+			}
+			System.out.println();
+		}
+
+	}
 }
+

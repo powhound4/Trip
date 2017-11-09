@@ -148,7 +148,7 @@ public class distanceObject {
 	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
 		    		+Double.parseDouble(decdegree[2])/3600;
 	    	if (negative == true){
-	    		return result * -1;
+	    	//	return result * -1;
 		}
 	    	return result;
 	    }
@@ -157,7 +157,7 @@ public class distanceObject {
 	    	String[] decdegree = degree.split("[°' ]");
 	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
 	    	if (negative == true){
-	    		return result * -1;
+	    	//	return result * -1;
 		}
 	    	return result;
 	    }
@@ -166,8 +166,9 @@ public class distanceObject {
 	    	String[] decdegree = degree.split("[° \"]");
 	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
 	    	if (negative == true){
-	    		return result * -1;
+	    		//return result * -1;
 		}
+		
 	    	return result;
 	    }
 		
@@ -175,7 +176,7 @@ public class distanceObject {
 	    	String[] decdegree = degree.split("[° ]");
 	    	double result = Double.parseDouble(decdegree[0]);
 	    	if (negative == true){
-	    		return result * -1;
+	    	//	return result * -1;
 		}
 	    	return result;
 	    }
@@ -184,9 +185,10 @@ public class distanceObject {
 	    	decdegree[0] = degree;
 	    	double result = Double.parseDouble(decdegree[0]);
 	    	if (negative == true){
-	    		return result * -1;
+	    	//	return result * -1;
 		}
-	    	return result;
+	    
+	    return result;
 	    }
 	    
 	}
@@ -199,6 +201,19 @@ public class distanceObject {
         	latB = Math.toRadians(toDecimal(lat2));		//λ1
         	longB = Math.toRadians(toDecimal(long2));	//λ2
         	deltalong = Math.abs(longB - longA); 		//Δλ
+        	
+        /*	System.out.println("this is lat1: " + lat1);
+        	System.out.println("this is latA: " + latA);
+        	System.out.println("this is long1: " + long1);
+        	System.out.println("this is longA: " + longA);
+        	System.out.println("this is lat2: " + lat2);
+        	System.out.println("this is latB: " + latB);
+        	System.out.println("this is long2: " + long2);
+        	
+ 
+        	System.out.print("this is longB: " + longB);*/
+        	
+        	
             
         	sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong))) 
                 	+ ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
