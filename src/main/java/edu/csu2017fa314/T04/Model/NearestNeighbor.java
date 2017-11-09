@@ -20,8 +20,9 @@ public class NearestNeighbor {
     	public static String [] nnUnits = {"miles"};
     	public String kilometers = "kilometers";
     	public String miles = "miles";
+    	public String optimization; 
 
-	public NearestNeighbor(ArrayList<Destination> locations) {
+	public NearestNeighbor(ArrayList<Destination> locations, String optimization) {
 		this.locations = locations;
 		disTable = new int[locations.size()][locations.size()];
 		visTable = new int[locations.size()][locations.size()];
@@ -32,6 +33,7 @@ public class NearestNeighbor {
         	minTotalDistK = Integer.MAX_VALUE;
         	curTotalDistK = 0;
         	setNnUnits();
+        	this.optimization = optimization;
 		fillInMap();
 	}
 	
@@ -53,6 +55,10 @@ public class NearestNeighbor {
     	public int getTotalDistanceK() {
         	return minTotalDistK;
     	}
+    	
+        public String getOptimization(){
+        return this.optimization;
+        }
 
 	private void fillInMap() {
 		for (int i = 0; i < locations.size(); i++) {
@@ -74,6 +80,16 @@ public class NearestNeighbor {
 	}
 
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
+	
+        if(this.optimization.equals("In Order")){
+            System.out.println("In Order");
+            return disObjectify(locations);      //no optimization, just return disobject array
+        }
+	
+        if(this.optimization.equals("Nearest Neighbor")){
+            System.out.println("Calling Nearest Neighbor");
+        }
+      
 		bestTrip = calcShortestTrip();
 		twoOpt(bestTrip);
 		ArrayList<Destination> orderedDestinations = new ArrayList<>(locations.size());
@@ -142,7 +158,10 @@ public class NearestNeighbor {
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calDist(i);
-			twoOpt(currentTrip);
+			if(this.optimization.equals("2 Opt")){
+                System.out.println("Calling 2 opt");
+                twoOpt(currentTrip);
+                }
 			//add the distance of the last destination to the first destination
 			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
             		curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
