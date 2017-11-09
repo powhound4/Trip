@@ -149,7 +149,7 @@ public class Destination {
         cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
         
         double earthradmi = 3958.7613;
-        deltalat = Math.atan(sin/cos);
+        deltalat = Math.atan2(sin,cos);
         distance = earthradmi * deltalat;
         totalDistanceM = (int)Math.round(distance);
         return Math.abs(totalDistanceM);
@@ -171,7 +171,7 @@ public class Destination {
         cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
 
         double earthradkm = 6371.0088; 
-        deltalat = Math.atan(sin/cos);
+        deltalat = Math.atan2(sin,cos);
         distance = earthradkm * deltalat;
         totalDistanceK = (int)Math.round(distance);
         return Math.abs(totalDistanceK);
