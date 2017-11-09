@@ -8,6 +8,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            route: [],
             sysFile: null,
             svgImage: [],
             allPairs: [],
@@ -77,6 +78,7 @@ export default class App extends React.Component {
                     optimizationOptions={this.state.optimizationOptions}
                     optimization={this.state.optimization}
                     browseUploadedFile={this.browseUploadedFile.bind(this)}
+                    getCords={this.state.route}
                     
                     
                 />
@@ -146,6 +148,7 @@ export default class App extends React.Component {
             
             else if(this.state.serverReturned.id == "1" || this.state.serverReturned.id == "2"){
                 this.browseFile(this.state.serverReturned.destinations);
+                this.buildRoute(this.state.serverReturned.destinations);
                 this.svgImage(this.state.serverReturned.svg);
                 let infoPath = require('../../info.json');
                 this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
@@ -213,6 +216,34 @@ export default class App extends React.Component {
         svg.push(s);
         this.setState({
             svgImage: svg
+        });
+    }
+
+
+    async buildRoute(file){
+        console.log("Got file:", file);
+        let r = [];
+        for (let i = 0; i < Object.values(file).length; i++) {
+            let lat = parseFloat(file[i].lat1);
+            let lng = parseFloat(file[i].long1);
+            let line = {
+              lat: lat,
+              lng: lng
+            };
+            r.push(line);
+		if(i == Object.values(file).length -1 ){
+			let lat = parseFloat(file[i].lat2);
+       	   		let lng = parseFloat(file[i].long2);
+            		let line = {
+              			lat: lat,
+             			lng: lng
+          		};
+            		r.push(line);
+		}
+        }
+	console.log("route = ", r);
+        this.setState({
+            route: r
         });
     }
     async browseUploadedFile(file) {
