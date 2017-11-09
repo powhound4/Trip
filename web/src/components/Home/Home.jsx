@@ -94,7 +94,7 @@ class Home extends React.Component {
     setSelectedDests(event){
         //console.log("State of destVal", this.state.destVal);
         for(let i = 0; i< this.state.selectedDests.length; i++){
-            console.log("selected dests i = ",this.state.selectedDests[i]);
+         //   console.log("selected dests i = ",this.state.selectedDests[i]);
             this.props.setDests(this.state.selectedDests[i]);
         }
 
@@ -121,7 +121,6 @@ class Home extends React.Component {
 
     runOptimization(event){
         console.log("State of destVal", this.state.destVal);
-        this.props.setDests(this.state.destVal);
         console.log('Selected Destinations' + this.state.selectedDests);
         this.props.fetch("query", this.state.inputValue);
         event.preventDefault();
