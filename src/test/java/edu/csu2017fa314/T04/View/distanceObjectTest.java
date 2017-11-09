@@ -55,19 +55,9 @@ public class distanceObjectTest {
         assertEquals(d.getEndName(), "Kit Carson County Airport");
     }
     @Test
-    public void getDistance() throws Exception {
-        assertEquals(d.getDistance(), 167);
-    }
-    @Test
     public void toDecimal() throws Exception {
         assertTrue(distanceObject.toDecimal("0") == 0);
         assertTrue(distanceObject.toDecimal("123.123") == 123.123);
         assertTrue(distanceObject.toDecimal("-4.002") == -4.002);
     }
-
-    @Test
-    public void computeDistance() throws Exception {
-        assertEquals(d.computeDistance(), 167);
-    }
-
 }

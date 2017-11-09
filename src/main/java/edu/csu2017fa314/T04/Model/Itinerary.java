@@ -34,7 +34,7 @@ public class Itinerary {
         NearestNeighbor nn = new NearestNeighbor(this.destinations);//instantiate new NearestNeighbor object
         ArrayList<distanceObject> trip = nn.getNearestNeighborTrip(); //find the shortest
         BuildSVG bsvg = new BuildSVG(trip,"src/main/java/edu/csu2017fa314/T04/View/World.svg");
-        View.writeItinerary(trip);
+        View.writeItinerarySetup(trip);
         return trip;
     }
     

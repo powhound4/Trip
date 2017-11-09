@@ -1,6 +1,7 @@
 package edu.csu2017fa314.T04.Server;
 
 import com.google.gson.Gson;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import edu.csu2017fa314.T04.Database.QueryBuilder;
@@ -15,8 +16,10 @@ import com.google.gson.reflect.TypeToken;
 
 import static spark.Spark.post;
 
-
 public class Server {
+    
+    public static String [] distUnits;
+
     public static void main(String[] args) {
         Server s = new Server();
         s.serve();
@@ -50,7 +53,7 @@ public class Server {
         
         String queryID = sRec.getId();
         
-        String units = sRec.getUnits();
+        distUnits = sRec.getDistUnits();
 
 
         //Create object with svg file path and list to return to server
@@ -112,7 +115,11 @@ public class Server {
         Object ret = gson.toJson(sRes,ServerResponse.class);
         return ret;
     }
-
+    
+    public static String [] getDistUnits(){
+        return distUnits;
+    }
+    
     private void setHeaders(Response res) {
         // Declares returning type json
         res.header("Content-Type", "application/json");

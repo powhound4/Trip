@@ -22,7 +22,7 @@ public class NearestNeighborTest {
     @Test
     public void getNearestNeighborTrip() throws Exception {
         ArrayList<distanceObject> trip = nn.getNearestNeighborTrip();
-        assertEquals(nn.getTotalDistance(), 926);
+        assertEquals(926, nn.getTotalDistanceM());
     }
 
 }
