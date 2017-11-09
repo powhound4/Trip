@@ -61,7 +61,7 @@ package edu.csu2017fa314.T04.Database;
  
  
  
-     public ArrayList<distanceObject> query(String query) { // Command line args contain username and password
+     public ArrayList<distanceObject> query(String query, String optimization) { // Command line args contain username and password
      File f = new File("web/World.svg");
 		if(f.exists()){
 		f.delete();
@@ -99,8 +99,9 @@ package edu.csu2017fa314.T04.Database;
                              System.out.printf("%s,%s\n", id, name);
                              destinations.add(new Destination(data, cols));
                         }
-                        Itinerary it = new Itinerary(destinations, queryCols);
+                        Itinerary it = new Itinerary(destinations, queryCols, optimization);
                         trip = it.buildItinerary();
+                        System.out.println("this is in the queryBuilder class: " + optimization);
                      } finally {
                          rs.close();
                      }

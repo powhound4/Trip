@@ -82,7 +82,7 @@ public class Server {
         System.out.println("Searched = " + searched);
         String queryString = String.format("SELECT airports.id, airports.name, airports.code, airports.municipality, regions.name as region, countries.name as country, continents.name as continent, airports.latitude, airports.longitude, airports.elevation FROM continents INNER JOIN countries ON continents.code = countries.continent INNER JOIN regions ON countries.code = regions.iso_country INNER JOIN airports ON regions.code = airports.iso_region WHERE airports.name IN ('%s') and countries.name LIKE '%s' OR regions.name LIKE '%s' OR airports.name LIKE '%s' OR airports.municipality LIKE '%s' ORDER BY continents.name, countries.name, regions.name, airports.municipality, airports.name ASC", searched, name, name, name, name);            
 
-            ArrayList<distanceObject> queryResults = q.query(queryString);
+            ArrayList<distanceObject> queryResults = q.query(queryString, sRec.getOptimization());
         
         
         /*Gson gsonNew = new Gson();
@@ -91,7 +91,8 @@ public class Server {
         System.out.println(result);*/
          // Create object with svg file path and list to return to server
         sRes = new ServerResponse("World.svg", queryResults, queryID); //TODO update file path to your svg, change to "./testing.png" for a sample image
-        
+        System.out.println("!!!!Optimization = " + sRec.getOptimization());
+
         //System.out.println("Sending \"" + sRes.toString() + "\" to server.");
 
         //Convert response to json
@@ -106,7 +107,7 @@ public class Server {
         if(queryID.equals("2")){
              String searched = "%" + sRec.getDests() + "%";
              String queryString = String.format("SELECT airports.id, airports.name, airports.code, airports.municipality, regions.name as region, countries.name as country, continents.name as continent, airports.latitude, airports.longitude, airports.elevation FROM continents INNER JOIN countries ON continents.code = countries.continent INNER JOIN regions ON countries.code = regions.iso_country INNER JOIN airports ON regions.code = airports.iso_region WHERE airports.code IN ('%s') ORDER BY continents.name, countries.name, regions.name, airports.municipality, airports.name ASC", searched);
-             ArrayList<distanceObject> queryResults = q.query(queryString);
+             ArrayList<distanceObject> queryResults = q.query(queryString, sRec.getOptimization());
              sRes = new ServerResponse("World.svg", queryResults, queryID);
              System.out.println("Sending \"" + sRes.toString() + "\" to server.");               
          }

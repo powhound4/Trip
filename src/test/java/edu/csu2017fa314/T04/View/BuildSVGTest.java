@@ -18,7 +18,7 @@ public class BuildSVGTest {
     String SVGPath;
     NearestNeighbor nn;
 
-    @Before
+   /* @Before
     public void setUp() throws Exception {
 
         CSVReader csvReader = new CSVReader("sprint2test.csv");
@@ -30,5 +30,5 @@ public class BuildSVGTest {
         disOb = nn.getNearestNeighborTrip();
         bsvg = new BuildSVG(disOb, SVGPath);
     }
-    
+   */ 
 }
