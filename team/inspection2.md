@@ -2,7 +2,7 @@
  
 Inspection | Details
 ----- | -----
-Subject | home.jsx 
+Subject | Home.jsx 
 Meeting | 11/8/2017 10:00 - 10:50 AM
 Checklist | 	Java Code Review Checklist (Dalbey) URL: http://users.csc.calpoly.edu/~jdalbey/301/Forms/CodeReviewChecklistJava.pdf
 
@@ -17,9 +17,9 @@ George Hatch| Moderator/Developer | 1.75 hours
 ### Log
 file:line | defect | h/m/l | github# | who
 --- | --- |:---:|:---:| ---
-home.jsx Line 11 | Unused variable type: '' | l | Issue #438 | Alison
-home.jsx lines 62-65 | else if statement no longer needed | m | Issue #436 | Evan
-home.jsx line 75 | remove unused function | l | Issue #436 | Evan
-home.jsx multiple lines | rename all "submit" functions and specify what each function is doing using comment lines | m | Issue #465 | George/Alison
-home.jsx multiple lines | add comments next to each function to clarify what each one is doing, clarify code and make it more readable | m | Issue #466 | Chris
-home.hsx line 116 | setOptimization function never used, remove | l | Issue #467 | Alison 
+Home.jsx, line 11 | Remove the unused state variable, type: ''| l | Issue #438 | Alison
+Home.jsx, lines 62-65 | The else if statement within the unit-recording function is no longer needed | m | Issue #436 | Evan
+Home.jsx, line 75 | Remove the unused function handleOnSubmit, which had been used in the original checkbox code| l | Issue #436 | Evan
+Home.jsx, line of each function declaration | Rename all "submit" functions, so that they have names that better identify what they are doing. | m | Issue #465 | George/Alison
+Home.jsx, every line preceding a function | Add comments next to each function to clarify what each one is doing, clarify code and make it more readable | m | Issue #466 | Chris
+Home.jsx, line 116 | The setOptimization function is never used, so it should be removed. | l | Issue #467 | Alison 
