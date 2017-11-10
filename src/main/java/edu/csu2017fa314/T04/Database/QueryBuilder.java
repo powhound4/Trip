@@ -36,7 +36,7 @@ package edu.csu2017fa314.T04.Database;
                     
                      try { // Iterate through the query results and print selected columns
                          while(rs.next()) {
-                             names.add(rs.getString("name"));
+                             names.add(rs.getString("name") + "," + rs.getString("code"));
                              String id = rs.getString("id");
                              String name = rs.getString("name");
                              System.out.printf("%s,%s\n", id, name);
