@@ -80,7 +80,7 @@ Completed *34* issues associated with these user stories.
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Work together to make a plan for the sprint. | Meeting up as a team for sprint planning, communication about what each person is working on so there are no conflicts with the code on master. Work on cleaning up our code and removing anything that is not being used. | Ensure each team member understands how to run the code using the new comands.
+What we did well | For this sprint we had a lot more collaboration. We met up as a whole team more often, and pairs of team members worked out problems together. | We improved this sprint by starting earlier to allow for time to overcome challenges. | IntelliJ, meeting with the entire team to work out issues.   
+What we need to work on | Time management. If we are getting hung up on a user story, know when to move on to work on something that can be completed in a more realistic timeline.  | Schedule a time to meet and plan for the sprint together as a team.  | Using github through the terminal to reduce merge conflicts. Use Code Climate to improve our code.
+What we will change next time | Write cleaner code that is more easily understood by all team members. Communicate about what each member is working on so there are no conflicts with code and how the code will work together. | Choose the first user stories to work on, change and update as the sprint progresses and challenges arise. | Use Code Climate to clean up our code. 
