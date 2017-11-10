@@ -8,6 +8,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+	    allCodes: [],
             route: [],
             sysFile: null,
             svgImage: [],
@@ -40,27 +41,11 @@ export default class App extends React.Component {
         let ps = pairs.map((pp) => {
             return <Pair {...pp}/>;
         });
-        if (this.state.serverReturned) { // if this.state.serverReturned is not null
-            //for stage 2
-            //Get list of numbers
-            //serverLocations = this.state.serverReturned.locations;
-          
-            /*Create an array of HTML list items. The Array.map function in Javascript passes each individual element
-            * of an array (in this case serverLocations is the array and "location" is the name chosen for the individual element)
-            * through a function and returns a new array with the mapped elements.
-            * In this case f: location -> <li>location.name</li>, so the array will look like:
-            * [<li>[name1]</li>,<li>[name2]</li>...]
-            */
-            /*locs = serverLocations.map((location) => {
-                return <li>{location.name}</li>;
-            });
-
-            // set the local variable scg to this.state.serverReturned.svg
-            svg = this.state.serverReturned.svg;*/
-        }
+        
         return (
             <div className="app-container">
                 <Home
+		    allCodes={this.state.allCodes}
                     fetch={this.fetch.bind(this)}
                     svgImage={this.svgImage.bind(this)} //svgImage can be referd to in home
                     svg={si}
@@ -95,7 +80,7 @@ export default class App extends React.Component {
         if(type === "initial"){
             newMap = {
                 name: input,
-                dests: [],
+                dests: this.state.destList,
                 id: "0",
                 units: this.state.units, 
                 optimization: this.state.optimization
@@ -152,7 +137,6 @@ export default class App extends React.Component {
                 this.browseFile(this.state.serverReturned.destinations);
                 this.buildRoute(this.state.serverReturned.destinations);
                 this.svgImage(this.state.serverReturned.svg);
-                let infoPath = require('../../info.json');
                 this.browseInfoFile(this.state.serverReturned.destinations[0].b1Labels);
             }
             
@@ -167,34 +151,54 @@ export default class App extends React.Component {
    async listResults(results){
         console.log("Search Results", results);
         let allTempRes = [];
-        allTempRes = results;
         let resultNames = [];
+        let codes = [];
         for (let i = 0; i < Object.values(results).length; i++) {
             console.log("Name:", results[i]);
-            let name=results[i];
-            //tempResults+=name + ",";
-        
+            let temp = results[i].split(',');
+            let name = temp[0];
+            let code = temp[1];
             let r= {
                 label : name,
                 value : name
             };
+           
+            allTempRes.push(name);
             console.log("Pushing Name: ", r);
             resultNames.push(r);
+            codes.push(code);
+
         }
         console.log("allTempResults = ", allTempRes);
         console.log("Result Names = ", resultNames);
         
         this.setState({
             res: resultNames,
-            allResults: allTempRes
+            allResults: allTempRes,
+            allCodes: codes
         });
         
         
     }
     async getDests(list){
-        console.log("DestList item = ", list);
-        //console.log("destAr state = ", destAr);
-        this.state.destList.push(list);
+        //console.log("DestList item = ", list);
+        //console.log("list length = ", list.length);
+
+       let temp = list.split(',');
+       let tempDest = temp[temp.length-1];
+
+       //console.log("temp = ", temp);
+       //console.log("tempDest = ", tempDest);
+
+       if(temp.length > 0){
+           //console.log("temp length greater than 1", temp.length);
+         this.state.destList.push(tempDest)
+       }
+       else{
+       this.setState({
+           destList: list
+    });
+       }
     }
     
     async getColumns(list){
