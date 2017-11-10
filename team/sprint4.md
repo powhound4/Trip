@@ -55,7 +55,7 @@ Date | Tasks done this time | Tasks done next time | Impediments | Confidence
 * *Website Transition  #334*: *The TripCo application can now be run off of a CS120 Lab machine, rather than a local file system.  The webpage can be opened up with a URL from any device on a CSU network connection*
 * *Optimization Selection  #335*: *There is now a dropdown menu on the webpage that allows the user to choose their preferred optimization between In Order, Nearest Neighbor, 2-Opt and 3-Opt.  The selection is sent to the Java code where the chosen optimization technique is used and an itinerary is made accordingly.*
 
-Completed *29* issues associated with these user stories.
+Completed *34* issues associated with these user stories.
 
 #### Incomplete user stories / epics in Sprint Backlog 
 * *Destination Selection  #124*: *A user is not yet able to add/select destinations to where they can build their trips in stages.  Once a selection has been made and an itinerary is printed out, a user must refresh the application to create an alternate itinerary.
