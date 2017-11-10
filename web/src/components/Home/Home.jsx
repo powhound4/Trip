@@ -116,7 +116,7 @@ class Home extends React.Component {
 
 
     logOptimization(val){
-
+        this.setState({optVal: val});
         this.props.optimization.pop(0);
         this.props.optimization.push(val);
         console.log("this is the state var ", this.props.optimization);
