@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NearestNeighbor {
-	  
+
 	private ArrayList<Destination> locations;
 	private int disTable[][];
 	private int visTable[][];
@@ -14,13 +14,11 @@ public class NearestNeighbor {
 	private int currentTrip[];
 	private int curTripPtr;
 	private int minTotalDistM;
-    	private int curTotalDistM;
-    	private int minTotalDistK;
-    	private int curTotalDistK;
-    	public static String [] nnUnits = {"miles"};
-    	public String kilometers = "kilometers";
-    	public String miles = "miles";
-    	public String optimization; 
+	private int curTotalDistM;
+	//public static String [] nnUnits = {"miles"};
+	//public String kilometers = "kilometers";
+	//public String miles = "miles";
+	public String optimization;
 
 	public NearestNeighbor(ArrayList<Destination> locations, String optimization) {
 		this.locations = locations;
@@ -28,37 +26,37 @@ public class NearestNeighbor {
 		visTable = new int[locations.size()][locations.size()];
 		currentTrip = new int[disTable.length];
 		curTripPtr = 0;
-       		minTotalDistM = Integer.MAX_VALUE;
-        	curTotalDistM = 0;
-        	minTotalDistK = Integer.MAX_VALUE;
-        	curTotalDistK = 0;
-        	setNnUnits();
-        	this.optimization = optimization;
+		minTotalDistM = Integer.MAX_VALUE;
+		curTotalDistM = 0;
+		//setNnUnits();
+		this.optimization = optimization;
 		fillInMap();
 	}
-	
-   	public static void setNnUnits() {
-        	Server serveNn = new Server();
-        	if (serveNn.distUnits == null){
-            		String [] nnStart = {"miles"};
-            		nnUnits = nnStart;
-        	}
-        	else{
-            		nnUnits = serveNn.distUnits;
-        	}
-     	}
-	
-    	public int getTotalDistanceM() {
-        	return minTotalDistM;
-    	}
-    
-    	public int getTotalDistanceK() {
-        	return minTotalDistK;
-    	}
-    	
-        public String getOptimization(){
-        return this.optimization;
-        }
+
+	/*
+	public static void setNnUnits() {
+		Server serveNn = new Server();
+		if (serveNn.distUnits == null){
+			String [] nnStart = {"miles"};
+			nnUnits = nnStart;
+		}
+		else{
+			nnUnits = serveNn.distUnits;
+		}
+	}
+*/
+
+	public int getTotalDistanceM() {
+		return minTotalDistM;
+	}
+/*
+	public int getTotalDistanceK() {
+		return minTotalDistK;
+	}
+*/
+	public String getOptimization(){
+		return this.optimization;
+	}
 
 	private void fillInMap() {
 		for (int i = 0; i < locations.size(); i++) {
@@ -66,32 +64,28 @@ public class NearestNeighbor {
 				if (i == j) {
 					disTable[i][j] = Integer.MAX_VALUE;
 				} else {
-                    			if (nnUnits[0].equals(miles)){
-                        			disTable[i][j] = 
-							locations.get(i).computeDistanceM(locations.get(j));
-					}
-					else{
-                        			disTable[i][j] = 
-							locations.get(i).computeDistanceK(locations.get(j));
-					}
+						disTable[i][j] = locations.get(i).computeDistanceM(locations.get(j));
 				}
+
 			}
 		}
 	}
 
+
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
-	
-        if(this.optimization.equals("In Order")){
-            System.out.println("In Order");
-            return disObjectify(locations);      //no optimization, just return disobject array
-        }
-	
-        if(this.optimization.equals("Nearest Neighbor")){
-            System.out.println("Calling Nearest Neighbor");
-        }
-      
+
+		if(this.optimization.equals("In Order")){
+			System.out.println("In Order");
+			return disObjectify(locations);      //no optimization, just return disobject array
+		}
+
+
+
 		bestTrip = calcShortestTrip();
-		twoOpt(bestTrip);
+
+		if(this.optimization.equals("2 Opt")){
+			twoOpt(bestTrip);
+		}
 		ArrayList<Destination> orderedDestinations = new ArrayList<>(locations.size());
 		for(int i = 0; i < locations.size(); i++){
 			orderedDestinations.add(locations.get(bestTrip[i]));
@@ -129,11 +123,10 @@ public class NearestNeighbor {
 					delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
 							+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
 					if (delta < 0) {  //subtract the change from totalDist. FIXME might need to change dist w/in swap call
-                        			trip = twoOptSwap(trip, i + 1, k);
-                        			improvement = true;
-                       				curTotalDistM += delta;  
-                        			curTotalDistK += delta;
-                    			}
+						trip = twoOptSwap(trip, i + 1, k);
+						improvement = true;
+						curTotalDistM += delta;
+					}
 				}
 			}
 		}
@@ -153,35 +146,35 @@ public class NearestNeighbor {
 		return trip;
 	}
 
-	private int[] calcShortestTrip(){//loops through each starting node and calls calDist with that start node
+	private int[] calcShortestTrip(){//loops through each starting node and calls calNearNeigh with that start node
 		int trip[] = new int[disTable.length];
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
-			calDist(i);
+			calNearNeigh(i);
 			if(this.optimization.equals("2 Opt")){
-                System.out.println("Calling 2 opt");
-                twoOpt(currentTrip);
-                }
+				System.out.println("Calling 2 opt");
+				twoOpt(currentTrip);
+			}else if(this.optimization.equals("3 Opt")){
+				System.out.println("Calling 3 opt");
+				//threeOpt(currentTrip);
+			}
 			//add the distance of the last destination to the first destination
 			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
-            		curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-            		curTotalDistK += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
-            		if((curTotalDistM < minTotalDistM)&&(curTotalDistK < minTotalDistK)){
-                		minTotalDistM = curTotalDistM;
-                		minTotalDistK = curTotalDistK;
-                		for(int k = 0; k < currentTrip.length; k++){
-                    			trip[k] = currentTrip[k];
-                		}
-            		}
-            		curTotalDistM = 0;
-            		curTotalDistK = 0;
-            		curTripPtr = 0;
-            		visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
-        	}
-        	return trip;
+			curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
+			if((curTotalDistM < minTotalDistM)){
+				minTotalDistM = curTotalDistM;
+				for(int k = 0; k < currentTrip.length; k++){
+					trip[k] = currentTrip[k];
+				}
+			}
+			curTotalDistM = 0;
+			curTripPtr = 0;
+			visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
+		}
+		return trip;
 	}
 
-	private void calDist(int startIndex){
+	private void calNearNeigh(int startIndex){
 		//Set 1's in the startIndex column for all rows, so no destination can be picked twice
 		for(int i = 0; i < disTable.length; i++){
 			visTable[i][startIndex] = 1;
@@ -198,9 +191,177 @@ public class NearestNeighbor {
 					currentTrip[curTripPtr] = i;
 				}
 			}
-                	curTotalDistM += min;
-                	curTotalDistK += min;
-			calDist(currentTrip[curTripPtr]);
+			curTotalDistM += min;
+			calNearNeigh(currentTrip[curTripPtr]);
 		}
 	}
+
+
+
+	private void threeOpt(int[] possibleTrip) {
+
+		boolean improvement = true;
+		int trip[] = new int[possibleTrip.length + 1];
+		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
+		trip[trip.length - 1] = trip[0]; //round trip
+
+		int n = trip.length - 1;
+		while (improvement) {
+			improvement = false;
+			//0 <= i < i+1 < j < j+1 < k < k+1 <= n
+			for (int i = 0; i <= n - 5; i++) {
+				for (int j = i + 1; j < n - 3; j++) {
+					for (int k = j + 1; k <= n - 1; k++) {
+
+						int[] distArr = new int[7];
+						distArr[0] = twoOpt1(trip, i, j);
+						distArr[1] = twoOpt2(trip, i, j, k);
+						distArr[2] = twoOpt3(trip, i, j, k);
+						distArr[3] = threeOpt1(trip, i, j, k);
+						distArr[4] = threeOpt2(trip, i, j, k);
+						distArr[5] = threeOpt3(trip, i, j, k);
+						distArr[6] = threeOpt4(trip, i, j, k);
+
+						int min = Integer.MAX_VALUE;
+						int index = -1;
+						for (int a = 0; a < distArr.length; a++) {
+							if (distArr[a] < min) {
+								min = distArr[a];
+								index = a;
+							}
+						}
+						if (min < 0) {
+							//improvement = true;
+						} else {
+							continue;
+						}
+						trip = makeImprovement(trip, index, i, j, k);
+						curTotalDistM += distArr[index];
+					}
+				}
+			}
+			if (improvement)
+				System.out.println("Improvement");
+			bestTrip = trip;
+		}
+	}
+
+	private int[] makeImprovement(int[] trip, int index, int i, int j, int k) {
+		assert (index >= 0 && index <= 6);
+		int[] imprTrip = new int[0];
+		switch (index) {
+			case 0:
+				//2opt1
+				imprTrip = twoOptSwap(trip, i + 1, j);
+				break;
+			case 1:
+				imprTrip = twoOptSwap(trip, j + 1, k);
+				break;
+			case 2:
+				//2opt3
+				imprTrip = twoOptSwap(trip, i + 1, k);
+				break;
+			case 3:
+				//3opt1
+				imprTrip = twoOptSwap(trip, i + 1, j);
+				imprTrip = twoOptSwap(imprTrip, j + 1, k);
+				break;
+			case 4:
+				//imprTrip = twoOptSwap(trip,j+1, k);
+				//imprTrip = rotateTrip(imprTrip, i,j,k);
+				imprTrip = twoOptSwap(trip, i + 1, k);
+				imprTrip = twoOptSwap(imprTrip, i + 1, j);
+				break;
+			case 5:
+				//imprTrip = twoOptSwap(trip,i+1, j);
+				//imprTrip = rotateTrip(imprTrip, i,j,k);
+				imprTrip = twoOptSwap(trip, i + 1, k);
+				imprTrip = twoOptSwap(imprTrip, j + 1, k);
+				break;
+			case 6:
+				//3opt4
+				//imprTrip = rotateTrip(trip,i,j,k);
+				//imprTrip = rotateTrip(imprTrip,i,j,k);
+				imprTrip = twoOptSwap(trip, i + 1, j + 1);
+				imprTrip = twoOptSwap(imprTrip, j, k);
+				break;
+			default:
+		}
+		return imprTrip;
+	}
+
+	/*private int[] rotateTrip(int[] trip, int i, int j, int k) {
+		int temp;
+		while(j < k){
+			temp = trip[j];
+			trip[j] = trip[i];
+			trip[i] = temp;
+			i++; j++;
+		}
+		return trip;
+	}
+		int temp;
+		while(j<k){
+			temp = trip[i];
+			trip[i] = j;
+
+		}
+
+	}*/
+	//subtractions for 2 opt are always [i][i+1], [j][j+1]
+	//subtractions for 3 opt are always [i][i+1], [j][j+1], [k][k+1]
+	//additions for 2 opt are the border cases
+	//		case1: [i][j], [i+1][j+1]
+	//		case2: [j][k], [j+1][k+1]
+	//		case3: [i][k], [i+1][k+1]
+	//additions for 3 opt are border cases
+	//		case1: [i][j], [i+1][k], [j+1][k+1]
+	//		case2: [i][k], [j+1][i+1], [j][k+1]
+	//		case3: [i][j+1], [k][j], [i+1][k+1]
+	//		case4: [i][j+1], [k][i+1], [j][k+1]
+
+	private int twoOpt1(int[] trip, int i, int j) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
+				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[j + 1]]);
+		return delta;
+	}
+
+	private int twoOpt2(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
+				+ (disTable[trip[j]][trip[k]]) + (disTable[trip[j + 1]][trip[k + 1]]);
+		return delta;
+	}
+
+	private int twoOpt3(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
+				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+		return delta;
+	}
+
+	private int threeOpt1(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
+				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[k]]) + (disTable[trip[j + 1]][trip[k + 1]]);
+		return delta;
+	}
+
+	private int threeOpt2(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
+				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[j + 1]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
+		return delta;
+	}
+
+	private int threeOpt3(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
+				+ (disTable[trip[i]][trip[j + 1]]) + (disTable[trip[k]][trip[j]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+		return delta;
+	}
+
+	private int threeOpt4(int[] trip, int i, int j, int k) {
+		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
+				+ (disTable[trip[i]][trip[j + 1]]) + (disTable[trip[k]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
+		return delta;
+	}
+
+
 }
+
