@@ -18,17 +18,17 @@ public class BuildSVGTest {
     String SVGPath;
     NearestNeighbor nn;
 
-   /* @Before
+    @Before
     public void setUp() throws Exception {
 
         CSVReader csvReader = new CSVReader("sprint2test.csv");
         ArrayList<Destination> breweryList = new ArrayList<Destination>(csvReader.getBreweryList());
-        nn = new NearestNeighbor(breweryList);
+        nn = new NearestNeighbor(breweryList, "2 Opt");
 
 
         SVGPath = "src/main/java/edu/csu2017fa314/T04/View/ColoradoMap.svg";
         disOb = nn.getNearestNeighborTrip();
         bsvg = new BuildSVG(disOb, SVGPath);
     }
-   */ 
+
 }
