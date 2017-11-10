@@ -23,6 +23,10 @@ public class Itinerary {
     public Info getInfo(){
         return this.info;
     }
+
+    public String getOpt(){
+        return this.optimization;
+    }
     
     public void addDestination(Destination place){
         this.destinations.add(place);
