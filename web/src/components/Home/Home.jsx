@@ -104,15 +104,19 @@ class Home extends React.Component {
     }
 
     logDest(val) {
+        let temp = val.split(',');
+        let tempDest = temp[temp.length-1];
         this.setState({destVal: val});
-        console.log("destVal = ", val);
-        this.state.selectedDests.push(val);
+        //console.log("destVal = ", val);
+        let code = this.props.allCodes[this.props.allResults.indexOf(tempDest)];
+       // console.log("code = ",this.props.allCodes[this.props.allResults.indexOf(tempDest)]);
+        this.state.selectedDests.push(code);
         event.preventDefault();
     }
 
 
     logOptimization(val){
-        this.setState({optVal: val});
+
         this.props.optimization.pop(0);
         this.props.optimization.push(val);
         console.log("this is the state var ", this.props.optimization);
@@ -130,8 +134,8 @@ class Home extends React.Component {
            
                 for(let i = 0; i < this.props.allResults.length; i++){
                    console.log("resultList[i] = ", this.props.resultList[i].label);
-                   this.state.selectedDests.push(this.props.allResults[i]);
-                   this.state.destVal.push(this.props.resultList[i].value);
+                    this.state.selectedDests.push(this.props.allCodes[i]);
+                    this.state.destVal.push(this.props.resultList[i].value);
                 }
             
     	}
@@ -144,6 +148,8 @@ class Home extends React.Component {
         let resList = this.props.resultList;
         let values = this.props.dropdownvalues;
         let total = this.props.totalDist; //update the total here
+        let resultSize = this.props.allResults.length;
+
 
         return <div className="home-container">
             <div className="separator">
@@ -169,6 +175,8 @@ class Home extends React.Component {
                         <input className="btn btn-primary btn-md" type="submit" value="Search" />
                         <br></br>
                     </form>
+			
+                    <h3>Search Results {resultSize == 0 ? "" :"(" + resultSize + ")"}</h3>
 
 
                     <center>
