@@ -206,7 +206,7 @@ public class distanceObject {
                         * (Math.cos(deltalong))))));
         	cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
         
-       		deltalat = Math.atan(sin/cos);
+       		deltalat = Math.atan2(sin,cos);
     	}
     
 	//compute distance in miles
