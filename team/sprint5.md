@@ -36,7 +36,7 @@ Story Points |  *36*  | *value*
 
 Statistic | Start | End
 --- | ---: | ---:
-Overall Test Coverage | *value* | *value* 
+Overall Test Coverage | 28% line coverage | *value* 
 Smells | *43* | *value* 
 Duplication | *40* | *value* 
 Technical Debt Ratio | *23.8* | *value* 
@@ -59,7 +59,7 @@ Epics planned for this release.
 Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Duplication | Technical Debt Ratio
 :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---:
 *date* | *issue numbers only* | *issue numbers only* | *High* | *50* | *10* | *20* | *15*
- |11/13/17 | None | Sprint Planning | Other coursework | No Number Available | 43 | 40 | 23.8
+ |11/13/17 | None | Sprint Planning | Other coursework | 28% line coverage | 43 | 40 | 23.8
  
 
 ## Review
