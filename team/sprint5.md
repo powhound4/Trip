@@ -54,6 +54,14 @@ Epics planned for this release.
 * *492 Clean Code*
 * *493 Map with zoom and pan*
 
+## Planning Decisions Made Based on Velocity of Previous Sprints
+* The purpose of this sprint for our team is to get caught up from the previous sprint. 
+* We will be adding some functionality, but will focus on completing all Sprint 4 epics, cleaning up our code, adding tests and updating our user interface
+* We will start earlier to allow time to review all aspects of our release and make sure that everything is complete and in perfect working order.
+* We will plan times to meet as a group for collaboration and to work through any issues we are having.
+* Time management for this sprint will be critical as we all have several other projects due around the same time
+* Each team member will work through the backlog starting with the items at the top first, communicating to the team about what they are working on and when. This will reduce conflicts in the code.
+
 ## Daily Scrums
 
 Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Duplication | Technical Debt Ratio
