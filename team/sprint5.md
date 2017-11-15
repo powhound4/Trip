@@ -45,8 +45,14 @@ Technical Debt Ratio | *value* | *value*
 
 Epics planned for this release.
 
-* *## title*
-*
+* *122 Select a starting location*
+* *125 Saved Trips*
+* *126 3-Opt*
+* *349 Remove Destinations*
+* *350 Manually reorder destinations*
+* *491 Test coverage*
+* *492 Clean Code*
+* *493 Map with zoom and pan*
 
 ## Daily Scrums
 
