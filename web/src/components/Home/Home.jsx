@@ -139,7 +139,44 @@ class Home extends React.Component {
             
     	}
 
+    saveButtonClicked(event) {
+        this.getFile();
+    }
     
+    async getFile() {
+         // assign all the airport codes of the displayed locations to an array
+         let locs = this.props.getDestList.map((location) => {
+            return location;
+        });
+
+        // create an object in the format of the download file:
+        let locationFile = {
+            title : "selection",
+            destinations: locs
+        };
+
+        // stringify the object
+        let asJSONString = JSON.stringify(locationFile);
+        
+        // Javascript code to create an <a> element with a link to the file
+        let pom = document.createElement('a');
+        pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(asJSONString));
+        // Download the file instead of opening it:
+        pom.setAttribute('download', "download.json");
+        
+        // Javascript to click the hidden link we created, causing the file to download
+        if (document.createEvent) {
+            let event = document.createEvent('MouseEvents');
+            event.initEvent('click', true, true);
+            pom.dispatchEvent(event);
+        } else {
+            pom.click();
+        }
+        
+        // remove hidden link from page
+        //pom.parentNode.removeChild(pom);
+
+    }
 
     render() {
         //console.log("Result list = ", this.props.resultList);
@@ -276,6 +313,9 @@ class Home extends React.Component {
                 <div className="subheading">
                     <h1>Your Itinerary</h1>
                 </div>
+		<center><form className="saveTrip" onClick={this.saveButtonClicked.bind(this)} style={{width:'30%'}}>
+                    <input className="btn btn-primary btn-md" type="submit"  value="Save Itinerary" style={{width:'100%', margin:'0 auto'}}/>
+		</form></center>
                 <table className="pair-table">
                     <thead>
                     <tr>
