@@ -64,7 +64,7 @@ export default class App extends React.Component {
                     optimization={this.state.optimization}
                     browseUploadedFile={this.browseUploadedFile.bind(this)}
                     getCords={this.state.route}
-                    
+                    getDestList={this.state.destList}
                     
                 />
             </div>
