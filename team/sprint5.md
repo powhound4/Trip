@@ -69,6 +69,7 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 *date* | *issue numbers only* | *issue numbers only* | *High* | *50* | *10* | *20* | *15*
  |11/13/17, 11/15/17 | None | Sprint Planning | Other coursework | 28% | 43 | 40 | 23.8
  | 11/17/2017 | Sprint 5 planning is completed | 3-opt, saved trips | Thanksgiving break, teammates out of town | 28% | 43 | 40 | 23.8
+ 11/27/2017 | None | 3-opt, saved trips | other classes | 28% | 43 | 40 | 23.8
 
 ## Review
 
