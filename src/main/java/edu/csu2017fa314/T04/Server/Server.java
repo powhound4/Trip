@@ -102,8 +102,9 @@ public class Server {
          */
         
         }
+        //if it's a file upload
         if(queryID.equals("2")){
-             String searched = "%" + sRec.getDests() + "%";
+             String searched = sRec.getDests();
              String queryString = String.format("SELECT airports.id, airports.name, airports.code, airports.municipality, regions.name as region, countries.name as country, continents.name as continent, airports.latitude, airports.longitude, airports.elevation FROM continents INNER JOIN countries ON continents.code = countries.continent INNER JOIN regions ON countries.code = regions.iso_country INNER JOIN airports ON regions.code = airports.iso_region WHERE airports.code IN ('%s') ORDER BY continents.name, countries.name, regions.name, airports.municipality, airports.name ASC", searched);
              ArrayList<distanceObject> queryResults = q.query(queryString, sRec.getOptimization());
              sRes = new ServerResponse("World.svg", queryResults, queryID);
