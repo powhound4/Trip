@@ -14,15 +14,8 @@ public class distanceObject {
 	public String lat2 = "";
 	public String long1 = "";
 	public String long2 = "";
-    	public String units = "";
-    	public String kilometers = "kilometers";
-    	public String miles = "miles";
     	public double latA = 0.0; 
     	public double latB = 0.0; 
-    	public double longA = 0.0; 
-    	public double longB = 0.0;
-    	public double sin = 0.0; 
-    	public double cos = 0.0; 
    	public double distance = 0.0;
     	public double deltalat = 0.0; 
     	public double deltalong = 0.0;
@@ -43,7 +36,6 @@ public class distanceObject {
         
 		this.startID = b1.getId();
 		this.endID = b2.getId();
-		
 		this.startName = b1.getName();
 		this.endName = b2.getName();
 		
@@ -66,7 +58,7 @@ public class distanceObject {
         	for(int i=0; i < this.b2Info.size(); i++){
             		res+="end_" + this.b2Labels[i] + " : " + this.b2Info.get(i) + ", ";
         	}
-        	if(units.equals(miles)){
+        	if(dUnits[0].equals("miles")){
             		res += "Total distance in miles: " + this.totalDistanceM;
 		}
         	else{
@@ -78,12 +70,15 @@ public class distanceObject {
 	public ArrayList<String> getB2Info(){
         	return this.b2Info;
 	}
+	
 	public ArrayList<String> getB1Info(){
         	return this.b1Info;
 	}
+	
 	public String[] getB1Labels(){
         	return this.b1Labels;
 	}
+	
 	public String[] getB2Labels(){
         	return this.b2Labels;
 	}
@@ -136,23 +131,23 @@ public class distanceObject {
 		}
 
 		if ((countdeg == 1) && (countmin == 1) && (countsec == 1)){
-			return setDMS(degree, negative);
+			return inDegMinSec(degree, negative);
 		}
 		else if ((countdeg == 1) && (countmin == 1) && (countsec == 0)){
-			return setDM(degree, negative);
+			return inDegMin(degree, negative);
 		}
 		else if ((countdeg == 1) && (countmin == 0) && (countsec == 1)){
-			return setDS(degree, negative);
+			return inDegSec(degree, negative);
 		}
 		else if ((countdeg == 1) && (countmin == 0) && (countsec == 0)){
-			return setDeg(degree, negative);
+			return inDeg(degree, negative);
 		}
 		else{
-			return setDec(degree, negative);
+			return inDec(degree, negative);
 		}
 	}
 	
-	private static double setDec(String degree, boolean negative) {
+	private static double inDec(String degree, boolean negative) {
 		String[] decdegree = new String[1];
 		decdegree[0] = degree;
 		double result = Double.parseDouble(decdegree[0]);
@@ -160,28 +155,28 @@ public class distanceObject {
 		return result;
 	}
 
-	private static double setDeg(String degree, boolean negative) {
+	private static double inDeg(String degree, boolean negative) {
 		String[] decdegree = degree.split("[° ]");
 		double result = Double.parseDouble(decdegree[0]);
 		if (isNegativeDeg(negative, result)) return result * -1;
 		return result;
 	}
 
-	private static double setDS(String degree, boolean negative) {
+	private static double inDegSec(String degree, boolean negative) {
 		String[] decdegree = degree.split("[° \"]");
 		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
 		if (isNegativeDeg(negative, result)) return result * -1;
 		return result;
 	}
 
-	private static double setDM(String degree, boolean negative) {
+	private static double inDegMin(String degree, boolean negative) {
 		String[] decdegree = degree.split("[°' ]");
 		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
 		if (isNegativeDeg(negative, result)) return result * -1;
 		return result;
 	}
 
-	private static double setDMS(String degree, boolean negative) {
+	private static double inDegMinSec(String degree, boolean negative) {
 		String[] decdegree = degree.split("[°' \"]");
 		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
                 +Double.parseDouble(decdegree[2])/3600;
@@ -198,15 +193,15 @@ public class distanceObject {
 
 	private static int getCountsec(String degree, int countsec, int i) {
 		if (degree.charAt(i) == '"'){
-            countsec++;
-        }
+            		countsec++;
+        	}
 		return countsec;
 	}
 
 	private static int getCountmin(String degree, int countmin, int i) {
 		if (degree.charAt(i) == '\''){
-            countmin++;
-        }
+            		countmin++;
+        	}
 		return countmin;
 	}
 
@@ -219,28 +214,32 @@ public class distanceObject {
 
 	private static boolean isNegativeDir(String degree, boolean negative, int i) {
 		if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
-            negative = true;
-    	}
+            		negative = true;
+    		}
 		return negative;
 	}	
 	
 	//set up the variables for the distance calculation
 	public void distanceSetup(){
         	distance = 0.0;
-        	latA = Math.toRadians(toDecimal(lat1));		//φ1
-        	longA = Math.toRadians(toDecimal(long1)); 	//φ2
-        	latB = Math.toRadians(toDecimal(lat2));		//λ1
-        	longB = Math.toRadians(toDecimal(long2));	//λ2
-        	deltalong = Math.abs(longB - longA); 		//Δλ
-            
-        	sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong))) 
-                	+ ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                	* (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB)) 
-                        * (Math.cos(deltalong))))));
-        	cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
-        
-       		deltalat = Math.atan2(sin,cos);
+        	latA = Math.toRadians(toDecimal(lat1));			//φ1
+        	double longA = Math.toRadians(toDecimal(long1)); 	//φ2
+        	double latB = Math.toRadians(toDecimal(lat2));		//λ1
+        	longB = Math.toRadians(toDecimal(long2));		//λ2
+        	deltalong = Math.abs(longB - longA); 			//Δλ
+            	vincentyFormula();
     	}
+	
+	private void vincentyFormula() {
+		double sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
+                	+ ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                	* (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                   	* (Math.cos(deltalong))))));
+		
+		double cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
+
+		deltalat = Math.atan2(sin,cos);
+	}
     
 	//compute distance in miles
     	public int computeDistanceM(){
