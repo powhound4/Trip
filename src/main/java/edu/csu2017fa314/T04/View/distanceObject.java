@@ -124,72 +124,105 @@ public class distanceObject {
      	}
 	
 	//convert lattitude and longitude to a decimal value
-	public static double toDecimal(String degree){ 
+	public static double toDecimal(String degree){
 		int countmin = 0; int countsec = 0; int countdeg = 0;
 		boolean negative = false;
-	    
-	    for (int i = 0; i < degree.length(); i++){
-	    	if (degree.charAt(i) == '\''){
-	    		countmin++;
+
+	    	for (int i = 0; i < degree.length(); i++){
+			countmin = getCountmin(degree, countmin, i);
+			countsec = getCountsec(degree, countsec, i);
+			countdeg = getCountdeg(degree, countdeg, i);
+			negative = isNegativeDir(degree, negative, i);
 		}
-	    	if (degree.charAt(i) == '"'){
-	    		countsec++;
+
+		if ((countdeg == 1) && (countmin == 1) && (countsec == 1)){
+			return setDMS(degree, negative);
 		}
-	    	if (degree.charAt(i) == '°'){
-	    		countdeg++;
+		else if ((countdeg == 1) && (countmin == 1) && (countsec == 0)){
+			return setDM(degree, negative);
 		}
-	    	if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
-	    		negative = true;
+		else if ((countdeg == 1) && (countmin == 0) && (countsec == 1)){
+			return setDS(degree, negative);
 		}
-	    }
-	    
-	    if ((countdeg == 1) && (countmin == 1) && (countsec == 1)){
-	    	String[] decdegree = degree.split("[°' \"]");
-	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
-		    		+Double.parseDouble(decdegree[2])/3600;
-	    	if (negative == true){
-	    		return result * -1;
+		else if ((countdeg == 1) && (countmin == 0) && (countsec == 0)){
+			return setDeg(degree, negative);
 		}
-	    	return result;
-	    }
-	    
-	    else if ((countdeg == 1) && (countmin == 1) && (countsec == 0)){
-	    	String[] decdegree = degree.split("[°' ]");
-	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
-	    	if (negative == true){
-	    		return result * -1;
+		else{
+			return setDec(degree, negative);
 		}
-	    	return result;
-	    }
-	    
-	    else if ((countdeg == 1) && (countmin == 0) && (countsec == 1)){
-	    	String[] decdegree = degree.split("[° \"]");
-	    	double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
-	    	if (negative == true){
-	    		return result * -1;
-		}
-	    	return result;
-	    }
-		
-	    else if ((countdeg == 1) && (countmin == 0) && (countsec == 0)){
-	    	String[] decdegree = degree.split("[° ]");
-	    	double result = Double.parseDouble(decdegree[0]);
-	    	if (negative == true){
-	    		return result * -1;
-		}
-	    	return result;
-	    }
-	    else{
-	    	String[] decdegree = new String[1];
-	    	decdegree[0] = degree;
-	    	double result = Double.parseDouble(decdegree[0]);
-	    	if (negative == true){
-	    		return result * -1;
-		}
-	    	return result;
-	    }
-	    
 	}
+	
+	private static double setDec(String degree, boolean negative) {
+		String[] decdegree = new String[1];
+		decdegree[0] = degree;
+		double result = Double.parseDouble(decdegree[0]);
+		if (isNegativeDeg(negative, result)) return result * -1;
+		return result;
+	}
+
+	private static double setDeg(String degree, boolean negative) {
+		String[] decdegree = degree.split("[° ]");
+		double result = Double.parseDouble(decdegree[0]);
+		if (isNegativeDeg(negative, result)) return result * -1;
+		return result;
+	}
+
+	private static double setDS(String degree, boolean negative) {
+		String[] decdegree = degree.split("[° \"]");
+		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
+		if (isNegativeDeg(negative, result)) return result * -1;
+		return result;
+	}
+
+	private static double setDM(String degree, boolean negative) {
+		String[] decdegree = degree.split("[°' ]");
+		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
+		if (isNegativeDeg(negative, result)) return result * -1;
+		return result;
+	}
+
+	private static double setDMS(String degree, boolean negative) {
+		String[] decdegree = degree.split("[°' \"]");
+		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+                +Double.parseDouble(decdegree[2])/3600;
+		if (isNegativeDeg(negative, result)) return result * -1;
+		return result;
+	}
+
+	private static int getCountdeg(String degree, int countdeg, int i) {
+		if (degree.charAt(i) == '°'){
+            		countdeg++;
+        	}
+		return countdeg;
+	}
+
+	private static int getCountsec(String degree, int countsec, int i) {
+		if (degree.charAt(i) == '"'){
+            countsec++;
+        }
+		return countsec;
+	}
+
+	private static int getCountmin(String degree, int countmin, int i) {
+		if (degree.charAt(i) == '\''){
+            countmin++;
+        }
+		return countmin;
+	}
+
+	private static boolean isNegativeDeg(boolean negative, double result) {
+		if (negative == true){
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isNegativeDir(String degree, boolean negative, int i) {
+		if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
+            negative = true;
+    	}
+		return negative;
+	}	
 	
 	//set up the variables for the distance calculation
 	public void distanceSetup(){
