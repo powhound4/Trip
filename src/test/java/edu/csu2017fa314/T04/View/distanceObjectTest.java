@@ -14,12 +14,14 @@ public class distanceObjectTest {
     private distanceObject d;
     private String[] labels;
     private ArrayList<String> info1, info2;
+    private String degree;
 
     @Before
     public void setUp() throws Exception {
         info1 = new ArrayList<>(Arrays.asList("Fort Collins Loveland Municipal Airport", "40.4518013", "-105.0110016", "KFNL"));
         info2  = new ArrayList<>(Arrays.asList("Kit Carson County Airport", "39.24250031", "-102.2850037", "KITR"));
         labels = new String[]{"name", "latitude", "longitude", "id"};
+        degree = "104°45'32\" W";
         d = new distanceObject(new Destination(info1, labels), new Destination(info2, labels));
     }
     @Test
@@ -68,7 +70,12 @@ public class distanceObjectTest {
         assertTrue(distanceObject.toDecimal("123.123") == 123.123);
         assertTrue(distanceObject.toDecimal("-4.002") == -4.002);
     }
-        @Test
+    @Test
+    public void isNegativeDeg() throws Exception {
+        assertEquals(distanceObject.isNegativeDir(false), false);
+        assertEquals(distanceObject.isNegativeDir(true), true); 
+    }
+    @Test
     public void computeDistanceM() throws Exception {
         assertEquals(167, d.computeDistanceM());
     }
