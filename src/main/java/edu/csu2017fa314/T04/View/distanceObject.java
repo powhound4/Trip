@@ -212,7 +212,7 @@ public class distanceObject {
 		return false;
 	}
 
-	private static boolean isNegativeDir(String degree, boolean negative, int i) {
+	public static boolean isNegativeDir(String degree, boolean negative, int i) {
 		if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
             		negative = true;
     		}
