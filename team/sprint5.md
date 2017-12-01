@@ -71,6 +71,7 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
  | 11/17/2017 | Sprint 5 planning is completed | 3-opt, saved trips | Thanksgiving break, teammates out of town | 28% | 43 | 40 | 23.8
  11/27/2017 | None | 3-opt, saved trips | other classes | 28% | 43 | 40 | 23.8
  11/29/2017 | Ability to save trips | Meeting with TA to work on 3 opt, testing/test coverage, work on code smells | Several other school projects, difficulty with 3 opt | 28% | 43 | 40 | 23.8
+ 12/1/2017 | None | KML, Meet with TA to work on 3 opt, test coverage, code climate issues | Several other school projects, difficulty with 3 opt | 28% | 43 | 44 | 23.7
 
 ## Review
 
