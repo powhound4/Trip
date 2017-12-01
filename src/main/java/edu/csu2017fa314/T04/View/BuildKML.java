@@ -18,17 +18,17 @@ public class BuildKML {
 		writeKML();
 	}
 
-	
-	private void writeKML(){
-		//begin writing to new file
+	private void checkExistance(){
 		//check to see if file exists if so delete and craete new
 		File f = new File("web/Trip.kml");
 		if(f.exists()){
 			f.delete();
 		}
-
+	}
+	private void writeKML(){
+		//begin writing to new file
+		checkExistance();
 		try{
-
             		bw = new BufferedWriter(new FileWriter("web/Trip.kml", true));
             		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+ "\n");
             		bw.write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+ "\n");
@@ -44,11 +44,7 @@ public class BuildKML {
 			}
            		bw.write("</coordinates>" + "\n" + "</LineString>" +"\n");
             		bw.write("<Style>" + "\n"+ "<LineStyle>" + "\n"+ "<color>#ff0000ff</color>" + "\n"+ "<width>6</width>" + "\n"+ "</LineStyle>" + "\n"+ "</Style>" + "\n"+ "</Placemark>\n");
-
-
-
 	    		for(int i =0; i< this.route.size(); i++){
-	    			//bw.write("<LookAt>\n<longitude>" +  route.get(i).long1 + "</longitude>\n<latitude>" + route.get(i).lat1 + "</latitude>\n<altitude>0</altitude>\n</LookAt>\n");
                			bw.write("<Placemark>\n");
                 		bw.write("<Style>\n<IconStyle>\n<Icon>\n<href>http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png\n</href>\n</Icon>\n</IconStyle>\n</Style>\n");
 				bw.write("<name>"+ route.get(i).startName + "</name>" + "\n");
@@ -62,12 +58,10 @@ public class BuildKML {
 	    		bw.write("</kml>");
             		bw.close();
         	}
-	// Close connection
-			
+		// Close connection		
 		catch(Exception e){
 			System.out.println(e);
 		}
 	}
-
 }
 
