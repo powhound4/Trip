@@ -13,33 +13,32 @@ public class BuildKML {
 	private BufferedWriter bw = null;
 	
 
-	public BuildKML(ArrayList<distanceObject> disOb){
+	public BuildKML(ArrayList<distanceObject> disOb) {
 		this.route = disOb;
-		writeKML();
+		checkExistance();
+		writeKml();
 	}
 
-	private void checkExistance(){
+	private void checkExistance() {
 		//check to see if file exists if so delete and craete new
 		File kmlFile = new File("web/Trip.kml");
-		if(kmlFile.exists()){
+		if(kmlFile.exists()) {
 			kmlFile.delete();
 		}
 	}
-	private void writeKML(){
+	private void writeKml() {
 		//begin writing to new file
-		checkExistance();
 		try{
             		bw = new BufferedWriter(new FileWriter("web/Trip.kml", true));
-            		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+ "\n");
-            		bw.write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+ "\n");
+            		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n");
             		bw.write("<Document>\n<Placemark>\n<LineString>\n<coordinates>\n");
    			for(int i =0; i< this.route.size(); i++){
-                		bw.write(route.get(i).long1 +","+ route.get(i).lat1 + "," + route.get(i).b1Info.get(9) + "\n");
+                		bw.write(route.get(i).long1+","+route.get(i).lat1+","+route.get(i).b1Info.get(9)+"\n");
                 		if(i == this.route.size()-1){
-                    			bw.write(route.get(i).long2 +","+ route.get(i).lat2 + "," + route.get(i).b2Info.get(9) + "\n");
+                    			bw.write(route.get(i).long2+","+route.get(i).lat2+","+route.get(i).b2Info.get(9)+"\n");
                 		}
 			}
-           		bw.write("</coordinates>" + "\n" + "</LineString>" +"\n");
+           		bw.write("</coordinates>\n</LineString>\n");
             		bw.write("<Style>\n<LineStyle>\n<color>#ff0000ff</color>\n<width>6</width>\n</LineStyle>\n</Style>\n</Placemark>\n");
 	    		for(int i =0; i< this.route.size(); i++){
                			bw.write("<Placemark>\n");
