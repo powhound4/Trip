@@ -149,7 +149,7 @@ public class distanceObject {
 	//convert degree formats to decimal
 	/** {@inheritDoc} */
 	public static double decimalConversion(String degree, int countmin, int countsec){
-		double result = 0;
+		double result = 0.0;
 		String[] decdegree = degree.split("[°' \"]");
 		if (countmin == 1 && countsec == 0){ //in dm
 			result = Double.parseDouble(decdegree[0])
