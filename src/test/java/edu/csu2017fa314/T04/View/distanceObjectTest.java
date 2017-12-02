@@ -20,7 +20,9 @@ public class distanceObjectTest {
     private String ds;
     private String degree;
     private String decimal;
-
+    private int cmin = 0;
+    private int csec = 0;
+    
     @Before
     public void setUp() throws Exception {
         info1 = new ArrayList<>(Arrays.asList("Fort Collins Loveland Municipal Airport", "40.4518013", "-105.0110016", "KFNL"));
@@ -95,8 +97,7 @@ public class distanceObjectTest {
         assertEquals(-104.75889, distanceObject.toDecimal("104°45'32\" W"), 0.001);
     }
     @Test
-    public void getCounts() throws Exception {
-        int countdeg = 0;
+    public void testConversion() throws Exception {
         int countmin = 0;
         int countsec = 0;
         for (int i = 0; i < dms.length(); i++){
@@ -106,35 +107,21 @@ public class distanceObjectTest {
             }            
             countmin = distanceObject.getCountmin(dms, countmin, i);
             countsec = distanceObject.getCountsec(dms, countsec, i);
-            countdeg = distanceObject.getCountdeg(dms, countdeg, i);
         }
-        assertEquals(countdeg, 1);
         assertEquals(countmin, 1);
         assertEquals(countsec, 1);
-    }
-    @Test
-    public void isNegativeDeg() throws Exception {
-        assertEquals(distanceObject.isNegativeDeg(false, 104), false);
-        assertEquals(distanceObject.isNegativeDeg(true, -104), true);
-    }
-    @Test
-    public void noDecimalConversion() throws Exception {
-        assertEquals(104.0, distanceObject.inDec(decimal, false), 0.1);
-        assertEquals(-104.0, distanceObject.inDec(decimal, true), 0.1);
-        assertEquals(104, distanceObject.inDeg(degree, false), 0.1);
-        assertEquals(-104, distanceObject.inDeg(degree, true), 0.1);
-    }
-    @Test
-    public void decimalConversion() throws Exception {
+        
         //Degree, minute tests
-        assertEquals(104.75, distanceObject.inDegMin(dm, false), 0.001);
-        assertEquals(-104.75, distanceObject.inDegMin(dm, true), 0.001);
+        assertEquals(104.75, distanceObject.decimalConversion(dm, 1, 0), 0.001);
         //Degree, second tests
-        assertEquals(104.00889, distanceObject.inDegSec(ds, false), 0.001);
-        assertEquals(-104.00889, distanceObject.inDegSec(ds, true), 0.001);
+        assertEquals(104.00889, distanceObject.decimalConversion(ds, 0, 1), 0.001);
         //Degree, minute, second tests
-        assertEquals(104.75889, distanceObject.inDegMinSec(dms, false), 0.001);
-        assertEquals(-104.75889, distanceObject.inDegMinSec(dms, true), 0.001);
+        assertEquals(104.75889, distanceObject.decimalConversion(dms, 1, 1), 0.001);
+    }
+    @Test
+    public void noConversion() throws Exception {
+        assertEquals(104.0, distanceObject.inDec(decimal, false), 0.1);
+        assertEquals(104, distanceObject.inDeg(degree, false), 0.1);
     }
     @Test
     public void computeDistanceM() throws Exception {
