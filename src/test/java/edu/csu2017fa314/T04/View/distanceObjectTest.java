@@ -98,18 +98,19 @@ public class distanceObjectTest {
     }
     @Test
     public void testConversion() throws Exception {
-        int countmin = 0;
-        int countsec = 0;
+        cmin = 0;
+        csec = 0;
+        
         for (int i = 0; i < dms.length(); i++){
             if (i == dms.length()-1) {
                 assertEquals(true, distanceObject.isNegativeDir(negDir, false, i));
                 assertEquals(false, distanceObject.isNegativeDir(dms, false, i));
             }            
-            countmin = distanceObject.getCountmin(dms, countmin, i);
-            countsec = distanceObject.getCountsec(dms, countsec, i);
+            cmin = distanceObject.getCountmin(dms, cmin, i);
+            csec = distanceObject.getCountsec(dms, csec, i);
         }
-        assertEquals(countmin, 1);
-        assertEquals(countsec, 1);
+        assertEquals(cmin, 1);
+        assertEquals(csec, 1);
         
         //Degree, minute tests
         assertEquals(104.75, distanceObject.decimalConversion(dm, 1, 0), 0.001);
@@ -120,8 +121,8 @@ public class distanceObjectTest {
     }
     @Test
     public void noConversion() throws Exception {
-        assertEquals(104.0, distanceObject.inDec(decimal, false), 0.1);
-        assertEquals(104, distanceObject.inDeg(degree, false), 0.1);
+        assertEquals(104.0, distanceObject.noConversion(decimal), 0.1);
+        assertEquals(104, distanceObject.noConversion(degree), 0.1);
     }
     @Test
     public void computeDistanceM() throws Exception {
