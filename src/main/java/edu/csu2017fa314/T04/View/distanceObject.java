@@ -27,7 +27,7 @@ public class distanceObject {
 	public String[] b2Labels = null;
     	public static String [] dUnits = {"miles"};
 
-	//Distance object that takes 2 brewery objects
+	//Distance object that takes two Destination objects
 	public distanceObject(Destination b1, Destination b2){
         	this.b1Info = b1.getInfo();
         	this.b2Info = b2.getInfo();
@@ -44,7 +44,13 @@ public class distanceObject {
 		this.long1 = b1.getLongitude().replaceAll("\\s","");
 		this.long2 = b2.getLongitude().replaceAll("\\s","");
 		
-		toStringUnits();
+		Server sDist = new Server();
+		String [] units = sDist.distUnits;
+		if (units == null){
+			String [] startup = {"miles"};
+			units = startup;
+		}
+		dUnits = units;
 		computeDistanceM();
 		computeDistanceK();
 	}
@@ -107,111 +113,75 @@ public class distanceObject {
         	return totalDistanceK;
     	}
 	
-	//sets the units for the distanceObject class
-	public static void toStringUnits() {
-        	Server sDist = new Server();
-        	String [] units = sDist.distUnits;
-        	if (units == null){
-           		String [] startup = {"miles"};
-            		units = startup;
-        	}
-        	dUnits = units;
-     	}
-	
 	//convert lattitude and longitude to a decimal value
 	public static double toDecimal(String degree){
-		int countmin = 0; int countsec = 0; int countdeg = 0;
+		int countmin = 0; int countsec = 0;
 		boolean negative = false;
 
 	    	for (int i = 0; i < degree.length(); i++){
 			countmin = getCountmin(degree, countmin, i);
 			countsec = getCountsec(degree, countsec, i);
-			countdeg = getCountdeg(degree, countdeg, i);
 			negative = isNegativeDir(degree, negative, i);
 		}
 
-		if ((countdeg == 1) && (countmin == 1) && (countsec == 1)){
-			return inDegMinSec(degree, negative);
+		if ((countmin == 1) && (countsec == 1)){
+			result = decimalConversion(degree, countmin, countsec);
 		}
-		else if ((countdeg == 1) && (countmin == 1) && (countsec == 0)){
-			return inDegMin(degree, negative);
+		else if ((countmin == 1) && (countsec == 0)){
+			result = decimalConversion(degree, countmin, countsec);
 		}
-		else if ((countdeg == 1) && (countmin == 0) && (countsec == 1)){
-			return inDegSec(degree, negative);
+		else if ((countmin == 0) && (countsec == 1)){
+			result = decimalConversion(degree, countmin, countsec);
 		}
-		else if ((countdeg == 1) && (countmin == 0) && (countsec == 0)){
-			return inDeg(degree, negative);
+		else {
+			result = noConversion(degree);
+	    	}
+		if (negative == true){
+	    		result *= -1;
 		}
-		else{
-			return inDec(degree, negative);
-		}
-	}
-
-	public static double inDec(String degree, boolean negative) {
-		String[] decdegree = new String[1];
-		decdegree[0] = degree;
-		double result = Double.parseDouble(decdegree[0]);
-		if (isNegativeDeg(negative, result)) return result * -1;
 		return result;
 	}
 
-	public static double inDeg(String degree, boolean negative) {
+	//already in decimal format, no conversion
+	public static double noConversion(String degree) {
 		String[] decdegree = degree.split("[° ]");
-		double result = Double.parseDouble(decdegree[0]);
-		if (isNegativeDeg(negative, result)) return result * -1;
-		return result;
+		return Double.parseDouble(decdegree[0]);
 	}
-
-	public static double inDegSec(String degree, boolean negative) {
-		String[] decdegree = degree.split("[° \"]");
-		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
-		if (isNegativeDeg(negative, result)) return result * -1;
-		return result;
-	}
-
-	public static double inDegMin(String degree, boolean negative) {
-		String[] decdegree = degree.split("[°' ]");
-		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
-		if (isNegativeDeg(negative, result)) return result * -1;
-		return result;
-	}
-
-	public static double inDegMinSec(String degree, boolean negative) {
+	
+	//convert degree formats to decimal
+	public static double decimalConversion(String degree, int countmin, int countsec){
+		double result = 0;
 		String[] decdegree = degree.split("[°' \"]");
-		double result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
-                +Double.parseDouble(decdegree[2])/3600;
-		if (isNegativeDeg(negative, result)) return result * -1;
+		if (countmin == 1 && countsec == 0){ //in dm
+			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
+		}
+		else if(countmin == 0 && countsec == 1){ //in ds
+			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
+		}
+		else{ //in dms
+			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+				+Double.parseDouble(decdegree[2])/3600;
+		}
 		return result;
 	}
-
-	public static int getCountdeg(String degree, int countdeg, int i) {
-		if (degree.charAt(i) == '°'){
-            		countdeg++;
-        	}
-		return countdeg;
-	}
-
+	
+	//determine if degree has seconds
 	public static int getCountsec(String degree, int countsec, int i) {
 		if (degree.charAt(i) == '"'){
             		countsec++;
         	}
 		return countsec;
 	}
-
+	
+	//determine if degree has minutes
 	public static int getCountmin(String degree, int countmin, int i) {
 		if (degree.charAt(i) == '\''){
             		countmin++;
         	}
 		return countmin;
 	}
-
-	public static boolean isNegativeDeg(boolean negative, double result) {
-		if (negative == true){
-			return true;
-		}
-		return false;
-	}
-
+	
+	//change the value of negative if the degree has W/S
 	public static boolean isNegativeDir(String degree, boolean negative, int i) {
 		if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
             		negative = true;
@@ -226,10 +196,7 @@ public class distanceObject {
 		latB = Math.toRadians(toDecimal(lat2));			//λ1
         	double longB = Math.toRadians(toDecimal(long2));	//λ2
         	deltalong = Math.abs(longB - longA); 			//Δλ
-		vincentyFormula();
-	}
 
-	private void vincentyFormula() {
 		double sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
                 + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
                 * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
