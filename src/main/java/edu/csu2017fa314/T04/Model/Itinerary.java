@@ -41,6 +41,7 @@ public class Itinerary {
         System.out.println("calling nearest neighbor trip with this optimization: " + this.optimization);
         ArrayList<distanceObject> trip = nn.getNearestNeighborTrip(); //find the shortest
         BuildSVG bsvg = new BuildSVG(trip,"src/main/java/edu/csu2017fa314/T04/View/World.svg");
+        BuildKML bkml = new BuildKML(trip);
         View.writeItinerarySetup(trip);
         return trip;
     }

@@ -315,7 +315,10 @@ class Home extends React.Component {
                 </div>
 		<center><form className="saveTrip" onClick={this.saveButtonClicked.bind(this)} style={{width:'30%'}}>
                     <input className="btn btn-primary btn-md" type="submit"  value="Save Itinerary" style={{width:'100%', margin:'0 auto'}}/>
-		</form></center>
+		</form>
+		    {{total} == 0 ? "" : <button><a href= "../../../Trip.kml" download>Save KML File</a></button>
+                }
+		    </center>
                 <table className="pair-table">
                     <thead>
                     <tr>
