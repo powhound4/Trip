@@ -115,8 +115,8 @@ public class distanceObject {
 	
 	/**
  	* Converts lattitude and longitude to a decimal value
- 	* @param  degree; a value that needs to be converted to decimal
- 	* @return result; a decimal value of the degree input
+ 	* param  degree: a value that needs to be converted to decimal
+ 	* returns a decimal value of the degree input
  	*/
 	public static double toDecimal(String degree){
 		int countmin = 0; 
@@ -144,8 +144,8 @@ public class distanceObject {
 
 	/**
  	* No conversion; parses the first number from the string
- 	* @param  degree: a String degree
- 	* @return a decimal value of the degree
+ 	* param degree: a String degree
+ 	* returns a decimal value of the degree
  	*/
 	public static double noConversion(String degree) {
 		String[] decdegree = degree.split("[° ]");
@@ -154,10 +154,10 @@ public class distanceObject {
 	
 	/**
  	* Converts a String degree into a decimal value
- 	* @param  degree: a String degree
-	* @param  countmin: an int to count minute signs
-	* @param  countsec: an int to count second signs
- 	* @return a decimal value of the degree
+ 	* param degree: a String degree
+	* param countmin: an int to count minute signs
+	* param countsec: an int to count second signs
+ 	* returns a decimal value of the degree
  	*/
 	public static double decimalConversion(String degree, int countmin, int countsec){
 		double result = 0.0;
@@ -180,10 +180,10 @@ public class distanceObject {
 	
 	/**
  	* Determine if the current character is a seconds sign
- 	* @param  degree: a String degree
-	* @param  countmin: an int counter
-	* @param  index: the current int index in the degree parameter
- 	* @return 1 if degree is in seconds, otherwise 0
+ 	* param degree: a String degree
+	* param countmin: an int counter for seconds sign
+	* param index: the current int index in the degree parameter
+ 	* returns 1 if degree is in seconds, otherwise 0
  	*/
 	public static int getCountsec(String degree, int countsec, int index) {
 		if (degree.charAt(index) == '"'){
@@ -194,10 +194,10 @@ public class distanceObject {
 	
 	/**
  	* Determine if the current character is a minutes sign
- 	* @param  degree: a String degree
-	* @param  countmin: an int counter
-	* @param  index: the current int index in the degree parameter
- 	* @return 1 if degree is in minutes, otherwise 0
+ 	* param degree: a String degree
+	* param countmin: an int counter for minutes sign
+	* param index: the current int index in the degree parameter
+ 	* returns 1 if degree is in minutes, otherwise 0
  	*/
 	public static int getCountmin(String degree, int countmin, int index) {
 		if (degree.charAt(index) == '\''){
@@ -208,10 +208,10 @@ public class distanceObject {
 	
 	/**
  	* Change the value of the variable negative if the degree has W/S
- 	* @param  degree: a String degree
-	* @param  negative: a boolean value recording negative direction
-	* @param  index: the current int index in the degree parameter
- 	* @return true or false
+ 	* param degree: a String degree
+	* param negative: a boolean value recording negative direction
+	* param index: the current int index in the degree parameter
+ 	* returns true or false
  	*/
 	public static boolean isNegativeDir(String degree, boolean negative, int index) {
 		if (degree.charAt(index) == 'W' || degree.charAt(index) == 'S'){
