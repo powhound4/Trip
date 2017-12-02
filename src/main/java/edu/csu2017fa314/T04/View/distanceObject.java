@@ -114,8 +114,11 @@ public class distanceObject {
     	}
 	
 	//convert lattitude and longitude to a decimal value
+	/** {@inheritDoc} */
 	public static double toDecimal(String degree){
-		int countmin = 0; int countsec = 0;
+		int countmin = 0; 
+		int countsec = 0;
+		double result = 0.0;
 		boolean negative = false;
 
 	    	for (int i = 0; i < degree.length(); i++){
@@ -124,13 +127,7 @@ public class distanceObject {
 			negative = isNegativeDir(degree, negative, i);
 		}
 
-		if ((countmin == 1) && (countsec == 1)){
-			result = decimalConversion(degree, countmin, countsec);
-		}
-		else if ((countmin == 1) && (countsec == 0)){
-			result = decimalConversion(degree, countmin, countsec);
-		}
-		else if ((countmin == 0) && (countsec == 1)){
+		if ((countmin == 1) || (countsec == 1)){
 			result = decimalConversion(degree, countmin, countsec);
 		}
 		else {
@@ -143,47 +140,55 @@ public class distanceObject {
 	}
 
 	//already in decimal format, no conversion
+	/** {@inheritDoc} */
 	public static double noConversion(String degree) {
 		String[] decdegree = degree.split("[° ]");
 		return Double.parseDouble(decdegree[0]);
 	}
 	
 	//convert degree formats to decimal
+	/** {@inheritDoc} */
 	public static double decimalConversion(String degree, int countmin, int countsec){
 		double result = 0;
 		String[] decdegree = degree.split("[°' \"]");
 		if (countmin == 1 && countsec == 0){ //in dm
-			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60;
+			result = Double.parseDouble(decdegree[0])
+				+Double.parseDouble(decdegree[1])/60;
 		}
 		else if(countmin == 0 && countsec == 1){ //in ds
-			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/3600;
+			result = Double.parseDouble(decdegree[0])
+				+Double.parseDouble(decdegree[1])/3600;
 		}
 		else{ //in dms
-			result = Double.parseDouble(decdegree[0])+Double.parseDouble(decdegree[1])/60
+			result = Double.parseDouble(decdegree[0])
+				+Double.parseDouble(decdegree[1])/60
 				+Double.parseDouble(decdegree[2])/3600;
 		}
 		return result;
 	}
 	
 	//determine if degree has seconds
-	public static int getCountsec(String degree, int countsec, int i) {
-		if (degree.charAt(i) == '"'){
+	/** {@inheritDoc} */
+	public static int getCountsec(String degree, int countsec, int index) {
+		if (degree.charAt(index) == '"'){
             		countsec++;
         	}
 		return countsec;
 	}
 	
 	//determine if degree has minutes
-	public static int getCountmin(String degree, int countmin, int i) {
-		if (degree.charAt(i) == '\''){
+	/** {@inheritDoc} */
+	public static int getCountmin(String degree, int countmin, int index) {
+		if (degree.charAt(index) == '\''){
             		countmin++;
         	}
 		return countmin;
 	}
 	
 	//change the value of negative if the degree has W/S
-	public static boolean isNegativeDir(String degree, boolean negative, int i) {
-		if (degree.charAt(i) == 'W' || degree.charAt(i) == 'S'){
+	/** {@inheritDoc} */
+	public static boolean isNegativeDir(String degree, boolean negative, int index) {
+		if (degree.charAt(index) == 'W' || degree.charAt(index) == 'S'){
             		negative = true;
     		}
 		return negative;
@@ -197,11 +202,14 @@ public class distanceObject {
         	double longB = Math.toRadians(toDecimal(long2));	//λ2
         	deltalong = Math.abs(longB - longA); 			//Δλ
 
-		double sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong)) * (Math.cos(latB) * (Math.sin(deltalong)))
-                + ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
-                * (Math.cos(deltalong))) * ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
-                    * (Math.cos(deltalong))))));
-		double cos = Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
+		double sin = Math.sqrt((Math.cos(latB) * Math.sin(deltalong))
+			* (Math.cos(latB) * (Math.sin(deltalong)))
+                	+ ((((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                	* (Math.cos(deltalong))) 
+			* ((Math.cos(latA) * Math.sin(latB)) - (Math.sin(latA) * Math.cos(latB))
+                    	* (Math.cos(deltalong))))));
+		double cos = Math.sin(latA) * Math.sin(latB) 
+			+ Math.cos(latA) * Math.cos(latB) * Math.cos(deltalong);
 
 		deltalat = Math.atan2(sin,cos);
 	}
