@@ -90,10 +90,10 @@ public class ServerRequest {
     @Override
     public String toString() {
         return "Request{"
-                + "dests='" + dests + '\''
+                + "dests='" + getDests() + '\''
                 + ", name='" + name + '\''
                 + ", id='" + id + '\''
-                + ", units='" + units + '\''
+                + ", units='" + getUnits() + '\''
                 + '}';
     }
 }
