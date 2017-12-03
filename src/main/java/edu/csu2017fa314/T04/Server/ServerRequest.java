@@ -5,7 +5,7 @@ public class ServerRequest {
     private String id = "";
     private String[] dests;
     private String[] units;
-    private String[] opt;
+    private String[] optimization;
     
      /**
      * Constructs a ServerRequest from details received by Server.java
@@ -14,12 +14,12 @@ public class ServerRequest {
      * String [] units: the customer's chosen units of measure
      * String [] opt: the customer's chosen method of trip optimization
      */
-    public ServerRequest(String name, String id, String[] dests, String [] units, String[] opt){
+    public ServerRequest(String name, String id, String[] dests, String [] units, String[] optimization){
         this.name = name;
         this.id = id;
         this.dests = dests;
         this.units = units;
-        this.opt = opt;
+        this.optimization = optimization;
     }
 
     public String getName() {
@@ -52,7 +52,7 @@ public class ServerRequest {
     }
     
     public String getOptimization(){
-        return opt[0];
+        return optimization[0];
     }
 
      /**
