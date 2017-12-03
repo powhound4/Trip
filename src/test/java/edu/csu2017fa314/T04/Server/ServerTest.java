@@ -20,6 +20,10 @@ public class ServerTest {
     private String[] units = {"miles"};
     private String[] opt = {"2Opt"};
 
+     /**
+     * Setup for object and variables for the ServerTest class
+     * throws an Exception for any error in doing so
+     */    
     @Before
     public void setUp() throws Exception {
         serve = new Server();
