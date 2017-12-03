@@ -34,8 +34,8 @@ public class ServerRequestTest {
 
     @Test
     public void getDests() throws Exception {
-        String d = "Fort Collins Loveland Municipal Airport', 'Denver International Airport";
-        assertEquals(d, req.getDests());
+        String dests = "Fort Collins Loveland Municipal Airport', 'Denver International Airport";
+        assertEquals(dests, req.getDests());
     }
 
     @Test
