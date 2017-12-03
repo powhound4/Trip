@@ -85,8 +85,8 @@ public class Destination {
  	* returns the total distance in miles
  	*/
 	public int computeDistanceM(Destination dest2){
-		distanceObject d = new distanceObject(this, dest2);
-		return d.computeDistanceM();
+		distanceObject distObj = new distanceObject(this, dest2);
+		return distObj.computeDistanceM();
     	}
 	
 	/**
@@ -95,8 +95,8 @@ public class Destination {
  	* returns the total distance in kilomters
  	*/
 	public int computeDistanceK(Destination dest2){
-		distanceObject d = new distanceObject(this, dest2);
-		return d.computeDistanceK();
+		distanceObject distObj = new distanceObject(this, dest2);
+		return distObj.computeDistanceK();
     	}
 	
 }
