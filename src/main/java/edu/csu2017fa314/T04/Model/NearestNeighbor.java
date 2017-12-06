@@ -76,6 +76,10 @@ public class NearestNeighbor {
 		return this.optimization;
 	}
 
+	/**
+	*fills in distance table
+	*returns nothing
+	*/
 	public void fillInMap() {
 		for (int i = 0; i < locations.size(); i++) {
 			for (int j = 0; j < locations.size(); j++) {
@@ -127,6 +131,10 @@ public class NearestNeighbor {
 		return trip;
 	}
 
+	/**
+	*Calculates the shortest trip, 2opt
+	*returns nothing
+	*/
 	public void twoOpt(int[] possibleTrip){
 		/*Implemented from sprint 3 slides*/
 		boolean improvement = true;
@@ -162,11 +170,17 @@ public class NearestNeighbor {
 			trip.add(dObj);
 			j++;
 		}
-		trip.add(new distanceObject(orderedLocations.get(orderedLocations.size()-1), orderedLocations.get(0)));//connect last to first
+		trip.add(new distanceObject(orderedLocations.get(orderedLocations.size()-1), orderedLocations.get(0)));
+		//connect last to first
 		return trip;
 	}
 
-	public int[] calcShortestTrip(){//loops through each starting node and calls calNearNeigh with that start node
+	/**
+	*Calculates the shortest trip, NN
+	*returns int[] array of trip
+	*/
+	public int[] calcShortestTrip(){
+		//loops through each starting node and calls calNearNeigh with that start node
 		int trip[] = new int[disTable.length];
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
@@ -194,6 +208,10 @@ public class NearestNeighbor {
 		return trip;
 	}
 
+	/**
+	*Calculates the shortest trip, NN
+	*returns nothing
+	*/
 	private void calNearNeigh(int startIndex){
 		//Set 1's in the startIndex column for all rows, so no destination can be picked twice
 		for(int i = 0; i < disTable.length; i++){
