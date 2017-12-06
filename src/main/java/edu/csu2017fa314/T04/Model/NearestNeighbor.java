@@ -352,6 +352,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 		System.out.println("test" + delta);
 		return delta;
 	}
+	
 	/**
 	*twoopt case 2
 	*Returns delta
@@ -363,6 +364,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
+	
 	/**
 	*twoOpt case 3
 	*Returns delta
@@ -374,6 +376,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
+	
 	/**
 	*threeOpt Case 1
 	*Returns delta
@@ -385,6 +388,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
+	
 	/**
 	*threeOpt Case 2
 	*Returns delta
@@ -396,6 +400,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
+	
 	/**
 	*threeOpt Case 3
 	*Returns delta
@@ -407,6 +412,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
+	
 	/**
 	*threeOpt Case 4
 	*Returns delta
