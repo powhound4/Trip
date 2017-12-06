@@ -72,7 +72,9 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
  11/27/2017 | None | 3-opt, saved trips | other classes | 28% | 43 | 40 | 23.8
  11/29/2017 | Ability to save trips | Meeting with TA to work on 3 opt, testing/test coverage, work on code smells | Several other school projects, difficulty with 3 opt | 28% | 43 | 40 | 23.8
  12/1/2017 | None | KML, Meet with TA to work on 3 opt, test coverage, code climate issues | Several other school projects, difficulty with 3 opt | 28% | 43 | 44 | 23.7
- 12/4/2017 | KML functionality, 3-opt improvements, Cleaned code, ++test coverage  | 3 opt with TA help, more test coverage, code climate issues | CS356, Several other school projects, difficulty with 3 opt, dead week | TBD | 26 | 36 | 17
+ 12/4/2017 | KML functionality, 3-opt improvements, Cleaned code, ++test coverage  | 3 opt with TA help, more test coverage, code climate issues | CS356, Several other school projects, difficulty with 3 opt, dead week | 30% | 26 | 36 | 17
+12/6/2017 | Cleaned code, ++test coverage | page refresh issue, more test coverage, code climate cleaning | CS356, difficulty with 3 opt, dead week | 30% | 27 | 34 | 16.4
+
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
