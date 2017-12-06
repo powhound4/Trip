@@ -64,9 +64,13 @@ public class NearestNeighbor {
 	}
 */
 	
-	public int[][] getDisTable(){return this.disTable;};
+	public int[][] getDisTable(){
+		return this.disTable;
+	}
 
-	public int[] getBestTrip(){return this.bestTrip;}
+	public int[] getBestTrip(){
+		return this.bestTrip;
+	}
 	
 	public String getOptimization(){
 		return this.optimization;
@@ -338,14 +342,20 @@ public class NearestNeighbor {
 	//		case2: [i][k], [j+1][i+1], [j][k+1]
 	//		case3: [i][j+1], [k][j], [i+1][k+1]
 	//		case4: [i][j+1], [k][i+1], [j][k+1]
-
+	/**
+	*twoOpt Case 1
+	*Returns delta
+	*/
 public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
 				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[j + 1]]);
 		System.out.println("test" + delta);
 		return delta;
 	}
-
+	/**
+	*twoopt case 2
+	*Returns delta
+	*/
 	public int twoOpt2(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[k]][trip[k + 1]]) - (disTable[trip[j]][trip[j + 1]])
 				+ (disTable[trip[j]][trip[k]]) + (disTable[trip[j + 1]][trip[k + 1]]);
@@ -353,7 +363,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
-
+	/**
+	*twoOpt case 3
+	*Returns delta
+	*/
 	public int twoOpt3(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
@@ -361,7 +374,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
-
+	/**
+	*threeOpt Case 1
+	*Returns delta
+	*/
 	public int threeOpt1(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[k]]) + (disTable[trip[j + 1]][trip[k+1]]);
@@ -369,7 +385,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
-
+	/**
+	*threeOpt Case 2
+	*Returns delta
+	*/
 	public int threeOpt2(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[j + 1]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
@@ -377,7 +396,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
-
+	/**
+	*threeOpt Case 3
+	*Returns delta
+	*/
 	public int threeOpt3(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[j + 1]]) + (disTable[trip[k]][trip[j]]) + (disTable[trip[i + 1]][trip[k + 1]]);
@@ -385,7 +407,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 
 		return delta;
 	}
-
+	/**
+	*threeOpt Case 4
+	*Returns delta
+	*/
 	public int threeOpt4(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[j + 1]]) + (disTable[trip[k]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
