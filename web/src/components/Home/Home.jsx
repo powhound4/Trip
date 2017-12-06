@@ -177,6 +177,10 @@ class Home extends React.Component {
         //pom.parentNode.removeChild(pom);
 
     }
+    refreshPage(event){
+       	event.preventDefault();
+       	window.location.reload();
+    }
 
     render() {
         //console.log("Result list = ", this.props.resultList);
@@ -197,6 +201,10 @@ class Home extends React.Component {
                 </div>
 
                 <center><div>
+			{typeof total == 'undefined' ? "" : <form  style={{width:'15%'}}>
+                    	<input className="btn btn-primary btn-md" type="button" onClick={this.refreshPage} value="Start New Trip!" style={{width:'100%', margin:'0 auto'}}/>
+                	</form>
+                	}
                    <h3>Upload a file</h3>
                   <Dropzone className="dropzone-style" onDrop={this.uploadFileClicked.bind(this)}>
                  <input className="btn btn-primary btn-md" type="submit" value="Upload a location file" />
@@ -313,9 +321,10 @@ class Home extends React.Component {
                 <div className="subheading">
                     <h1>Your Itinerary</h1>
                 </div>
-		<center><form className="saveTrip" onClick={this.saveButtonClicked.bind(this)} style={{width:'30%'}}>
+		<center>{typeof total == 'undefined' ? "" : <form className="saveTrip" onClick={this.saveButtonClicked.bind(this)} style={{width:'15%'}}>
                     <input className="btn btn-primary btn-md" type="submit"  value="Save Itinerary" style={{width:'100%', margin:'0 auto'}}/>
-		</form>
+                </form>
+                }
 		    {typeof total == 'undefined' ? "" : <button><a href= "../../../Trip.kml" download>Save KML File</a></button>
                 }
 		    </center>
