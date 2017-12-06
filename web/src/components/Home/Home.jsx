@@ -140,6 +140,7 @@ class Home extends React.Component {
     	}
 
     saveButtonClicked(event) {
+	event.preventDefault();
         this.getFile();
     }
     
