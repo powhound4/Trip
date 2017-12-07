@@ -26,9 +26,9 @@ public class NearestNeighborTest {
     public void setUp() throws Exception {
         labels = new String[]{"name", "latitude", "longitude", "id", "country"};
 
-        info1 = new ArrayList<> (Arrays.asList("Papa Westray Airport","59.351699829100006","-2.9002799987800003", "United Kingdom"));
-        info2 = new ArrayList<> (Arrays.asList( "Westray Airport", "59.3502998352", "-2.95000004768", "United Kingdom" ));
-        info3 = new ArrayList<> (Arrays.asList( "Strayhorn Ranch Airport","26.662799835205078", "-81.77059936523438", "United States"));
+        info1 = new ArrayList<>(Arrays.asList("Papa Westray Airport","59.351699829100006","-2.9002799987800003", "United Kingdom"));
+        info2 = new ArrayList<>(Arrays.asList( "Westray Airport", "59.3502998352", "-2.95000004768", "United Kingdom" ));
+        info3 = new ArrayList<>(Arrays.asList( "Strayhorn Ranch Airport","26.662799835205078", "-81.77059936523438", "United States"));
         Destination d1 = new Destination(info1, labels);
         Destination d2 = new Destination(info2, labels);
         Destination d3 = new Destination(info3, labels);
