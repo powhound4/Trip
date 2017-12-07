@@ -15,9 +15,6 @@ public class NearestNeighbor {
 	private int curTripPtr;
 	private int minTotalDistM;
 	private int curTotalDistM;
-	//public static String [] nnUnits = {"miles"};
-	//public String kilometers = "kilometers";
-	//public String miles = "miles";
 	public String optimization;
 
 	public NearestNeighbor(ArrayList<Destination> locations, String optimization) {
@@ -33,18 +30,6 @@ public class NearestNeighbor {
 		fillInMap();
 	}
 
-	/*
-	public static void setNnUnits() {
-		Server serveNn = new Server();
-		if (serveNn.distUnits == null){
-			String [] nnStart = {"miles"};
-			nnUnits = nnStart;
-		}
-		else{
-			nnUnits = serveNn.distUnits;
-		}
-	}
-*/
 	
 	int calculateDistance(int[] array){
 	int totalDistance = 0;
@@ -58,11 +43,6 @@ public class NearestNeighbor {
 	public int getTotalDistanceM() {
 		return minTotalDistM;
 	}
-/*
-	public int getTotalDistanceK() {
-		return minTotalDistK;
-	}
-*/
 	
 	public int[][] getDisTable(){
 		return this.disTable;
@@ -97,7 +77,6 @@ public class NearestNeighbor {
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
 
 		if(this.optimization.equals("In Order")){
-			System.out.println("In Order");
 			return disObjectify(locations);      //no optimization, just return disobject array
 		}
 
@@ -139,7 +118,7 @@ public class NearestNeighbor {
 		/*Implemented from sprint 3 slides*/
 		boolean improvement = true;
 		int delta;
-		int trip[] = new int[possibleTrip.length+1];
+		int trip[] = new int[possibleTrip.length];
 		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length-1] = trip[0]; //round trip
 		int n = trip.length-1;
@@ -181,17 +160,10 @@ public class NearestNeighbor {
 	*/
 	public int[] calcShortestTrip(){
 		//loops through each starting node and calls calNearNeigh with that start node
-		int trip[] = new int[disTable.length];
+		int trip[] = new int[disTable.length + 1];
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calNearNeigh(i);
-			if(this.optimization.equals("2 Opt")){
-				System.out.println("Calling 2 opt");
-				twoOpt(currentTrip);
-			}else if(this.optimization.equals("3 Opt")){
-				System.out.println("Calling 3 opt");
-				//threeOpt(currentTrip);
-			}
 			//add the distance of the last destination to the first destination
 			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
 			curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
@@ -239,7 +211,7 @@ public class NearestNeighbor {
 	private void threeOpt(int[] possibleTrip) {
 
 		boolean improvement = true;
-		int trip[] = new int[possibleTrip.length + 1];
+		int trip[] = new int[possibleTrip.length];
 		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length - 1] = trip[0]; //round trip
 
