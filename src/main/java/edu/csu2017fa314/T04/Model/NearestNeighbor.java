@@ -208,7 +208,7 @@ public class NearestNeighbor {
 
 
 
-	private void threeOpt(int[] possibleTrip) {
+	public void threeOpt(int[] possibleTrip) {
 
 		boolean improvement = true;
 		int trip[] = new int[possibleTrip.length];
