@@ -1,16 +1,18 @@
 package edu.csu2017fa314.T04.Database;
  
- import edu.csu2017fa314.T04.Model.*;
- import edu.csu2017fa314.T04.View.*;
+ import edu.csu2017fa314.T04.Model.Destination;
+ import edu.csu2017fa314.T04.Model.Info;
+ import edu.csu2017fa314.T04.Model.Itinerary;
+ import edu.csu2017fa314.T04.View.distanceObject;
  
  import java.sql.Connection;
  import java.sql.DriverManager;
  import java.sql.ResultSet;
  import java.sql.Statement;
  import java.util.ArrayList;
-  import java.util.Arrays;
-  import java.sql.ResultSetMetaData;
-  import java.io.File;
+ import java.util.Arrays;
+ import java.sql.ResultSetMetaData;
+ import java.io.File;
  
  public class QueryBuilder {
      private String user = "";
@@ -20,11 +22,18 @@ package edu.csu2017fa314.T04.Database;
          this.user = user;
          this.pass = pass;
      }
+
+    /**
+    * Inputs a search term into a query
+    * Returns the name and code of all the destinations, which match the search
+    */
     public ArrayList<String> queryTerm(String word){
         ArrayList<String> names = new ArrayList<String>();
         String myDriver = "com.mysql.jdbc.Driver"; // Add dependencies in pom.xml
-        String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314"; // Use this line if connecting inside CSU's network
-         //String myUrl = "jdbc:mysql://localhost/cs314"; // Use this line if tunneling 3307 traffic through shell
+        String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314"; 
+	 // Use this line if connecting inside CSU's network
+         //String myUrl = "jdbc:mysql://localhost/cs314"; 
+	 // Use this line if tunneling 3307 traffic through shell
          try { // Connect to the database
              Class.forName(myDriver);
              Connection conn = DriverManager.getConnection(myUrl, user, pass);
@@ -59,18 +68,25 @@ package edu.csu2017fa314.T04.Database;
          return names;
     }
  
- 
- 
-     public ArrayList<distanceObject> query(String query, String optimization) { // Command line args contain username and password
-     File f = new File("web/World.svg");
-		if(f.exists()){
-		f.delete();
+     /**
+     * Creates an ArrayList of distanceObjects for all of the
+     * search-matching destinations
+     * Takes a query and a user-chosen optimization method as input
+     * Returns a filled distanceObject ArrayList to send back to the webpage
+     */
+     public ArrayList<distanceObject> query(String query, String optimization) { 
+	     // Command line args contain username and password
+     File queryFile = new File("web/World.svg");
+		if(queryFile.exists()){
+		queryFile.delete();
 		}
         ArrayList<Destination> destinations = new ArrayList<>();
         ArrayList<distanceObject> trip = new ArrayList<>();
          String myDriver = "com.mysql.jdbc.Driver"; // Add dependencies in pom.xml
-         String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314"; // Use this line if connecting inside CSU's network
-         //String myUrl = "jdbc:mysql://localhost/cs314"; // Use this line if tunneling 3307 traffic through shell
+         String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314"; 
+	 // Use this line if connecting inside CSU's network
+         //String myUrl = "jdbc:mysql://localhost/cs314"; 
+	 // Use this line if tunneling 3307 traffic through shell
          try { // Connect to the database
              Class.forName(myDriver);
              Connection conn = DriverManager.getConnection(myUrl, user, pass);
