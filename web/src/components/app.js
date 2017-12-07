@@ -23,7 +23,7 @@ export default class App extends React.Component {
             res: [],
             destList: [],
             allResults: [],
-            optimization: ["2opt"],
+            optimization: ["2 Opt"],
             optimizationOptions: [{label: "I'm not in a hurry! (In Order)", value: "In Order"}, {label: "A little faster trip! (Nearest Neighbor)", value: "Nearest Neighbor"}, {label:"Make my trip even faster! (2 Opt)", value: "2 Opt"}, {label:"I want the fastest trip possible! (3 Opt)", value: "3 Opt"}]
             
             //add all labels
