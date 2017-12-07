@@ -43,7 +43,7 @@ public class BuildKML {
 	    		for(int i =0; i< this.route.size(); i++){
                			bw.write("<Placemark>\n");
                 		bw.write("<Style>\n<IconStyle>\n<Icon>\n<href>http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png\n</href>\n</Icon>\n</IconStyle>\n</Style>\n");
-				bw.write("<name>"+ route.get(i).startName + "</name>\n");
+				bw.write("<name><![CDATA[" +  route.get(i).startName  + "]]> </name>\n");
 				bw.write("<description>Code: " + route.get(i).b1Info.get(2) + "</description>\n<Point>\n");
                 		bw.write("<coordinates>" + route.get(i).long1 +","+ route.get(i).lat1 + ",0</coordinates>\n</Point>\n</Placemark>\n");
 	  		 }
