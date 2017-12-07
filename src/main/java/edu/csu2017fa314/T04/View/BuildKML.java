@@ -21,7 +21,7 @@ public class BuildKML {
 
 	private void checkExistance() {
 		//check to see if file exists if so delete and craete new
-		File kmlFile = new File("web/Trip.kml");
+		File kmlFile = new File("./public/Trip.kml");
 		if(kmlFile.exists()) {
 			kmlFile.delete();
 		}
@@ -29,7 +29,7 @@ public class BuildKML {
 	private void writeKml() {
 		//begin writing to new file
 		try{
-            		bw = new BufferedWriter(new FileWriter("web/Trip.kml", true));
+            		bw = new BufferedWriter(new FileWriter("./public/Trip.kml", true));
             		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n");
             		bw.write("<Document>\n<Placemark>\n<LineString>\n<coordinates>\n");
    			for(int i =0; i< this.route.size(); i++){
