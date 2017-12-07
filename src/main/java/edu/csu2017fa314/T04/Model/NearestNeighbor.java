@@ -118,7 +118,7 @@ public class NearestNeighbor {
 		/*Implemented from sprint 3 slides*/
 		boolean improvement = true;
 		int delta;
-		int trip [] = new int[possibleTrip.length];
+		int trip [] = new int [possibleTrip.length];
 		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length-1] = trip[0]; //round trip
 		int n = trip.length-1;
@@ -160,7 +160,7 @@ public class NearestNeighbor {
 	*/
 	public int[] calcShortestTrip(){
 		//loops through each starting node and calls calNearNeigh with that start node
-		int trip [] = new int[disTable.length + 1];
+		int trip [] = new int [disTable.length + 1];
 		for(int i = 0; i < disTable.length; i++){
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calNearNeigh(i);
@@ -211,7 +211,7 @@ public class NearestNeighbor {
 	public void threeOpt(int[] possibleTrip) {
 
 		boolean improvement = true;
-		int trip [] = new int[possibleTrip.length];
+		int trip [] = new int [possibleTrip.length];
 		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length - 1] = trip[0]; //round trip
 
