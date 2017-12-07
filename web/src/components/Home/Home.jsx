@@ -326,7 +326,7 @@ class Home extends React.Component {
                     <input className="btn btn-primary btn-md" type="submit"  value="Save Itinerary" style={{width:'100%', margin:'0 auto'}}/>
                 </form>
                 }
-		    {typeof total == 'undefined' ? "" : <button><a href= "../../../Trip.kml" download>Save KML File</a></button>
+		    {typeof total == 'undefined' ? "" : <button><a href= "./public/Trip.kml" download>Save KML File</a></button>
                 }
 		    </center>
                 <table className="pair-table">
