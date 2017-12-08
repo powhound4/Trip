@@ -30,16 +30,16 @@
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *22*   | *value* 
-Story Points |  *36*  | *value* 
+Tasks |  *22*   | *16* 
+Story Points |  *36*  | *19* 
 
 
 Statistic | Start | End
 --- | ---: | ---:
 Overall Test Coverage | 28% | *value* 
-Smells | *43* | *value* 
-Duplication | *40* | *value* 
-Technical Debt Ratio | *23.8* | *value* 
+Smells | *43* | *27* 
+Duplication | *40* | *30* 
+Technical Debt Ratio | *23.8* | *15.2* 
 
 ## Plan
 
