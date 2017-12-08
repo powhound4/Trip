@@ -23,6 +23,9 @@ public class distanceObjectTest {
     private int cmin = 0;
     private int csec = 0;
     
+    /**
+    *Set up the variables needed for the tests of distanceObject.java
+    */
     @Before
     public void setUp() throws Exception {
         info1 = new ArrayList<>(Arrays.asList("Fort Collins Loveland Municipal Airport", "40.4518013", "-105.0110016", "KFNL"));
@@ -36,46 +39,57 @@ public class distanceObjectTest {
         decimal = "104";
         d = new distanceObject(new Destination(info1, labels), new Destination(info2, labels));
     }
+    
     @Test
     public void getB2Info() throws Exception {
         assertTrue(d.getB2Info() == info2);
     }
+    
     @Test
     public void getB1Info() throws Exception {
         assertTrue(d.getB1Info() == info1);
     }
+    
     @Test
     public void getB1Labels() throws Exception {
         assertTrue(d.getB1Labels() == labels);
     }
+    
     @Test
     public void getB2Labels() throws Exception {
         assertTrue(d.getB2Labels() == labels);
     }
+    
     @Test
     public void getStartID() throws Exception {
         assertEquals(d.getStartID(), "KFNL");
     }
+    
     @Test
     public void getEndID() throws Exception {
         assertEquals(d.getEndID(), "KITR");
     }
+    
     @Test
     public void getStartName() throws Exception {
         assertEquals(d.getStartName(), "Fort Collins Loveland Municipal Airport");
     }
+    
     @Test
     public void getEndName() throws Exception {
         assertEquals(d.getEndName(), "Kit Carson County Airport");
     }
+    
     @Test
     public void getDistanceInM() throws Exception {
         assertEquals(167, d.getDistanceInM());
     }
+    
     @Test
     public void getDistanceInK() throws Exception {
         assertEquals(269, d.getDistanceInK());
     }
+    
     @Test
     public void toDecimal() throws Exception {
         
@@ -96,6 +110,7 @@ public class distanceObjectTest {
         assertEquals(104.75889, distanceObject.toDecimal("104°45'32\" N"), 0.001);
         assertEquals(-104.75889, distanceObject.toDecimal("104°45'32\" W"), 0.001);
     }
+    
     @Test
     public void testConversion() throws Exception {
         cmin = 0;
@@ -119,15 +134,18 @@ public class distanceObjectTest {
         //Degree, minute, second tests
         assertEquals(104.75889, distanceObject.decimalConversion(dms, 1, 1), 0.001);
     }
+    
     @Test
     public void noConversion() throws Exception {
         assertEquals(104.0, distanceObject.noConversion(decimal), 0.1);
         assertEquals(104, distanceObject.noConversion(degree), 0.1);
     }
+    
     @Test
     public void computeDistanceM() throws Exception {
         assertEquals(167, d.computeDistanceM());
     }
+    
     @Test
     public void computeDistanceK() throws Exception {
             assertEquals(269, d.computeDistanceK());
