@@ -3,6 +3,8 @@ package edu.csu2017fa314.T04.Model;
 import java.util.ArrayList;
 
 import edu.csu2017fa314.T04.View.distanceObject;
+import edu.csu2017fa314.T04.View.BuildKML;
+import edu.csu2017fa314.T04.View.BuildSVG;
 
 public class Itinerary {
     private Info info;
