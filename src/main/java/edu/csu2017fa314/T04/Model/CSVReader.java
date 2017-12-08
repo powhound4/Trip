@@ -1,11 +1,12 @@
 package edu.csu2017fa314.T04.Model;
+
 import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-//import java.io.*;
 
 public class CSVReader {
 
@@ -14,7 +15,6 @@ public class CSVReader {
 	private String line = "";
 	private String delim = ",";
 	private String[] labels = null;
-	//private int indexId, indexName, indexCity, indexLatitude, indexLongitude, indexElevation; //indexOf
 
 	private Destination brew = null;
 	private ArrayList<Destination> brewList = new ArrayList<Destination>();
@@ -23,6 +23,10 @@ public class CSVReader {
         return Arrays.asList(labels).indexOf(lab);
 	}*/
 	
+	/**
+	* Constructs a CSVReader object
+	* Takes a filename/filepath to be read
+	*/
 	public CSVReader(String file){
 		try {
 			csvFile = file;
