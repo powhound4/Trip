@@ -36,7 +36,7 @@ Story Points |  *36*  | *19*
 
 Statistic | Start | End
 --- | ---: | ---:
-Overall Test Coverage | 28% | *value* 
+Overall Test Coverage | 28% | 60%
 Smells | *43* | *27* 
 Duplication | *40* | *30* 
 Technical Debt Ratio | *23.8* | *15.2* 
