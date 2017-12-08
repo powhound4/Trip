@@ -337,7 +337,7 @@ public class NearestNeighbor {
 public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
 				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[j + 1]]);
-		System.out.println("test" + delta);
+		//System.out.println("test" + delta);
 		return delta;
 	}
 	
@@ -348,7 +348,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 	public int twoOpt2(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[k]][trip[k + 1]]) - (disTable[trip[j]][trip[j + 1]])
 				+ (disTable[trip[j]][trip[k]]) + (disTable[trip[j + 1]][trip[k + 1]]);
-		System.out.println("test2" + delta);
+		//System.out.println("test2" + delta);
 
 		return delta;
 	}
@@ -360,7 +360,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 	public int twoOpt3(int[] trip, int i, int j, int k) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
 				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
-		System.out.println("test3" + delta);
+		//System.out.println("test3" + delta);
 
 		return delta;
 	}
@@ -373,7 +373,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
 			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j]]) 
 			+ (disTable[trip[i + 1]][trip[k]]) + (disTable[trip[j + 1]][trip[k+1]]);
-		System.out.println("test4" + delta);
+		//System.out.println("test4" + delta);
 
 		return delta;
 	}
@@ -386,7 +386,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
 			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[k]]) 
 			+ (disTable[trip[j + 1]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
-		System.out.println("test5" + delta);
+		//System.out.println("test5" + delta);
 
 		return delta;
 	}
@@ -399,7 +399,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
 			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j + 1]]) 
 			+ (disTable[trip[k]][trip[j]]) + (disTable[trip[i + 1]][trip[k + 1]]);
-		System.out.println("test6" + delta);
+		//System.out.println("test6" + delta);
 
 		return delta;
 	}
@@ -412,7 +412,7 @@ public int twoOpt1(int[] trip, int i, int j) {
 		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
 			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j + 1]]) 
 			+ (disTable[trip[k]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
-		System.out.println("test7" + delta);
+		//System.out.println("test7" + delta);
 
 		return delta;
 	}
