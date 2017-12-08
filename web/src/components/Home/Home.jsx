@@ -221,16 +221,15 @@ class Home extends React.Component {
                         <br></br>
                     </form>
 			
-                    <h3>Search Results {resultSize == 0 ? "" :"(" + resultSize + ")"}</h3>
-
+                   <h3>Number Of Search Results: {resultSize == 0 ? "" :"(" + resultSize + ")"}</h3>
+                    <h3>Total Trip Distance: {this.props.totalDist == null ? "" : this.props.totalDist + " " + this.state.selectedUnits}</h3>
 
                     <center>
                         <h3>Selected Destinations</h3>
                         <form className="Drop-down-form" onSubmit={this.setSelectedDests.bind(this)}>
                             <div className = "Select-control">
                                 <Select
-                                    name="form-
-  			field-name"
+                                    name="form-field-name"
                                     value={this.state.destVal}
                                     multi={true}
                                     options={resList} //must be labeled label and value to work
@@ -251,6 +250,7 @@ class Home extends React.Component {
                 </div></center>
 
                 <center>
+		    <h3> Select Optimization For Your Trip </h3>
                     <form className="Drop-down-form2" onSubmit={this.runOptimization.bind(this)}>
                         <div className = "Select-control">
                             <Select
@@ -262,7 +262,7 @@ class Home extends React.Component {
                                 onChange={this.logOptimization.bind(this)}
                                 simpleValue
                                 searchable={false}
-                                placeholder = "Select Trip Optimization"
+                                placeholder = "2 Opt"
                                 backspaceToRemoveMessage=""
                             />
                         </div>
