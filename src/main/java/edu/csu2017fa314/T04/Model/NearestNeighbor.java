@@ -1,22 +1,26 @@
 package edu.csu2017fa314.T04.Model;
 
 import edu.csu2017fa314.T04.View.distanceObject;
-import edu.csu2017fa314.T04.Server.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NearestNeighbor {
 
 	private ArrayList<Destination> locations;
-	private int disTable[][];
-	private int visTable[][];
-	private int bestTrip[];
-	private int currentTrip[];
+	private int [][] disTable;
+	private int [][] visTable;
+	private int [] bestTrip;
+	private int [] currentTrip;
 	private int curTripPtr;
 	private int minTotalDistM;
 	private int curTotalDistM;
 	public String optimization;
 
+	/**
+	* Constructs a NearestNeighbor object
+	* Takes a ArrayList of destinations for which to compute distances
+	* Takes a user-selected method of trip optimization
+	*/
 	public NearestNeighbor(ArrayList<Destination> locations, String optimization) {
 		this.locations = locations;
 		disTable = new int[locations.size()][locations.size()];
@@ -25,7 +29,6 @@ public class NearestNeighbor {
 		curTripPtr = 0;
 		minTotalDistM = Integer.MAX_VALUE;
 		curTotalDistM = 0;
-		//setNnUnits();
 		this.optimization = optimization;
 		fillInMap();
 	}
@@ -77,7 +80,8 @@ public class NearestNeighbor {
 	public ArrayList<distanceObject> getNearestNeighborTrip() {
 
 		if(this.optimization.equals("In Order")){
-			return disObjectify(locations);      //no optimization, just return disobject array
+			//no optimization, just return disobject array
+			return disObjectify(locations);      
 		}
 
 		bestTrip = calcShortestTrip();
@@ -105,7 +109,8 @@ public class NearestNeighbor {
 			temp = trip[i1];
 			trip[i1] = trip[k];
 			trip[k] = temp;
-			i1++; k--;
+			i1++; 
+			k--;
 		}
 		return trip;
 	}
@@ -118,7 +123,7 @@ public class NearestNeighbor {
 		/*Implemented from sprint 3 slides*/
 		boolean improvement = true;
 		int delta;
-		int trip [] = new int [possibleTrip.length];
+		int [] trip = new int [possibleTrip.length];
 		System.arraycopy(possibleTrip, 0, trip, 0, possibleTrip.length);
 		trip[trip.length-1] = trip[0]; //round trip
 		int n = trip.length-1;
@@ -127,9 +132,13 @@ public class NearestNeighbor {
 			//0 <= i < i+1 < k < k+1 <= n
 			for (int i = 0; i <= n - 3; i++) {
 				for (int k = i + 2; k <= n - 1; k++) {
-					delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
-							+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
-					if (delta < 0) {  //subtract the change from totalDist. FIXME might need to change dist w/in swap call
+					delta = -(disTable[trip[i]][trip[i + 1]]) 
+						- (disTable[trip[k]][trip[k + 1]])
+						+ (disTable[trip[i]][trip[k]]) 
+						+ (disTable[trip[i + 1]][trip[k + 1]]);
+					if (delta < 0) {  
+						//subtract the change from totalDist. 
+						//FIXME might need to change dist w/in swap call
 						trip = twoOptSwap(trip, i + 1, k);
 						improvement = true;
 						curTotalDistM += delta;
@@ -145,8 +154,9 @@ public class NearestNeighbor {
 		ArrayList<distanceObject> trip = new ArrayList<distanceObject>(orderedLocations.size()+1);
 		int j = 1;
 		for(int i = 0; j < orderedLocations.size(); i++){
-			distanceObject dObj = new distanceObject(orderedLocations.get(i), orderedLocations.get(j));
-			trip.add(dObj);
+			distanceObject distObj;
+			distObj = new distanceObject(orderedLocations.get(i), orderedLocations.get(j));
+			trip.add(distObj);
 			j++;
 		}
 		trip.add(new distanceObject(orderedLocations.get(orderedLocations.size()-1), orderedLocations.get(0)));
@@ -165,7 +175,8 @@ public class NearestNeighbor {
 			currentTrip[curTripPtr] = i;	//always currentTrip[0] = i;
 			calNearNeigh(i);
 			//add the distance of the last destination to the first destination
-			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance of that starting node
+			//NOTE: at this point curTotalDist holds the Nearest Neighbor distance
+			//of that starting node
 			curTotalDistM += disTable[currentTrip[currentTrip.length-1]][currentTrip[0]];
 			if((curTotalDistM < minTotalDistM)){
 				minTotalDistM = curTotalDistM;
@@ -175,7 +186,8 @@ public class NearestNeighbor {
 			}
 			curTotalDistM = 0;
 			curTripPtr = 0;
-			visTable = new int[locations.size()][locations.size()]; //zero out table for next iteration
+			//zero out table for next iteration
+			visTable = new int[locations.size()][locations.size()]; 
 		}
 		return trip;
 	}
@@ -185,7 +197,8 @@ public class NearestNeighbor {
 	*returns nothing
 	*/
 	private void calNearNeigh(int startIndex){
-		//Set 1's in the startIndex column for all rows, so no destination can be picked twice
+		//Set 1's in the startIndex column for all rows,
+		//so no destination can be picked twice
 		for(int i = 0; i < disTable.length; i++){
 			visTable[i][startIndex] = 1;
 		}
@@ -250,8 +263,9 @@ public class NearestNeighbor {
 					}
 				}
 			}
-			if (improvement)
+			if (improvement){
 				System.out.println("Improvement");
+			}
 			bestTrip = trip;
 		}
 	}
@@ -335,8 +349,10 @@ public class NearestNeighbor {
 	*Returns delta
 	*/
 public int twoOpt1(int[] trip, int i, int j) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]])
-				+ (disTable[trip[i]][trip[j]]) + (disTable[trip[i + 1]][trip[j + 1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]])
+			+ (disTable[trip[i]][trip[j]]) 
+			+ (disTable[trip[i + 1]][trip[j + 1]]);
 		System.out.println("test" + delta);
 		return delta;
 	}
@@ -346,8 +362,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int twoOpt2(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[k]][trip[k + 1]]) - (disTable[trip[j]][trip[j + 1]])
-				+ (disTable[trip[j]][trip[k]]) + (disTable[trip[j + 1]][trip[k + 1]]);
+		int delta = -(disTable[trip[k]][trip[k + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]])
+			+ (disTable[trip[j]][trip[k]]) 
+			+ (disTable[trip[j + 1]][trip[k + 1]]);
 		System.out.println("test2" + delta);
 
 		return delta;
@@ -358,8 +376,10 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int twoOpt3(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[k]][trip[k + 1]])
-				+ (disTable[trip[i]][trip[k]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[k]][trip[k + 1]])
+			+ (disTable[trip[i]][trip[k]]) 
+			+ (disTable[trip[i + 1]][trip[k + 1]]);
 		System.out.println("test3" + delta);
 
 		return delta;
@@ -370,9 +390,12 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int threeOpt1(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
-			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j]]) 
-			+ (disTable[trip[i + 1]][trip[k]]) + (disTable[trip[j + 1]][trip[k+1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]]) 
+			- (disTable[trip[k]][trip[k + 1]]) 
+			+ (disTable[trip[i]][trip[j]]) 
+			+ (disTable[trip[i + 1]][trip[k]]) 
+			+ (disTable[trip[j + 1]][trip[k+1]]);
 		System.out.println("test4" + delta);
 
 		return delta;
@@ -383,9 +406,12 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int threeOpt2(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
-			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[k]]) 
-			+ (disTable[trip[j + 1]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]]) 
+			- (disTable[trip[k]][trip[k + 1]])
+			+ (disTable[trip[i]][trip[k]]) 
+			+ (disTable[trip[j + 1]][trip[i + 1]])
+			+ (disTable[trip[j]][trip[k + 1]]);
 		System.out.println("test5" + delta);
 
 		return delta;
@@ -396,9 +422,12 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int threeOpt3(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
-			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j + 1]]) 
-			+ (disTable[trip[k]][trip[j]]) + (disTable[trip[i + 1]][trip[k + 1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]]) 
+			- (disTable[trip[k]][trip[k + 1]])
+			+ (disTable[trip[i]][trip[j + 1]]) 
+			+ (disTable[trip[k]][trip[j]]) 
+			+ (disTable[trip[i + 1]][trip[k + 1]]);
 		System.out.println("test6" + delta);
 
 		return delta;
@@ -409,9 +438,12 @@ public int twoOpt1(int[] trip, int i, int j) {
 	*Returns delta
 	*/
 	public int threeOpt4(int[] trip, int i, int j, int k) {
-		int delta = -(disTable[trip[i]][trip[i + 1]]) - (disTable[trip[j]][trip[j + 1]]) 
-			- (disTable[trip[k]][trip[k + 1]])+ (disTable[trip[i]][trip[j + 1]]) 
-			+ (disTable[trip[k]][trip[i + 1]]) + (disTable[trip[j]][trip[k + 1]]);
+		int delta = -(disTable[trip[i]][trip[i + 1]]) 
+			- (disTable[trip[j]][trip[j + 1]]) 
+			- (disTable[trip[k]][trip[k + 1]])
+			+ (disTable[trip[i]][trip[j + 1]]) 
+			+ (disTable[trip[k]][trip[i + 1]]) 
+			+ (disTable[trip[j]][trip[k + 1]]);
 		System.out.println("test7" + delta);
 
 		return delta;
