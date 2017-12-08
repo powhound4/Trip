@@ -57,7 +57,7 @@ public class Server {
         //ServerResponse sRes = new ServerResponse("../ColoradoSVGEdited.svg");
         
         // Create new QueryBuilder instance and pass in credentials
-        QueryBuilder qBuild = new QueryBuilder("powhound", "828940106"); 
+        QueryBuilder queryBuild = new QueryBuilder("powhound", "828940106"); 
         // if id == 0: if the user has qued the server to return names related search term
         ServerResponse serverRes = new ServerResponse();
         
@@ -72,8 +72,9 @@ public class Server {
                    + " OR regions.name LIKE '%s' OR airports.name LIKE '%s' "
                    + " OR airports.municipality LIKE '%s' "
                    + " ORDER BY continents.name, countries.name, regions.name, "
-                   + " airports.municipality, airports.name ASC", searched, searched, searched, searched);            
-            ArrayList<String> queryDests = qBuild.queryTerm(queryString);
+                   + " airports.municipality, "
+                   + " airports.name ASC", searched, searched, searched, searched);            
+            ArrayList<String> queryDests = queryBuild.queryTerm(queryString);
             
              serverRes = new ServerResponse(queryDests, queryID);
              System.out.println("Sending \"" + serverRes.toString() + "\" to server.");
@@ -93,7 +94,7 @@ public class Server {
             + " ON regions.code = airports.iso_region WHERE airports.code IN ('%s') "
             + " ORDER BY continents.name, countries.name, regions.name, "
             + " airports.municipality, airports.name ASC", searched);
-            ArrayList<distanceObject> queryResults = qBuild.query(queryString, serverRec.getOptimization());
+            ArrayList<distanceObject> queryResults = queryBuild.query(queryString, serverRec.getOptimization());
         
         /*Gson gsonNew = new Gson();
         Type resType = new TypeToken<Destination>() {}.getType();
@@ -109,8 +110,10 @@ public class Server {
         //ret = gson.toJson(sRes, ServerResponse.class);
 
         /* What to return to the server.
-         * In this example, the "ServerResponse" object sRes is converted into a JSON representation using GSON library.
-         * If you'd like to see what this JSON looks like, it is logged to the console in the web client.
+         * In this example, the "ServerResponse" object sRes 
+         * is converted into a JSON representation using GSON library.
+         * If you'd like to see what this JSON looks like, 
+         * it is logged to the console in the web client.
          */
         
         }
@@ -126,7 +129,7 @@ public class Server {
                    + " ON regions.code = airports.iso_region WHERE airports.code IN ('%s')"
                    + " ORDER BY continents.name, countries.name, regions.name,"
                    + " airports.municipality, airports.name ASC", searched);
-             ArrayList<distanceObject> queryResults = qBuild.query(queryString, serverRec.getOptimization());
+             ArrayList<distanceObject> queryResults = queryBuild.query(queryString, serverRec.getOptimization());
              serverRes = new ServerResponse("World.svg", queryResults, queryID);
              System.out.println("Sending \"" + serverRes.toString() + "\" to server.");               
          }
