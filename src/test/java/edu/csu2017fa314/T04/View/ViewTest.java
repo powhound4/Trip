@@ -8,24 +8,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ViewTest {
     private View view;
-    private distanceObject d;
+    private distanceObject dist;
     private String[] labels;
-    private ArrayList<String> info1, info2;
+    private ArrayList<String> info1;
+    private ArrayList<String> info2;
     private ArrayList<distanceObject> list;
-
+    
+    /**
+    * Sets up the variables needed for the View tests
+    */
     @Before
     public void setUp() throws Exception {
         view = new View();
         info1 = new ArrayList<>(Arrays.asList("Fort Collins Loveland Municipal Airport", "40.4518013", "-105.0110016", "KFNL"));
         info2  = new ArrayList(Arrays.asList("Kit Carson County Airport", "39.24250031", "-102.2850037", "KITR"));
         labels = new String[]{"name", "latitude", "longitude", "id"};
-        d = new distanceObject(new Destination(info1, labels), new Destination(info2, labels));
+        dist = new distanceObject(new Destination(info1, labels), new Destination(info2, labels));
         list = new ArrayList<>();
-        list.add(d);
+        list.add(dist);
     }
 
     @Test
