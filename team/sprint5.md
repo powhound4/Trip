@@ -91,13 +91,18 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 * *350 Manually reorder destinations:* Implementing the code for this functionality would not work with how the code is structured.  There was not enough to rewrite all of the related code to get it to work.
 *
 
-#### What went well
-* *something*
-*
 
-#### Problems encountered and resolutions
-* *something*
-*
+#### What went well
+* The Google Earth component was easy to set up and went smoothly.
+* Two team members took a lot of time troubleshooting 3 opt and worked well together using problem solving techniques.
+* We improved our Code Climate technical debt ratio down from 23.8% to 15.2%.
+* We added additional tests bringing our coverage up to more than 50%.
+
+### Problems encountered and resolutions
+* The team had a hard time getting 3 opt working. To help resolve this we scheduled times to meet with the TA to get assistance.
+* The way our code was set up didn't allow for a react drag-and-drop component to be set up easily. Due to this, we chose to forgo the option for re-ordering the trip intinerary.
+* Due to this sprint occurring over the span of Thanksgiving break, our team wasn't as cohesive as prior sprints. We all did what we could individually, but had trouble meeting on a regular schedule.
+
 
 ## Retrospective
 
