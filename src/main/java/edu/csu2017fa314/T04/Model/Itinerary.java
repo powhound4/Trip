@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import edu.csu2017fa314.T04.View.distanceObject;
 import edu.csu2017fa314.T04.View.BuildKML;
 import edu.csu2017fa314.T04.View.BuildSVG;
+import edu.csu2017fa314.T04.View.View;
+
 
 public class Itinerary {
     private Info info;
