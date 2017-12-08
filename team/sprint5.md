@@ -83,13 +83,11 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 * *491 Test coverage:* The application now has more test coverage, including testing for .java classes, which were not tested at all in previous Increments.
 * *492 Clean Code:* The application has cleaner code now.  The technical debt ratio is now at 15.2%, down from 23.8%, where it started at for this Sprint.  Additionally, many issues were resolved, including those relating to smells and duplication.  The number of smells is now at 27, down from 43 (initial) and the duplication at 30, down from 40 (initial). With this release hundreds of "other issues" are also solved.
 * *493 Map with zoom and pan:* a user was able to zoom and pan on a map provided by Google Docs during the last Sprint Increment, but a user can now save a KML save file of the map, with a button provided on the webpage.
-* 
 
 #### Incomplete user stories / epics in Sprint Backlog 
 * *122 Select a starting location:* A user cannot select a starting location.  The starting location is always the first one that comes up in the query results.
 * *126, 3-Opt:* A user is not able to use 3-Opt optimization on their itinerary.  The user is still able to use previously-released optimizations, but will not be able to have a 3-Opt trip.  A bug remains in the code that cannot be found or resolved and the TAs could not fix it either.
 * *350 Manually reorder destinations:* Implementing the code for this functionality would not work with how the code is structured.  There was not enough to rewrite all of the related code to get it to work.
-*
 
 
 #### What went well
@@ -108,7 +106,7 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Worked together to plan for Sprint 5. | Write tests at the same time as code, communicate well about what each person is working on so there are no conflicts with the code on master. Work towards cleaning code based on Code Climate scores and removing unusued methods/variables. | Using the new components of the app, such as the .KML file. Running the code using new commands.
+What we did well | We wrote tests and fixed bugs in the code. Some of us met up and pairs of team members worked out problems together. | We improved this sprint by starting earlier to allow for time to overcome challenges. | IntelliJ, Code Climate, Test Coverage, Google Earth
+What we need to work on | Better-encompasing plan for the Sprint, be more conservative in choosing what we have time to finish. We should let go of user stories we're hung up on and try something else; know when to move on to something that's more feasible to complete. | Use the planning session more methodically  | GitHub estimates, Code Climate, Planning Poker, Boards
+What we will change next time | Write cleaner code from the start that's more easily understood by all team members. Improve acceptance accountability in getting tasks completed.  If a team member cannot contribute to the Sprint or come to class, find times outside of class to meet up and discuss things. | Try to communicate about what's happening on an individual level.  Choose the first user stories/tasks to work on, change and update as the sprint progresses and challenges arise. | Cell phones, Code Climate, Slack
