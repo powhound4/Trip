@@ -78,23 +78,26 @@ Date | Tasks done now | Tasks done next | Impediments | Coverage | Smells | Dupl
 ## Review
 
 #### Completed user stories (epics) in Sprint Backlog 
-* *user story*:  *comments*
+* *125 Saved Trips:* A user can now save an Itinerary that they've created through the application with a "Save Itinerary" button.  With this new functionality, a user can look at itineraries they've created after building them, rather than having to rebuild it.
+* *349 Remove Destinations:* A user can remove destinations when the come up in "selected" box, after selecting destinations, and have them removed from the built itinerary.  However, this is the only place that the destinations can be removed from.
+* *491 Test coverage:* The application now has more test coverage, including testing for .java classes, which were not tested at all in previous Increments.
+* *492 Clean Code:* The application has cleaner code now.  The technical debt ratio is now at 15.2%, down from 23.8%, where it started at for this Sprint.  Additionally, many issues were resolved, including those relating to smells and duplication.  The number of smells is now at 27, down from 43 (initial) and the duplication at 30, down from 40 (initial). With this release hundreds of "other issues" are also solved.
+* *493 Map with zoom and pan:* a user was able to zoom and pan on a map provided by Google Docs during the last Sprint Increment, but a user can now save a KML save file of the map, with a button provided on the webpage.
 * 
 
 #### Incomplete user stories / epics in Sprint Backlog 
-* *user story*: *Explanation...*
+* *122 Select a starting location:* A user cannot select a starting location.  The starting location is always the first one that comes up in the query results.
+* *126, 3-Opt:* A user is not able to use 3-Opt optimization on their itinerary.  The user is still able to use previously-released optimizations, but will not be able to have a 3-Opt trip.  A bug remains in the code that cannot be found or resolved and the TAs could not fix it either.
+* *350 Manually reorder destinations:* Implementing the code for this functionality would not work with how the code is structured.  There was not enough to rewrite all of the related code to get it to work.
 *
 
 #### What went well
-* The Google Earth component was easy to set up and went smoothly.
-* Two team members took a lot of time troubleshooting 3 opt and worked well together using problem solving techniques.
-* We improved our Code Climate technical debt ratio down from 23.8% to 15.2%.
-* We added additional tests bringing our coverage up to more than 50%.
+* *something*
+*
 
 #### Problems encountered and resolutions
-* The team had a hard time getting 3 opt working. To help resolve this we scheduled times to meet with the TA to get assistance. 
-* The way our code was set up didn't allow for a react drag-and-drop component to be set up easily. Due to this, we chose to forgo the option for re-ordering the trip intinerary.
-* Due to this sprint occurring over the span of Thanksgiving break, our team wasn't as cohesive as prior sprints. We all did what we could individually, but had trouble meeting on a regular schedule.
+* *something*
+*
 
 ## Retrospective
 
